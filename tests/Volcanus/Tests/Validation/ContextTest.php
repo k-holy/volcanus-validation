@@ -8,14 +8,14 @@
  */
 namespace Volcanus\Tests;
 
-use Volcanus\Validation;
+use Volcanus\Validation\Context;
 
 /**
- * ValidationTest
+ * ContextTest
  *
  * @author     k.holy74@gmail.com
  */
-class ValidationTest extends \PHPUnit_Framework_TestCase
+class ContextTest extends \PHPUnit_Framework_TestCase
 {
 
 	public function testArrayAccessForResultWhenNewInstanceWithArrayValues()
@@ -24,7 +24,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
 			'id'   => 1,
 			'name' => 'foo',
 		);
-		$validation = new Validation($array);
+		$validation = new Context($array);
 		$this->assertEquals($validation->result['id'  ], $array['id']);
 		$this->assertEquals($validation->result['name'], $array['name']);
 	}
@@ -34,14 +34,14 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
 		$object = new \stdClass();
 		$object->id = 1;
 		$object->name = 'foo';
-		$validation = new Validation($object);
+		$validation = new Context($object);
 		$this->assertEquals($validation->result->id,  $object->id);
 		$this->assertEquals($validation->result->name, $object->name);
 	}
 
 	public function testSetErrorAndUnsetError()
 	{
-		$validation = new Validation();
+		$validation = new Context();
 		$this->assertTrue($validation->isValid());
 		$validation->setError('id', 'notFound');
 		$this->assertTrue($validation->isError('id'));
@@ -56,7 +56,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
 		$values = array(
 			'id' => 'a',
 		);
-		$validation = new Validation($values);
+		$validation = new Context($values);
 		$this->assertTrue($validation->isValid());
 
 		$validation->setError('id', 'notFound');
@@ -69,7 +69,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
 
 	public function testRegisterChecker()
 	{
-		$validation = new Validation(array(
+		$validation = new Context(array(
 			'entry1' => 'abc',
 			'entry2' => 'def',
 		));
@@ -83,7 +83,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testRaiseInvalidArgumentExceptionWhenCheckerIsNotCallable()
 	{
-		$validation = new Validation();
+		$validation = new Context();
 		$validation->registerChecker('abc', array('hoge', 'fuga'));
 	}
 
@@ -92,13 +92,13 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testRaiseRuntimeExceptionWhenUndefinedCheckerIsCalled()
 	{
-		$validation = new Validation();
+		$validation = new Context();
 		$validation->getChecker('def');
 	}
 
 	public function testInitChecker()
 	{
-		$validation = new Validation(array(
+		$validation = new Context(array(
 			'entry1' => 'abc',
 			'entry2' => 'def',
 		));
@@ -114,7 +114,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testRaiseRuntimeExceptionWhenUndefinedCheckerIsCalledAfterInitChecker()
 	{
-		$validation = new Validation();
+		$validation = new Context();
 		$validation->registerChecker('abc', $this->abcChecker());
 		$this->assertTrue(is_callable($validation->getChecker('abc')));
 		$validation->initChecker();
@@ -123,7 +123,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
 
 	public function testInitCheckerOnConstruct()
 	{
-		$validation = new Validation(array(
+		$validation = new Context(array(
 			'entry1' => 'abc',
 			'entry2' => 'def',
 		), array(
@@ -135,21 +135,21 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetDefaultChecker()
 	{
-		$validation = new Validation();
+		$validation = new Context();
 		$this->assertInstanceOf('\Volcanus\Validation\Checker\AlphaChecker',
 			$validation->getDefaultChecker('alpha'));
 	}
 
 	public function testGetResult()
 	{
-		$validation = new Validation();
+		$validation = new Context();
 		$this->assertInstanceOf('\Volcanus\Validation\Result',
 			$validation->getResult());
 	}
 
 	public function testIsValid()
 	{
-		$validation = new Validation(array(
+		$validation = new Context(array(
 			'id'   => 1,
 			'name' => 'foo',
 		));
@@ -162,7 +162,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
 
 	public function testIsNotValid()
 	{
-		$validation = new Validation(array(
+		$validation = new Context(array(
 			'id'   => 'a',
 			'name' => '',
 		));
@@ -179,7 +179,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
 
 	public function testIsError()
 	{
-		$validation = new Validation(array(
+		$validation = new Context(array(
 			'id' => 100,
 		));
 		$validation->registerChecker('int', $this->intChecker());
@@ -193,7 +193,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
 
 	public function testIsNotError()
 	{
-		$validation = new Validation(array(
+		$validation = new Context(array(
 			'id' => 1,
 		));
 		$validation->registerChecker('int', $this->intChecker());
@@ -206,7 +206,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetChecker()
 	{
-		$validation = new Validation();
+		$validation = new Context();
 		$validation->registerChecker('abc', $this->abcChecker());
 		$this->assertTrue(call_user_func($validation->getChecker('abc'), 'abc'));
 		$this->assertFalse(call_user_func($validation->getChecker('abc'), 'def'));
@@ -214,21 +214,21 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetDefaultCheckerByMagicGetter()
 	{
-		$validation = new Validation();
+		$validation = new Context();
 		$this->assertEquals($validation->defaultChecker('alpha'),
 			$validation->getDefaultChecker('alpha'));
 	}
 
 	public function testGetResultByMagicGetter()
 	{
-		$validation = new Validation();
+		$validation = new Context();
 		$this->assertSame($validation->result,
 			$validation->getResult());
 	}
 
 	public function testGetCheckerByMagicGetter()
 	{
-		$validation = new Validation();
+		$validation = new Context();
 		$validation->registerChecker('abc', $this->abcChecker());
 		$this->assertTrue(call_user_func($validation->checker('abc'), 'abc'));
 		$this->assertFalse(call_user_func($validation->checker('abc'), 'def'));
@@ -236,7 +236,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
 
 	public function testMessageProcessor()
 	{
-		$validation = new Validation();
+		$validation = new Context();
 		$validation->registerChecker('int', $this->intChecker());
 		$validation->setMessageProcessor(function($name, $type, $options) {
 			switch($type) {
@@ -268,7 +268,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
 
 	public function testCheckArrayValueWithAcceptArrayOption()
 	{
-		$validation = new Validation(array(
+		$validation = new Context(array(
 			'id'    => array(1, 2, 3),
 			'id_ng' => array(1, 'a', 3),
 		));
@@ -279,7 +279,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
 
 	public function testCheckNestedArrayValueWithAcceptArrayOption()
 	{
-		$validation = new Validation(array(
+		$validation = new Context(array(
 			'id' => array(
 				array(
 					array(1, 2, 3),

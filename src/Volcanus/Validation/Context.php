@@ -6,7 +6,7 @@
  * @author     k.holy74@gmail.com
  * @license    http://www.opensource.org/licenses/mit-license.php  The MIT License (MIT)
  */
-namespace Volcanus;
+namespace Volcanus\Validation;
 
 use Volcanus\Validation\Util;
 use Volcanus\Validation\Checker;
@@ -15,11 +15,11 @@ use Volcanus\Validation\Exception\RuntimeException;
 use Volcanus\Validation\Exception\InvalidArgumentException;
 
 /**
- * Validation
+ * Context
  *
  * @author     k.holy74@gmail.com
  */
-class Validation
+class Context
 {
 
 	/* @var array チェッカーの配列 */

@@ -8,7 +8,7 @@
 
 ライブラリに同梱されているデフォルトチェッカーは、check()メソッドで与えられた引数を検証し、妥当ではない場合にはVolcanus\Validation\Exception\CheckerExceptionインタフェースを実装した例外をスローします。
 
-    use Volcanus\Validation;
+    use Volcanus\Validation\Context;
     use Volcanus\Validation\Checker\IntChecker;
     use Volcanus\Validation\Exception\CheckerException;
     use Volcanus\Validation\Exception\CheckerException\IntException;
@@ -39,11 +39,11 @@
     }
 
 
-##Validationクラス
+##Contextクラス
 
-Validationクラスはチェック対象のオブジェクトまたは配列を保持し、Validation::check()メソッドによりプロパティまたは配列のキーを指定してチェックを行えます。
+Contextクラスはチェック対象のオブジェクトまたは配列を保持し、Context::check()メソッドによりプロパティまたは配列のキーを指定してチェックを行えます。
 
-    $validation = new Validation(array(
+    $validation = new Context(array(
         'id'   => 10,
         'name' => '',
     ));
@@ -77,7 +77,7 @@ Validationクラスはチェック対象のオブジェクトまたは配列を�
 
 デフォルトチェッカー以外にも、registerChecker()メソッドで独自のチェック処理を登録して利用できます。
 
-    $validation = new Validation(array(
+    $validation = new Context(array(
         'id'   => 0,
         'name' => '',
     ));
