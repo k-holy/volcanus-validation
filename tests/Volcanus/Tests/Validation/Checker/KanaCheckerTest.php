@@ -18,10 +18,11 @@ use Volcanus\Validation\Checker\KanaChecker;
 class KanaCheckerTest extends \PHPUnit_Framework_TestCase
 {
 
-	const ZENKAKU_HIRA = 'ぁあぃいぅうぇえぉおかがきぎくぐけげこごさざしじすずせぜそぞただちぢっつづてでとどなにぬねのはばぱひびぴふぶぷへべぺほぼぽまみむめもゃやゅゆょよらりるれろゎわゐゑをん';
-	const ZENKAKU_KANA = 'ァアィイゥウェエォオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモャヤュユョヨラリルレロヮワヰヱヲンヴヵヶ';
-	const ZENKAKU_KIGO = '・ーヽヾ';
-	const HANKAKU_KANA = '｡｢｣､･ｦｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝﾞﾟ';
+	const ZENKAKU_HIRA = 'ぁあぃいぅうぇえぉおかがきぎくぐけげこごさざしじすずせぜそぞただちぢっつづてでとどなにぬねのはばぱひびぴふぶぷへべぺほぼぽまみむめもゃやゅゆょよらりるれろゎわゐゑをんー';
+	const ZENKAKU_KANA = 'ァアィイゥウェエォオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモャヤュユョヨラリルレロヮワヰヱヲンヴヵヶー';
+	const ZENKAKU_KIGO = '・ヽヾ';
+	const HANKAKU_KANA = 'ｦｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝﾞﾟ';
+	const HANKAKU_KIGO = '･';
 
 	protected $checker;
 	protected $internalEncoding;
@@ -32,16 +33,85 @@ class KanaCheckerTest extends \PHPUnit_Framework_TestCase
 		$this->checker->setOption('encoding', 'UTF-8');
 	}
 
-	public function testCheckIsOk()
+	public function testCheckZenkakuHiragana()
 	{
-		$checker = $this->checker;
-		$this->assertTrue($this->checker->check(self::ZENKAKU_HIRA));
-		$this->assertTrue($this->checker->check(self::ZENKAKU_HIRA . self::ZENKAKU_KIGO, array('acceptFlag' => 'H')));
-		$this->assertTrue($this->checker->check(self::ZENKAKU_KANA . self::ZENKAKU_KIGO, array('acceptFlag' => 'K')));
-		$this->assertTrue($this->checker->check(self::HANKAKU_KANA                     , array('acceptFlag' => 'k')));
-		$this->assertTrue($this->checker->check(self::ZENKAKU_HIRA . self::ZENKAKU_KANA . self::ZENKAKU_KIGO, array('acceptFlag' => 'HK')));
-		$this->assertTrue($this->checker->check(self::ZENKAKU_HIRA . self::HANKAKU_KANA . self::ZENKAKU_KIGO, array('acceptFlag' => 'Hk')));
-		$this->assertTrue($this->checker->check(self::ZENKAKU_KANA . self::HANKAKU_KANA . self::ZENKAKU_KIGO, array('acceptFlag' => 'Kk')));
+		$this->assertTrue($this->checker->check(self::ZENKAKU_HIRA, array('acceptFlag' => 'H')));
+	}
+
+	public function testCheckZenkakuKatakana()
+	{
+		$this->assertTrue($this->checker->check(self::ZENKAKU_KANA,
+			array('acceptFlag' => 'K')));
+	}
+
+	public function testCheckHankakuKatakana()
+	{
+		$this->assertTrue($this->checker->check(self::HANKAKU_KANA,
+			array('acceptFlag' => 'k')));
+	}
+
+	public function testCheckZenkakuHiraganaAndZenkakuKatakana()
+	{
+		$this->assertTrue($this->checker->check(self::ZENKAKU_HIRA . self::ZENKAKU_KANA,
+			array('acceptFlag' => 'HK')));
+	}
+
+	public function testCheckZenkakuHiraganaAndHankakuKatakana()
+	{
+		$this->assertTrue($this->checker->check(self::ZENKAKU_HIRA . self::HANKAKU_KANA,
+			array('acceptFlag' => 'Hk')));
+	}
+
+	public function testCheckZenkakuKatakanaAndHankakuKatakana()
+	{
+		$this->assertTrue($this->checker->check(self::ZENKAKU_KANA . self::HANKAKU_KANA,
+			array('acceptFlag' => 'Kk')));
+	}
+
+	public function testCheckZenkakuHiraganaAndZenkakuKatakanaAndHankakuKatakana()
+	{
+		$this->assertTrue($this->checker->check(self::ZENKAKU_HIRA . self::ZENKAKU_KANA . self::HANKAKU_KANA,
+			array('acceptFlag' => 'HKk')));
+	}
+
+	public function testCheckWithEncoding()
+	{
+		$this->assertTrue($this->checker->check(mb_convert_encoding(self::ZENKAKU_HIRA, 'SJIS', 'UTF-8'),
+			array('acceptFlag' => 'H', 'encoding' => 'SJIS')));
+		$this->assertTrue($this->checker->check(mb_convert_encoding(self::ZENKAKU_HIRA, 'EUC-JP', 'UTF-8'),
+			array('acceptFlag' => 'H', 'encoding' => 'EUC-JP')));
+		$this->assertTrue($this->checker->check(mb_convert_encoding(self::ZENKAKU_HIRA, 'ISO-2022-JP', 'UTF-8'),
+			array('acceptFlag' => 'H', 'encoding' => 'ISO-2022-JP')));
+	}
+
+	public function testCheckZenkakuWithAcceptSign()
+	{
+		$this->assertTrue($this->checker->check(self::ZENKAKU_HIRA . self::ZENKAKU_KIGO,
+			array('acceptFlag' => 'H', 'acceptSign' => true)));
+		$this->assertTrue($this->checker->check(self::ZENKAKU_KANA . self::ZENKAKU_KIGO,
+			array('acceptFlag' => 'K', 'acceptSign' => true)));
+	}
+
+	public function testCheckHankakuWithAcceptSign()
+	{
+		$this->assertTrue($this->checker->check(self::HANKAKU_KANA . self::HANKAKU_KIGO,
+			array('acceptFlag' => 'k', 'acceptSign' => true)));
+	}
+
+	public function testCheckZenkakuAndHankakuWithAcceptSign()
+	{
+		$this->assertTrue($this->checker->check(self::ZENKAKU_HIRA . self::HANKAKU_KANA . self::ZENKAKU_KIGO . self::HANKAKU_KIGO,
+			array('acceptFlag' => 'Hk', 'acceptSign' => true)));
+		$this->assertTrue($this->checker->check(self::ZENKAKU_KANA . self::HANKAKU_KANA . self::ZENKAKU_KIGO . self::HANKAKU_KIGO,
+			array('acceptFlag' => 'Kk', 'acceptSign' => true)));
+		$this->assertTrue($this->checker->check(self::ZENKAKU_HIRA . self::ZENKAKU_KANA . self::HANKAKU_KANA . self::ZENKAKU_KIGO . self::HANKAKU_KIGO,
+			array('acceptFlag' => 'HKk', 'acceptSign' => true)));
+	}
+
+	public function testCheckWithAcceptSpace()
+	{
+		$this->assertTrue($this->checker->check(self::ZENKAKU_HIRA . ' ',
+			array('acceptFlag' => 'H', 'acceptSpace' => true)));
 	}
 
 	/**
@@ -52,23 +122,22 @@ class KanaCheckerTest extends \PHPUnit_Framework_TestCase
 		$this->checker->check('ｚ');
 	}
 
-	public function testCheckIsOkEnableSpace()
+	/**
+	 * @expectedException Volcanus\Validation\Exception\CheckerException\KanaException
+	 */
+	public function testRaiseKanaExceptionWhenCheckIsNgByNotAcceptSign()
 	{
-		$this->assertTrue($this->checker->check(self::ZENKAKU_HIRA  . ' ', array('acceptSpace' => true)));
-		$this->assertTrue($this->checker->check(self::ZENKAKU_HIRA  . self::ZENKAKU_KIGO . ' ', array('acceptFlag' => 'H', 'acceptSpace' => true)));
-		$this->assertTrue($this->checker->check(self::ZENKAKU_KANA  . self::ZENKAKU_KIGO . ' ', array('acceptFlag' => 'K', 'acceptSpace' => true)));
-		$this->assertTrue($this->checker->check(self::HANKAKU_KANA  . ' ', array('acceptFlag' => 'k', 'acceptSpace' => true)));
-		$this->assertTrue($this->checker->check(self::ZENKAKU_HIRA  . self::ZENKAKU_KANA . self::ZENKAKU_KIGO . ' ', array('acceptFlag' => 'HK', 'acceptSpace' => true)));
-		$this->assertTrue($this->checker->check(self::ZENKAKU_HIRA  . self::HANKAKU_KANA . self::ZENKAKU_KIGO . ' ', array('acceptFlag' => 'Hk', 'acceptSpace' => true)));
-		$this->assertTrue($this->checker->check(self::ZENKAKU_KANA  . self::HANKAKU_KANA . self::ZENKAKU_KIGO . ' ', array('acceptFlag' => 'Kk', 'acceptSpace' => true)));
+		$this->checker->check(self::ZENKAKU_HIRA . self::ZENKAKU_KIGO,
+			array('acceptFlag' => 'H', 'acceptSign' => false));
 	}
 
 	/**
 	 * @expectedException Volcanus\Validation\Exception\CheckerException\KanaException
 	 */
-	public function testCheckIsNgEnableSpace()
+	public function testRaiseKanaExceptionWhenCheckIsNgByNotAcceptSpace()
 	{
-		$this->checker->check(self::ZENKAKU_HIRA . ' ', array('acceptSpace' => false));
+		$this->checker->check(self::ZENKAKU_HIRA . ' ',
+			array('acceptFlag' => 'H', 'acceptSpace' => false));
 	}
 
 	/**

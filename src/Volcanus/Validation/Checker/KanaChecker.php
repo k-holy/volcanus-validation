@@ -23,6 +23,7 @@ class KanaChecker extends AbstractChecker
 	{
 		$this->options['acceptFlag' ] = 'HKk'; // // 許容する文字列
 		$this->options['encoding'   ] = null; // 文字エンコーディング
+		$this->options['acceptSign' ] = true; // 記号を許可する
 		$this->options['acceptSpace'] = false; // 空白を許可する
 		$this->options = Util::mergeOptions($this->options, $options);
 	}
@@ -40,6 +41,7 @@ class KanaChecker extends AbstractChecker
 
 		$acceptFlag  = $options['acceptFlag'];
 		$encoding    = $options['encoding'];
+		$acceptSign  = $options['acceptSign'];
 		$acceptSpace = $options['acceptSpace'];
 		$stringValue = (string)$value;
 
@@ -52,21 +54,27 @@ class KanaChecker extends AbstractChecker
 		}
 
 		$patterns = array();
-		// 全角かな
+		// 全角かな＋ー
 		if (false !== strpos($acceptFlag, 'H')) {
- 			$patterns[] = '(\xe3(\x81[\x81-\xbf]|\x82[\x80-\x93]))';
+ 			$patterns[] = '(\xe3(\x81[\x81-\xbf]|\x82[\x80-\x96]|\x83\xbc))';
 		}
-		// 全角カナ
+		// 全角カナ＋ー
 		if (false !== strpos($acceptFlag, 'K')) {
- 			$patterns[] = '(\xe3(\x82[\xa1-\xbf]|\x83[\x80-\xb6]))';
+ 			$patterns[] = '(\xe3(\x82[\xa1-\xbf]|\x83[\x80-\xba]|\x83\xbc))';
 		}
-		// 半角ｶﾅ
+		// 半角ｶﾅ＋ｰﾞﾟ
 		if (false !== strpos($acceptFlag, 'k')) {
- 			$patterns[] = '(\xef(\xbd[\xa1-\xbf]|\xbe[\x80-\x9f]))';
+ 			$patterns[] = '(\xef(\xbd[\xa6-\xbf]|\xbe[\x80-\x9f]))';
 		}
-		// 全角かな＋全角カナ記号（・ーヽヾ）
-		if (false !== strpos($acceptFlag, 'H') || false !== strpos($acceptFlag, 'K')) {
- 			$patterns[] = '(\xe3\x83[\xbb-\xbe])';
+		if ($acceptSign) {
+			// 全角かな/全角カナ記号（・ヽヾ）
+			if (false !== strpos($acceptFlag, 'H') || false !== strpos($acceptFlag, 'K')) {
+	 			$patterns[] = '(\xe3\x83(\xbb|\xbd|\xbe))';
+			}
+			// 半角ｶﾅ記号（･）
+			if (false !== strpos($acceptFlag, 'k')) {
+	 			$patterns[] = '(\xef\xbd\xa5)';
+			}
 		}
 		// 空白を許可
 		if ($acceptSpace) {
