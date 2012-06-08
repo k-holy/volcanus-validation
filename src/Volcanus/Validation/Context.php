@@ -11,8 +11,6 @@ namespace Volcanus\Validation;
 use Volcanus\Validation\Util;
 use Volcanus\Validation\Checker;
 use Volcanus\Validation\Exception\CheckerException;
-use Volcanus\Validation\Exception\RuntimeException;
-use Volcanus\Validation\Exception\InvalidArgumentException;
 
 /**
  * Context
@@ -105,7 +103,7 @@ class Context
 	public function registerChecker($type, $checker)
 	{
 		if (!is_callable($checker)) {
-			throw new InvalidArgumentException(
+			throw new \InvalidArgumentException(
 				sprintf('The checker "%s" is not callable.', $type));
 		}
 		$this->checkers[$type] = $checker;
@@ -134,7 +132,7 @@ class Context
 		if (!isset($this->checkers[$type])) {
 			try {
 				$defaultChecker = $this->getDefaultChecker($type);
-			} catch (RuntimeException $e) {
+			} catch (\RuntimeException $e) {
 				throw $e;
 			}
 			$this->checkers[$type] = $defaultChecker;
@@ -152,7 +150,7 @@ class Context
 	{
 		$class = 'Volcanus\Validation\Checker\\' . ucfirst($type) . 'Checker';
 		if (!class_exists($class, true)) {
-			throw new RuntimeException(
+			throw new \RuntimeException(
 				sprintf('The checker type "%s" is not defined.', $type));
 		}
 		return new $class();
@@ -166,7 +164,7 @@ class Context
 	public function setMessageProcessor($messageProcessor)
 	{
 		if (!is_callable($messageProcessor)) {
-			throw new InvalidArgumentException(
+			throw new \InvalidArgumentException(
 				sprintf('The messageProcessor is not callable. type:%s',
 				is_object($messageProcessor)
 					? get_class($messageProcessor)
@@ -194,7 +192,7 @@ class Context
 		}
 		$checker = $this->checker($type);
 		if (!is_callable($checker)) {
-			throw new RuntimeException(
+			throw new \RuntimeException(
 				sprintf('The checker type "%s" is not defined.', $type));
 		}
 		$value = $this->result->getValue($name);
@@ -215,12 +213,12 @@ class Context
 		if ((is_array($value) || $value instanceof \Traversable)) {
 			if ($checker instanceof Checker) {
 				if (false === $checker->isEnableOption('acceptArray')) {
-					throw new RuntimeException(
+					throw new \RuntimeException(
 						sprintf('The acceptArray option is not supported for checker type "%s".', $type));
 				}
 			}
 			if (!isset($options['acceptArray']) || !$options['acceptArray']) {
-				throw new InvalidArgumentException(
+				throw new \InvalidArgumentException(
 					sprintf('The value is array or Traversable. type:%s',
 					is_object($value)
 						? get_class($value)
@@ -337,7 +335,7 @@ class Context
 		if (method_exists($this, $method)) {
 			return $this->{$method}();
 		}
-		throw new RuntimeException(
+		throw new \RuntimeException(
 			sprintf('The property "%s" is not defined.', $name));
 	}
 
@@ -354,7 +352,7 @@ class Context
 		if (method_exists($this, $method)) {
 			return $this->{$method}($value);
 		}
-		throw new RuntimeException(
+		throw new \RuntimeException(
 			sprintf('The property "%s" is not defined.', $name));
 	}
 
@@ -371,7 +369,7 @@ class Context
 		if (method_exists($this, $method)) {
 			return call_user_func_array(array($this, $method), $args);
 		}
-		throw new RuntimeException(
+		throw new \RuntimeException(
 			sprintf('The method "%s" is not defined.', $name));
 	}
 

@@ -10,7 +10,6 @@ namespace Volcanus\Validation\Checker;
 
 use Volcanus\Validation\Util;
 use Volcanus\Validation\Exception\CheckerException;
-use Volcanus\Validation\Exception\InvalidArgumentException;
 
 /**
  * AbstractChecker
@@ -90,7 +89,7 @@ abstract class AbstractChecker implements \Volcanus\Validation\Checker
 	public function setOption($name, $value)
 	{
 		if (!$this->isEnableOption($name)) {
-			throw new InvalidArgumentException(
+			throw new \InvalidArgumentException(
 				sprintf('The option "%s" is not support.', $name));
 		}
 		$this->options[$name] = $value;

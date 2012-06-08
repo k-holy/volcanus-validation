@@ -8,7 +8,6 @@
  */
 namespace Volcanus\Validation\Checker;
 
-use Volcanus\Validation\Exception;
 use Volcanus\Validation\Exception\CheckerException\DateException;
 use Volcanus\Validation\Exception\CheckerException\DatetimeException;
 
@@ -37,7 +36,7 @@ class DatetimeChecker extends AbstractChecker
 				'pattern' => DateChecker::PATTERN_YMDHIS,
 				'order'   => 'ymdhis',
 			))->check($value, $options);
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			if ($e instanceof DateException) {
 				switch ($e->getCode()) {
 				case DateException::INVALID_FORMAT:

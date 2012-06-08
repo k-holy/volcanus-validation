@@ -9,8 +9,6 @@
 namespace Volcanus\Validation\Checker;
 
 use Volcanus\Validation\Util;
-use Volcanus\Validation\Exception;
-use Volcanus\Validation\Exception\InvalidArgumentException;
 use Volcanus\Validation\Exception\CheckerException\MinValueException;
 use Volcanus\Validation\Exception\CheckerException\MaxValueException;
 
@@ -46,13 +44,13 @@ class FloatChecker extends AbstractChecker
 
 		try {
 			Util::checkFloat($value, $options['unsigned']);
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			throw $e;
 		}
 
 		if (isset($min)) {
 			if (!is_int($min) && !is_float($min)) {
-				throw new InvalidArgumentException(
+				throw new \InvalidArgumentException(
 					'The min parameter is not integer and not float.');
 			}
 			if ($value < $min) {
@@ -63,7 +61,7 @@ class FloatChecker extends AbstractChecker
 
 		if (isset($max)) {
 			if (!is_int($max) && !is_float($max)) {
-				throw new InvalidArgumentException(
+				throw new \InvalidArgumentException(
 					'The max parameter is not integer and not float.');
 			}
 			if ($value > $max) {

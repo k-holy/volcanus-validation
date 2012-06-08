@@ -9,7 +9,6 @@
 namespace Volcanus\Validation\Checker;
 
 use Volcanus\Validation\Util;
-use Volcanus\Validation\Exception\InvalidArgumentException;
 use Volcanus\Validation\Exception\CheckerException\MinValueException;
 use Volcanus\Validation\Exception\CheckerException\MaxValueException;
 
@@ -40,7 +39,7 @@ class ArraySizeChecker extends AbstractChecker
 		$options = Util::mergeOptions($this->options, $options);
 
 		if (false === is_array($value) && false === ($value instanceof \Countable)) {
-			throw new InvalidArgumentException(
+			throw new \InvalidArgumentException(
 				'The value is not an Array and not Countable.');
 		}
 
@@ -50,7 +49,7 @@ class ArraySizeChecker extends AbstractChecker
 		$size = count($value);
 		if (isset($minSize)) {
 			if (!is_int($minSize)) {
-				throw new InvalidArgumentException(
+				throw new \InvalidArgumentException(
 					'The minSize parameter is not integer.');
 			}
 			if ($size < $minSize) {
@@ -60,7 +59,7 @@ class ArraySizeChecker extends AbstractChecker
 		}
 		if (isset($maxSize)) {
 			if (!is_int($maxSize)) {
-				throw new InvalidArgumentException(
+				throw new \InvalidArgumentException(
 					'The maxSize parameter is not integer.');
 			}
 			if ($size > $maxSize) {

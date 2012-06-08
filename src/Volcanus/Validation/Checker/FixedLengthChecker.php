@@ -9,8 +9,6 @@
 namespace Volcanus\Validation\Checker;
 
 use Volcanus\Validation\Util;
-use Volcanus\Validation\Exception;
-use Volcanus\Validation\Exception\InvalidArgumentException;
 
 /**
  * FixedLengthChecker
@@ -40,12 +38,12 @@ class FixedLengthChecker extends AbstractChecker
 		$options = Util::mergeOptions($this->options, $options);
 
 		if (!isset($options['length'])) {
-			throw new InvalidArgumentException(
+			throw new \InvalidArgumentException(
 				'The parameter "length" is not specified.');
 		}
 
 		if (!is_int($options['length'])) {
-			throw new InvalidArgumentException(
+			throw new \InvalidArgumentException(
 				'The parameter "length" is not integer.');
 		}
 
@@ -67,7 +65,7 @@ class FixedLengthChecker extends AbstractChecker
 				(isset($options['encoding'])) ? $options['encoding'] : null
 			);
 
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			throw $e;
 		}
 		return true;

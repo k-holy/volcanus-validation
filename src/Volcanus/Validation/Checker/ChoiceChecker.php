@@ -9,7 +9,6 @@
 namespace Volcanus\Validation\Checker;
 
 use Volcanus\Validation\Util;
-use Volcanus\Validation\Exception\InvalidArgumentException;
 use Volcanus\Validation\Exception\CheckerException\ChoiceException;
 
 /**
@@ -40,14 +39,14 @@ class ChoiceChecker extends AbstractChecker
 		$choices  = $options['choices'];
 
 		if (!isset($choices)) {
-			throw new InvalidArgumentException(
+			throw new \InvalidArgumentException(
 				'The parameter "choices" is not specified.');
 		}
 		if (is_string($choices) && false !== strpos($choices, ',')) {
 			$choices = explode(',', $choices);
 		}
 		if (!is_array($choices) && !($choices instanceof Traversable)) {
-			throw new InvalidArgumentException(
+			throw new \InvalidArgumentException(
 				'The parameter "choices" is not valid Array/Traversable.');
 		}
 

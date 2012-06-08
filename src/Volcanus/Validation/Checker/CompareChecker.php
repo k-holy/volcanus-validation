@@ -9,7 +9,6 @@
 namespace Volcanus\Validation\Checker;
 
 use Volcanus\Validation\Util;
-use Volcanus\Validation\Exception\InvalidArgumentException;
 use Volcanus\Validation\Exception\CheckerException\CompareException;
 
 /**
@@ -49,12 +48,12 @@ class CompareChecker extends AbstractChecker
 		$compareTo = $options['compareTo'];
 
 		if (!isset($operator)) {
-			throw new InvalidArgumentException(
+			throw new \InvalidArgumentException(
 				'The parameter "operator" is not specified.');
 		}
 
 		if (!isset($compareTo)) {
-			throw new InvalidArgumentException(
+			throw new \InvalidArgumentException(
 				'The parameter "compareTo" is not specified.');
 		}
 
@@ -111,7 +110,7 @@ class CompareChecker extends AbstractChecker
 			}
 			break;
 		default:
-			throw new InvalidArgumentException(
+			throw new \InvalidArgumentException(
 				sprintf('The parameter "%s" is unsupported operator.', $operator));
 		}
 		return true;

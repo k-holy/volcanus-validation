@@ -8,13 +8,11 @@
  */
 namespace Volcanus\Validation\Exception;
 
-use Volcanus\Validation\Exception;
-
 /**
  * CheckerException
  *
  * @package    Volcanus\Validation
  * @author     k.holy74@gmail.com
  */
-interface CheckerException extends Exception
+interface CheckerException
 {}

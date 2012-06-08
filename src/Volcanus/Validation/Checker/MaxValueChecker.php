@@ -9,8 +9,6 @@
 namespace Volcanus\Validation\Checker;
 
 use Volcanus\Validation\Util;
-use Volcanus\Validation\Exception;
-use Volcanus\Validation\Exception\InvalidArgumentException;
 use Volcanus\Validation\Exception\CheckerException\InvalidValueException;
 use Volcanus\Validation\Exception\CheckerException\MaxValueException;
 
@@ -40,27 +38,27 @@ class MaxValueChecker extends AbstractChecker
 		$options = Util::mergeOptions($this->options, $options);
 
 		if (!isset($options['max'])) {
-			throw new InvalidArgumentException(
+			throw new \InvalidArgumentException(
 				'The parameter "length" is not specified.');
 		}
 
 		try {
 			Util::checkInt($options['max'], false);
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			try {
 				Util::checkFloat($options['max'], false);
-			} catch (Exception $e) {
-				throw new InvalidArgumentException(
+			} catch (\Exception $e) {
+				throw new \InvalidArgumentException(
 					'The max parameter contains characters other than the sign and digits and comma.');
 			}
 		}
 
 		try {
 			Util::checkInt($value, false);
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			try {
 				Util::checkFloat($value, false);
-			} catch (Exception $e) {
+			} catch (\Exception $e) {
 				throw new InvalidValueException(
 					'The value contains characters other than the sign and digits and comma.');
 			}

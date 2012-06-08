@@ -99,7 +99,7 @@ class MaxLengthCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\InvalidArgumentException
+	 * @expectedException \InvalidArgumentException
 	 */
 	public function testRaiseInvalidArgumentExceptionWhenLengthParameterIsNotSpecified()
 	{

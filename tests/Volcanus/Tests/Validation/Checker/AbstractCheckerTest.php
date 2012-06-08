@@ -71,9 +71,9 @@ class AbstractCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\InvalidArgumentException
+	 * @expectedException \InvalidArgumentException
 	 */
-	public function testRaiseRuntimeExceptionWhenUndefinedOptionIsSpecified()
+	public function testRaiseInvalidArgumentExceptionWhenUndefinedOptionIsSpecified()
 	{
 		$checker = new NumericChecker();
 		$checker->setOption('foo', true);

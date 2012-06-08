@@ -9,7 +9,6 @@
 namespace Volcanus\Validation\Checker;
 
 use Volcanus\Validation\Util;
-use Volcanus\Validation\Exception;
 
 /**
  * TextChecker
@@ -61,7 +60,7 @@ class TextChecker extends AbstractChecker
 				);
 			}
 
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			throw $e;
 		}
 		return true;

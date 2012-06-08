@@ -55,7 +55,7 @@ class MaxValueCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\InvalidArgumentException
+	 * @expectedException \InvalidArgumentException
 	 */
 	public function testRaiseInvalidArgumentExceptionWhenInvalidMaxValueParameterIsSpecified()
 	{

@@ -128,7 +128,7 @@ class CompareCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\InvalidArgumentException
+	 * @expectedException \InvalidArgumentException
 	 */
 	public function testRaiseInvalidArgumentExceptionWhenOperatorParameterIsNotSpecified()
 	{
@@ -136,7 +136,7 @@ class CompareCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\InvalidArgumentException
+	 * @expectedException \InvalidArgumentException
 	 */
 	public function testRaiseInvalidArgumentExceptionWhenCompareValueParameterIsNotSpecified()
 	{
@@ -144,7 +144,7 @@ class CompareCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\InvalidArgumentException
+	 * @expectedException \InvalidArgumentException
 	 */
 	public function testRaiseInvalidArgumentExceptionWhenInvalidOperatorParameterIsSpecified()
 	{

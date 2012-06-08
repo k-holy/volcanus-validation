@@ -9,7 +9,6 @@
 namespace Volcanus\Validation\Checker;
 
 use Volcanus\Validation\Util;
-use Volcanus\Validation\Exception;
 use Volcanus\Validation\Exception\CheckerException\EmailException;
 use Volcanus\Validation\Exception\CheckerException\MaxLengthException;
 
@@ -78,7 +77,7 @@ class EmailChecker extends AbstractChecker
 		} catch (MaxLengthException $e) {
 			throw new MaxLengthException(
 				'A addr-spec of the e-mail address is limited within 256 bytes.');
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			throw $e;
 		}
 		return true;
@@ -109,7 +108,7 @@ class EmailChecker extends AbstractChecker
 		} catch (MaxLengthException $e) {
 			throw new MaxLengthException(
 				'A local-part of the e-mail address is limited within 64 bytes.');
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			throw $e;
 		}
 		return true;
@@ -136,7 +135,7 @@ class EmailChecker extends AbstractChecker
 		} catch (MaxLengthException $e) {
 			throw new MaxLengthException(
 				'A domain of the e-mail address is limited within 255 bytes.');
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			throw $e;
 		}
 		return true;

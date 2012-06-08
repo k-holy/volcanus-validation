@@ -8,7 +8,6 @@
  */
 namespace Volcanus\Validation;
 
-use Volcanus\Validation\Exception\InvalidArgumentException;
 use Volcanus\Validation\Exception\CheckerException\MaxLengthException;
 use Volcanus\Validation\Exception\CheckerException\MinLengthException;
 use Volcanus\Validation\Exception\CheckerException\InvalidEncodingException;
@@ -35,7 +34,7 @@ class Util
 	public static function recursiveCheck($checker, $value, $options = array())
 	{
 		if (!is_callable($checker)) {
-			throw new InvalidArgumentException(
+			throw new \InvalidArgumentException(
 				sprintf('The checker is not callable. received:%s',
 					(is_object($checker)) ? get_class($checker) : gettype($checker)));
 		}
@@ -72,7 +71,7 @@ class Util
 		if (count($appends) >= 1) {
 			foreach (array_keys($appends) as $name) {
 				if (!array_key_exists($name, $defaults)) {
-					throw new InvalidArgumentException(
+					throw new \InvalidArgumentException(
 						sprintf('The option "%s" is not support.', $name));
 				}
 			}
@@ -97,11 +96,11 @@ class Util
 	{
 		$stringValue = (string)$value;
 		if (!isset($length)) {
-			throw new InvalidArgumentException(
+			throw new \InvalidArgumentException(
 				'The parameter "length" is not specified.');
 		}
 		if (!is_int($length)) {
-			throw new InvalidArgumentException(
+			throw new \InvalidArgumentException(
 				'The parameter "length" is not integer.');
 		}
 		switch ($mbLength) {
@@ -123,7 +122,7 @@ class Util
 			break;
 		}
 		if (!isset($characterLength) || !isset($mbLengthType)) {
-			throw new InvalidArgumentException(
+			throw new \InvalidArgumentException(
 				sprintf('The mbLength parameter "%s" is not valid.', $mbLength));
 		}
 		if ($characterLength < $length) {
@@ -150,11 +149,11 @@ class Util
 	{
 		$stringValue = (string)$value;
 		if (!isset($length)) {
-			throw new InvalidArgumentException(
+			throw new \InvalidArgumentException(
 				'The parameter "length" is not specified.');
 		}
 		if (!is_int($length)) {
-			throw new InvalidArgumentException(
+			throw new \InvalidArgumentException(
 				'The parameter "length" is not integer.');
 		}
 		switch ($mbLength) {
@@ -176,7 +175,7 @@ class Util
 			break;
 		}
 		if (!isset($characterLength) || !isset($mbLengthType)) {
-			throw new InvalidArgumentException(
+			throw new \InvalidArgumentException(
 				sprintf('The mbLength parameter "%s" is not valid.', $mbLength));
 		}
 		if ($characterLength > $length) {
@@ -285,7 +284,7 @@ class Util
 	public static function map($func, $value)
 	{
 		if (!is_callable($func)) {
-			throw new InvalidArgumentException(
+			throw new \InvalidArgumentException(
 				sprintf('The function is not callable. received:%s',
 					(is_object($func)) ? get_class($func) : gettype($func)));
 		}

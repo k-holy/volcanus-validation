@@ -9,8 +9,6 @@
 namespace Volcanus\Validation\Checker;
 
 use Volcanus\Validation\Util;
-use Volcanus\Validation\Exception;
-use Volcanus\Validation\Exception\InvalidArgumentException;
 use Volcanus\Validation\Exception\CheckerException\InvalidValueException;
 use Volcanus\Validation\Exception\CheckerException\MinValueException;
 
@@ -40,27 +38,27 @@ class MinValueChecker extends AbstractChecker
 		$options = Util::mergeOptions($this->options, $options);
 
 		if (!isset($options['min'])) {
-			throw new InvalidArgumentException(
+			throw new \InvalidArgumentException(
 				'The parameter "length" is not specified.');
 		}
 
 		try {
 			Util::checkInt($options['min'], false);
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			try {
 				Util::checkFloat($options['min'], false);
-			} catch (Exception $e) {
-				throw new InvalidArgumentException(
+			} catch (\Exception $e) {
+				throw new \InvalidArgumentException(
 					'The min parameter contains characters other than the sign and digits and comma.');
 			}
 		}
 
 		try {
 			Util::checkInt($value, false);
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			try {
 				Util::checkFloat($value, false);
-			} catch (Exception $e) {
+			} catch (\Exception $e) {
 				throw new InvalidValueException(
 					'The value contains characters other than the sign and digits and comma.');
 			}

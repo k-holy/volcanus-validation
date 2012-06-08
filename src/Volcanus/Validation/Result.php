@@ -9,7 +9,6 @@
 namespace Volcanus\Validation;
 
 use Volcanus\Validation\Error;
-use Volcanus\Validation\Exception\InvalidArgumentException;
 
 /**
  * Result
@@ -78,7 +77,7 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
 				$this->setValue($name, $values->{$name});
 			}
 		} else {
-			throw new InvalidArgumentException(
+			throw new \InvalidArgumentException(
 				sprintf('The values is invalid type. %s', gettype($values)));
 		}
 		return $this;
@@ -145,7 +144,7 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
 	public function setMessage($name, $message)
 	{
 		if (!isset($this->errors[$name])) {
-			throw new InvalidArgumentException(
+			throw new \InvalidArgumentException(
 				sprintf('The value of "%s" is not defined.', $name));
 		}
 		$this->errors[$name]->setMessage($message);

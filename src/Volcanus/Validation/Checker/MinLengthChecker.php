@@ -9,8 +9,6 @@
 namespace Volcanus\Validation\Checker;
 
 use Volcanus\Validation\Util;
-use Volcanus\Validation\Exception;
-use Volcanus\Validation\Exception\InvalidArgumentException;
 use Volcanus\Validation\Exception\CheckerException\MinLengthException;
 
 /**
@@ -41,12 +39,12 @@ class MinLengthChecker extends AbstractChecker
 		$options = Util::mergeOptions($this->options, $options);
 
 		if (!isset($options['length'])) {
-			throw new InvalidArgumentException(
+			throw new \InvalidArgumentException(
 				'The parameter "length" is not specified.');
 		}
 
 		if (!is_int($options['length'])) {
-			throw new InvalidArgumentException(
+			throw new \InvalidArgumentException(
 				'The parameter "length" is not integer.');
 		}
 
@@ -62,7 +60,7 @@ class MinLengthChecker extends AbstractChecker
 				(isset($options['encoding'])) ? $options['encoding'] : null
 			);
 
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			throw $e;
 		}
 		return true;

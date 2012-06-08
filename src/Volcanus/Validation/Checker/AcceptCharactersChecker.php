@@ -9,7 +9,6 @@
 namespace Volcanus\Validation\Checker;
 
 use Volcanus\Validation\Util;
-use Volcanus\Validation\Exception\InvalidArgumentException;
 use Volcanus\Validation\Exception\CheckerException\AcceptCharactersException;
 
 /**
@@ -38,7 +37,7 @@ class AcceptCharactersChecker extends AbstractChecker
 		$options = Util::mergeOptions($this->options, $options);
 		$acceptCharacters = $options['acceptCharacters'];
 		if (!isset($acceptCharacters)) {
-			throw new InvalidArgumentException(
+			throw new \InvalidArgumentException(
 				'The parameter "acceptCharacters" is not specified.');
 		}
 		if (strspn($value, $acceptCharacters) !== strlen($value)) {

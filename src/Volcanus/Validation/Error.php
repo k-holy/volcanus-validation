@@ -8,9 +8,6 @@
  */
 namespace Volcanus\Validation;
 
-use Volcanus\Validation\Exception\RuntimeException;
-use Volcanus\Validation\Exception\InvalidArgumentException;
-
 /**
  * Error
  *
@@ -85,7 +82,7 @@ class Error
 	public function setMessage($message)
 	{
 		if (!is_string($message)) {
-			throw new InvalidArgumentException(
+			throw new \InvalidArgumentException(
 				'The message is not string.');
 		}
 		$this->message = $message;
@@ -114,7 +111,7 @@ class Error
 		if (method_exists($this, $method)) {
 			return $this->{$method}();
 		}
-		throw new RuntimeException(
+		throw new \RuntimeException(
 			sprintf('The property "%s" is not defined.', $name));
 	}
 
@@ -131,7 +128,7 @@ class Error
 		if (method_exists($this, $method)) {
 			return $this->{$method}($value);
 		}
-		throw new RuntimeException(
+		throw new \RuntimeException(
 			sprintf('The property "%s" is not defined.', $name));
 	}
 
