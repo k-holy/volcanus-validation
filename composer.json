@@ -2,7 +2,7 @@
     "name": "volcanus/validation",
     "type": "library",
     "description": "validation library",
-    "keywords": [],
+    "keywords": ["validation"],
     "homepage": "https://github.com/k-holy/Volcanus_Validation",
     "version": "0.2.0",
     "license": "MIT",
