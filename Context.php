@@ -211,12 +211,6 @@ class Context
 		}
 		$valid = null;
 		if ((is_array($value) || $value instanceof \Traversable)) {
-			if ($checker instanceof Checker) {
-				if (false === $checker->isEnableOption('acceptArray')) {
-					throw new \RuntimeException(
-						sprintf('The acceptArray option is not supported for checker type "%s".', $type));
-				}
-			}
 			if (!isset($options['acceptArray']) || !$options['acceptArray']) {
 				throw new \InvalidArgumentException(
 					sprintf('The value is array or Traversable. type:%s',
