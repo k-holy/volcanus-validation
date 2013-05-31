@@ -23,6 +23,7 @@ class MinValueChecker extends AbstractChecker
 	public function __construct(array $options = array())
 	{
 		$this->options['min'] = null; // 最小値
+		$this->options['acceptArray'] = true;
 		$this->options = Util::mergeOptions($this->options, $options);
 	}
 

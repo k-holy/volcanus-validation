@@ -23,6 +23,7 @@ class FixedLengthChecker extends AbstractChecker
 		$this->options['length'  ] = null; // 文字長
 		$this->options['encoding'] = null; // 文字エンコーディング
 		$this->options['mbLength'] = self::LENGTH_CHARS; // 文字長測定モード 'B':バイト長 'C':文字長 'W':文字幅
+		$this->options['acceptArray'] = true;
 		$this->options = Util::mergeOptions($this->options, $options);
 	}
 

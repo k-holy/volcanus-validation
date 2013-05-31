@@ -24,6 +24,7 @@ class UriChecker extends AbstractChecker
 	public function __construct(array $options = array())
 	{
 		$this->options['acceptScheme'] = 'http,https'; // 受け入れるスキーム
+		$this->options['acceptArray'] = true;
 		$this->options = Util::mergeOptions($this->options, $options);
 	}
 

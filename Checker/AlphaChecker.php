@@ -8,6 +8,7 @@
  */
 namespace Volcanus\Validation\Checker;
 
+use Volcanus\Validation\Util;
 use Volcanus\Validation\Exception\CheckerException\AlphaException;
 
 /**
@@ -17,6 +18,12 @@ use Volcanus\Validation\Exception\CheckerException\AlphaException;
  */
 class AlphaChecker extends AbstractChecker
 {
+
+	public function __construct(array $options = array())
+	{
+		$this->options['acceptArray'] = true;
+		$this->options = Util::mergeOptions($this->options, $options);
+	}
 
 	/**
 	 * 値が英字だけで構成されているか検証します。

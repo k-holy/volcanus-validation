@@ -8,6 +8,7 @@
  */
 namespace Volcanus\Validation\Checker;
 
+use Volcanus\Validation\Util;
 use Volcanus\Validation\Exception\CheckerException\AlnumException;
 
 /**
@@ -17,6 +18,12 @@ use Volcanus\Validation\Exception\CheckerException\AlnumException;
  */
 class AlnumChecker extends AbstractChecker
 {
+
+	public function __construct(array $options = array())
+	{
+		$this->options['acceptArray'] = true;
+		$this->options = Util::mergeOptions($this->options, $options);
+	}
 
 	/**
 	 * 値が英字と10進数の数字だけで構成されているか検証します。

@@ -25,6 +25,7 @@ class KanaChecker extends AbstractChecker
 		$this->options['encoding'   ] = null; // 文字エンコーディング
 		$this->options['acceptSign' ] = true; // 記号を許可する
 		$this->options['acceptSpace'] = false; // 空白を許可する
+		$this->options['acceptArray'] = true;
 		$this->options = Util::mergeOptions($this->options, $options);
 	}
 
