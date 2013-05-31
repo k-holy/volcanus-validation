@@ -25,6 +25,7 @@ class IntChecker extends AbstractChecker
 		$this->options['min'] = null; // 最小値
 		$this->options['max'] = null; // 最大値
 		$this->options['unsigned'] = false; // +-を有効とするかどうか
+		$this->options['acceptArray'] = true;
 		$this->options = Util::mergeOptions($this->options, $options);
 	}
 

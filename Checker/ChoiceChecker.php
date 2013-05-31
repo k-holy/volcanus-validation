@@ -22,6 +22,7 @@ class ChoiceChecker extends AbstractChecker
 	public function __construct(array $options = array())
 	{
 		$this->options['choices'] = null; // 選択肢 (Array/Traversable または カンマ区切りの文字列)
+		$this->options['acceptArray'] = true;
 		$this->options = Util::mergeOptions($this->options, $options);
 	}
 

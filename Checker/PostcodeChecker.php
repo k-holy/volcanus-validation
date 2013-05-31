@@ -22,6 +22,7 @@ class PostcodeChecker extends AbstractChecker
 	public function __construct(array $options = array())
 	{
 		$this->options['locale'] = null; // ロケール
+		$this->options['acceptArray'] = true;
 		$this->options = Util::mergeOptions($this->options, $options);
 	}
 

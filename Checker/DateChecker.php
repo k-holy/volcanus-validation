@@ -41,6 +41,7 @@ class DateChecker extends AbstractChecker
 	{
 		$this->options['pattern'] = self::PREG_PATTERN_YMD; // 日付解析用パターン
 		$this->options['order'  ] = self::ORDER_YMD; // 日付解析用順序
+		$this->options['acceptArray'] = true;
 		$this->options = Util::mergeOptions($this->options, $options);
 	}
 

@@ -23,6 +23,7 @@ class EmailChecker extends AbstractChecker
 	public function __construct(array $options = array())
 	{
 		$this->options['allowDotEndOfLocalPart'] = false; // ローカルパートの末尾に.を許可するかどうか
+		$this->options['acceptArray'] = true;
 		$this->options = Util::mergeOptions($this->options, $options);
 	}
 

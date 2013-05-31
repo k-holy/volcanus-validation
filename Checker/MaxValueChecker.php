@@ -23,6 +23,7 @@ class MaxValueChecker extends AbstractChecker
 	public function __construct(array $options = array())
 	{
 		$this->options['max'] = null; // 最大値
+		$this->options['acceptArray'] = true;
 		$this->options = Util::mergeOptions($this->options, $options);
 	}
 
