@@ -217,7 +217,7 @@ class Context
 				} catch (CheckerException $e) {
 					$valid = false;
 				}
-			} elseif ($checker instanceof Checker && true === $checker::forVector) {
+			} elseif ($checker instanceof Checker && true === $checker::$forVector) {
 				try {
 					$valid = call_user_func($checker, $value, $options);
 				} catch (CheckerException $e) {
