@@ -19,6 +19,8 @@ use Volcanus\Validation\Exception\CheckerException\AcceptCharactersException;
 class AcceptCharactersChecker extends AbstractChecker
 {
 
+	public static $forVector = false;
+
 	public function __construct(array $options = array())
 	{
 		$this->options['acceptCharacters'] = null; // 許容する文字列

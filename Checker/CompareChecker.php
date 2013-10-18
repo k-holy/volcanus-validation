@@ -19,6 +19,8 @@ use Volcanus\Validation\Exception\CheckerException\CompareException;
 class CompareChecker extends AbstractChecker
 {
 
+	public static $forVector = false;
+
 	const IS_EQUAL_TO                 = 'eq';
 	const IS_NOT_EQUAL                = 'ne';
 	const IS_GREATER_THAN             = 'gt';
@@ -57,13 +59,10 @@ class CompareChecker extends AbstractChecker
 				'The parameter "compareTo" is not specified.');
 		}
 
-		$stringValue1 = (string)$value;
-		$stringValue2 = (string)$compareTo;
-
 		switch ($operator) {
 		case 'eq':
 		case self::IS_EQUAL_TO:
-			if (false === ($stringValue1 == $stringValue2)) {
+			if (false === ($value == $compareTo)) {
 				throw new CompareException(
 					'The value {1} is not equal to value {2}.',
 					CompareException::INVALID_EQUAL_TO);
@@ -71,7 +70,7 @@ class CompareChecker extends AbstractChecker
 			break;
 		case 'ne':
 		case self::IS_NOT_EQUAL:
-			if (false === ($stringValue1 != $stringValue2)) {
+			if (false === ($value != $compareTo)) {
 				throw new CompareException(
 					'The value {1} is equal to value {2}.',
 					CompareException::INVALID_NOT_EQUAL);
@@ -79,7 +78,7 @@ class CompareChecker extends AbstractChecker
 			break;
 		case 'gt':
 		case self::IS_GREATER_THAN:
-			if (false === ($stringValue1 > $stringValue2)) {
+			if (false === ($value > $compareTo)) {
 				throw new CompareException(
 					'The value {1} is not greater than value {2}.',
 					CompareException::INVALID_GREATER_THAN);
@@ -87,7 +86,7 @@ class CompareChecker extends AbstractChecker
 			break;
 		case 'lt':
 		case self::IS_LESS_THAN:
-			if (false === ($stringValue1 < $stringValue2)) {
+			if (false === ($value < $compareTo)) {
 				throw new CompareException(
 					'The value {1} is not less than value {2}.',
 					CompareException::INVALID_LESS_THAN);
@@ -95,7 +94,7 @@ class CompareChecker extends AbstractChecker
 			break;
 		case 'ge':
 		case self::IS_GREATER_THAN_OR_EQUAL_TO:
-			if (false === ($stringValue1 >= $stringValue2)) {
+			if (false === ($value >= $compareTo)) {
 				throw new CompareException(
 					'The value {1} is not greater than value {2} or not equal to value {2}.',
 					CompareException::INVALID_GREATER_THAN_OR_EQUAL_TO);
@@ -103,7 +102,7 @@ class CompareChecker extends AbstractChecker
 			break;
 		case 'le':
 		case self::IS_LESS_THAN_OR_EQUAL_TO:
-			if (false === ($stringValue1 <= $stringValue2)) {
+			if (false === ($value <= $compareTo)) {
 				throw new CompareException(
 					'The value {1} is not less than value 2 or not equal to value {2}.',
 					CompareException::INVALID_LESS_THAN_OR_EQUAL_TO);

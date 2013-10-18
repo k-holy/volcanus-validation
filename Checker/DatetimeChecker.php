@@ -19,6 +19,8 @@ use Volcanus\Validation\Exception\CheckerException\DatetimeException;
 class DatetimeChecker extends AbstractChecker
 {
 
+	public static $forVector = false;
+
 	/**
 	 * 値が日時を表す文字列であるか検証します。
 	 * 年の範囲: 1-32767 (checkdate関数の制限による)

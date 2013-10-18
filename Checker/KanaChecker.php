@@ -19,6 +19,8 @@ use Volcanus\Validation\Exception\CheckerException\KanaException;
 class KanaChecker extends AbstractChecker
 {
 
+	public static $forVector = false;
+
 	public function __construct(array $options = array())
 	{
 		$this->options['acceptFlag' ] = 'HKk'; // // 許容する文字列

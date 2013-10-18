@@ -19,6 +19,8 @@ use Volcanus\Validation\Exception\CheckerException\DateException;
 class DateChecker extends AbstractChecker
 {
 
+	public static $forVector = false;
+
 	/* 日付解析用パターン */
 	const PATTERN_YMD    = 'ymd';
 	const PATTERN_YMDH   = 'ymdh';

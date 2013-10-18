@@ -18,6 +18,8 @@ use Volcanus\Validation\Util;
 class TextChecker extends AbstractChecker
 {
 
+	public static $forVector = false;
+
 	public function __construct(array $options = array())
 	{
 		$this->options['minLength'] = null; // 最小文字長
