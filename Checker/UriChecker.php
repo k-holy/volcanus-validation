@@ -19,6 +19,8 @@ use Volcanus\Validation\Exception\CheckerException\UriException;
 class UriChecker extends AbstractChecker
 {
 
+	public static $forVector = false;
+
 	public static $uriPattern = '~\A(([a-z][a-z0-9+-.]+):)(//([^/?#]*))?([^?#]+)(\?([^#]*))?(#(.*))?\z~i'; // required scheme,path
 
 	public function __construct(array $options = array())

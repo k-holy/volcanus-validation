@@ -20,6 +20,8 @@ use Volcanus\Validation\Exception\CheckerException\MaxValueException;
 class FloatChecker extends AbstractChecker
 {
 
+	public static $forVector = false;
+
 	public function __construct(array $options = array())
 	{
 		$this->options['min'] = null; // 最小値

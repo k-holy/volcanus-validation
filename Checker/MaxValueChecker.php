@@ -20,6 +20,8 @@ use Volcanus\Validation\Exception\CheckerException\MaxValueException;
 class MaxValueChecker extends AbstractChecker
 {
 
+	public static $forVector = false;
+
 	public function __construct(array $options = array())
 	{
 		$this->options['max'] = null; // 最大値

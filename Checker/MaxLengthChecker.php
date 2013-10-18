@@ -19,6 +19,8 @@ use Volcanus\Validation\Exception\CheckerException\MaxLengthException;
 class MaxLengthChecker extends AbstractChecker
 {
 
+	public static $forVector = false;
+
 	public function __construct(array $options = array())
 	{
 		$this->options['length'  ] = null; // 文字長

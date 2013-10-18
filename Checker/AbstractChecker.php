@@ -19,6 +19,8 @@ use Volcanus\Validation\Exception\CheckerException;
 abstract class AbstractChecker implements \Volcanus\Validation\Checker
 {
 
+	public static $forVector = false;
+
 	protected $options = array();
 
 	public function __construct(array $options = array())

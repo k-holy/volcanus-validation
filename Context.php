@@ -210,8 +210,20 @@ class Context
 			}
 		}
 		$valid = null;
-		if ((is_array($value) || $value instanceof \Traversable)) {
-			if (!isset($options['acceptArray']) || !$options['acceptArray']) {
+		if (is_array($value) || $value instanceof \Traversable) {
+			if (isset($options['acceptArray']) && $options['acceptArray']) {
+				try {
+					$valid = Util::recursiveCheck($checker, $value, $options);
+				} catch (CheckerException $e) {
+					$valid = false;
+				}
+			} elseif ($checker instanceof Checker && true === $checker::$forVector) {
+				try {
+					$valid = call_user_func($checker, $value, $options);
+				} catch (CheckerException $e) {
+					$valid = false;
+				}
+			} else {
 				throw new \InvalidArgumentException(
 					sprintf('The value is array or Traversable. type:%s',
 					is_object($value)
@@ -219,11 +231,6 @@ class Context
 						: gettype($value)
 					)
 				);
-			}
-			try {
-				$valid = Util::recursiveCheck($checker, $value, $options);
-			} catch (CheckerException $e) {
-				$valid = false;
 			}
 		} else {
 			try {

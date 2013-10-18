@@ -18,6 +18,8 @@ use Volcanus\Validation\Util;
 class FixedLengthChecker extends AbstractChecker
 {
 
+	public static $forVector = false;
+
 	public function __construct(array $options = array())
 	{
 		$this->options['length'  ] = null; // 文字長

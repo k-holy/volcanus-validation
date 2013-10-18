@@ -20,6 +20,8 @@ use Volcanus\Validation\Exception\CheckerException\MaxLengthException;
 class EmailChecker extends AbstractChecker
 {
 
+	public static $forVector = false;
+
 	public function __construct(array $options = array())
 	{
 		$this->options['allowDotEndOfLocalPart'] = false; // ローカルパートの末尾に.を許可するかどうか

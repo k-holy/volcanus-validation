@@ -19,6 +19,8 @@ use Volcanus\Validation\Exception\CheckerException\ChoiceException;
 class ChoiceChecker extends AbstractChecker
 {
 
+	public static $forVector = false;
+
 	public function __construct(array $options = array())
 	{
 		$this->options['choices'] = null; // 選択肢 (Array/Traversable または カンマ区切りの文字列)

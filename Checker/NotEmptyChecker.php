@@ -18,6 +18,8 @@ use Volcanus\Validation\Exception\CheckerException\EmptyException;
 class NotEmptyChecker extends AbstractChecker
 {
 
+	public static $forVector = true;
+
 	/**
 	 * 検証前のガードメソッドを実行します。このメソッドがFALSEを返した場合は検証メソッドを実行しません。
 	 *

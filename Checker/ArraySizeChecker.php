@@ -20,11 +20,24 @@ use Volcanus\Validation\Exception\CheckerException\MaxValueException;
 class ArraySizeChecker extends AbstractChecker
 {
 
+	public static $forVector = true;
+
 	public function __construct(array $options = array())
 	{
 		$this->options['minSize'] = null; // 最小値
 		$this->options['maxSize'] = null; // 最大値
 		$this->options = Util::mergeOptions($this->options, $options);
+	}
+
+	/**
+	 * 検証前のガードメソッドを実行します。このメソッドがFALSEを返した場合は検証メソッドを実行しません。
+	 *
+	 * @param  mixed   検証値 (文字列または__toStringメソッド実装オブジェクト)
+	 * @return boolean 
+	 */
+	public function guard($value)
+	{
+		return true;
 	}
 
 	/**

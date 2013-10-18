@@ -19,6 +19,8 @@ use Volcanus\Validation\Exception\CheckerException\AlphaException;
 class AlphaChecker extends AbstractChecker
 {
 
+	public static $forVector = false;
+
 	public function __construct(array $options = array())
 	{
 		$this->options['acceptArray'] = true;
