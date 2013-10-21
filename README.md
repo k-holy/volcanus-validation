@@ -1,5 +1,8 @@
 #Volcanus Validation
 
+[![Latest Stable Version](https://poser.pugx.org/volcanus/validation/v/stable.png)](https://packagist.org/packages/volcanus/validation)
+[![Build Status](https://travis-ci.org/k-holy/volcanus-validation.png?branch=master)](https://travis-ci.org/k-holy/volcanus-validation)
+
 あるオブジェクトのプロパティまたは配列の値に対して、型や文字数、値の大小などの妥当性を検証するためのライブラリです。
 ライブラリ全体としてはまだ作成途中ですが、検証処理自体は独立したクラス(Checker)として実装しており、それなりに稼働実績があります。
 （実はこのプロジェクトは、それらの検証処理にテストケースを完備するために開始したものです）
