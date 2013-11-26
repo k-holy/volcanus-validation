@@ -11,7 +11,7 @@ before_script:
 
 script:
   - mkdir -p build/logs
-  - phpunit
+  - phpunit -c phpunit.xml
 
 after_script:
-  - php vendor/bin/coveralls -v
+  - php vendor/bin/coveralls -v -c .coveralls.yml
