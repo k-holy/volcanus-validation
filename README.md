@@ -2,6 +2,7 @@
 
 [![Latest Stable Version](https://poser.pugx.org/volcanus/validation/v/stable.png)](https://packagist.org/packages/volcanus/validation)
 [![Build Status](https://travis-ci.org/k-holy/volcanus-validation.png?branch=master)](https://travis-ci.org/k-holy/volcanus-validation)
+[![Coverage Status](https://coveralls.io/repos/k-holy/volcanus-validation/badge.png?branch=master)](https://coveralls.io/r/k-holy/volcanus-validation?branch=master)
 
 あるオブジェクトのプロパティまたは配列の値に対して、型や文字数、値の大小などの妥当性を検証するためのライブラリです。
 ライブラリ全体としてはまだ作成途中ですが、検証処理自体は独立したクラス(Checker)として実装しており、それなりに稼働実績があります。

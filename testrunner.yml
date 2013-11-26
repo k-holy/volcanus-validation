@@ -1,14 +1,14 @@
 general:
   framework: phpunit
   test_targets:
-    recursive:
+    recursive: true
     resources:
       - Tests
   autotest:
     enabled: false
     watch_dirs:
       - .
-  notify:
+  notify: true
 
 phpunit:
   config: phpunit.xml
