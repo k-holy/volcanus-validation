@@ -13,12 +13,9 @@
         }
     ],
     "autoload": {
-        "psr-0": { "Volcanus\\Validation": "src/" }
+        "psr-4": { "Volcanus\\Validation\\": "src/" }
     },
     "require": {
         "php": ">=5.3.3"
-    },
-    "require-dev": {
-        "satooshi/php-coveralls": "dev-master"
     }
 }
