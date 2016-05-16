@@ -16,6 +16,6 @@
         "psr-4": { "Volcanus\\Validation\\": "src/" }
     },
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.5.9"
     }
 }
