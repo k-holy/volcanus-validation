@@ -95,6 +95,25 @@ class Context
 	}
 
 	/**
+	 * 検証結果からエラーのリストを返します。
+	 *
+	 * @return array
+	 */
+	public function getErrors()
+	{
+		return $this->result->getErrors();
+	}
+
+	/**
+	 * 検証結果からエラーをクリアします。
+	 */
+	public function clearErrors()
+	{
+		$this->result->clearErrors();
+		return $this;
+	}
+
+	/**
 	 * チェッカーを登録します。
 	 *
 	 * @param string 検証種別

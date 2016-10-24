@@ -51,6 +51,37 @@ class ContextTest extends \PHPUnit_Framework_TestCase
 		$this->assertTrue($validation->isValid());
 	}
 
+	public function testSetErrorAndGetErrors()
+	{
+		$validation = new Context();
+		$validation->setError('id1', 'notFound');
+		$validation->setError('id2', 'notFound');
+		$errors = $validation->getErrors();
+		$this->assertArrayHasKey('id1', $errors);
+		$this->assertInstanceOf('\Volcanus\Validation\Error', $errors['id1']);
+		$this->assertArrayHasKey('id2', $errors);
+		$this->assertInstanceOf('\Volcanus\Validation\Error', $errors['id2']);
+	}
+
+	public function testSetErrorAndClearErrors()
+	{
+		$validation = new Context();
+		$this->assertTrue($validation->isValid());
+
+		$validation->setError('id1', 'notFound');
+		$this->assertTrue($validation->isError('id1'));
+		$this->assertFalse($validation->isValid());
+
+		$validation->setError('id2', 'notFound');
+		$this->assertTrue($validation->isError('id2'));
+		$this->assertFalse($validation->isValid());
+
+		$validation->clearErrors();
+		$this->assertFalse($validation->isError('id1'));
+		$this->assertFalse($validation->isError('id2'));
+		$this->assertTrue($validation->isValid());
+	}
+
 	public function testInitResult()
 	{
 		$values = array(
