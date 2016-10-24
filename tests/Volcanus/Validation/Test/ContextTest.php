@@ -51,6 +51,25 @@ class ContextTest extends \PHPUnit_Framework_TestCase
 		$this->assertTrue($validation->isValid());
 	}
 
+	public function testSetErrorAndClearErrors()
+	{
+		$validation = new Context();
+		$this->assertTrue($validation->isValid());
+
+		$validation->setError('id1', 'notFound');
+		$this->assertTrue($validation->isError('id1'));
+		$this->assertFalse($validation->isValid());
+
+		$validation->setError('id2', 'notFound');
+		$this->assertTrue($validation->isError('id2'));
+		$this->assertFalse($validation->isValid());
+
+		$validation->clearErrors();
+		$this->assertFalse($validation->isError('id1'));
+		$this->assertFalse($validation->isError('id2'));
+		$this->assertTrue($validation->isValid());
+	}
+
 	public function testInitResult()
 	{
 		$values = array(

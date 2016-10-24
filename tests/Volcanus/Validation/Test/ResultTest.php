@@ -69,6 +69,17 @@ class ResultTest extends \PHPUnit_Framework_TestCase
 		$this->assertTrue($this->result->hasError('fieldName', 'errorType', array(1, 2, 3)));
 	}
 
+	public function testSetErrorAndClearErrors()
+	{
+		$this->result->setError('fieldName1', 'errorType', array(1, 2, 3));
+		$this->assertTrue($this->result->hasError('fieldName1'));
+		$this->result->setError('fieldName2', 'errorType', array(1, 2, 3));
+		$this->assertTrue($this->result->hasError('fieldName2'));
+		$this->result->clearErrors();
+		$this->assertFalse($this->result->hasError('fieldName1'));
+		$this->assertFalse($this->result->hasError('fieldName2'));
+	}
+
 	public function testTraversable()
 	{
 		$values = array(

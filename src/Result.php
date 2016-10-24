@@ -50,6 +50,14 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
 		}
 	}
 
+	/**
+	 * 検証エラーをクリアします。
+	 */
+	public function clearErrors()
+	{
+		$this->errors = array();
+	}
+
 	public function __get($name)
 	{
 		return $this->getValue($name);
