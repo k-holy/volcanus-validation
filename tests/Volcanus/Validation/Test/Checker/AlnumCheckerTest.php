@@ -15,9 +15,10 @@ use Volcanus\Validation\Checker\AlnumChecker;
  *
  * @author     k.holy74@gmail.com
  */
-class AlnumCheckerTest extends \PHPUnit_Framework_TestCase
+class AlnumCheckerTest extends \PHPUnit\Framework\TestCase
 {
 
+    /** @var  \Volcanus\Validation\Checker\AlnumChecker */
 	protected $checker;
 
 	public function setUp()
@@ -31,7 +32,7 @@ class AlnumCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\AlnumException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\AlnumException
 	 */
 	public function testRaiseAlnumExceptionWhenCheckIsNgByFormat()
 	{
@@ -39,7 +40,7 @@ class AlnumCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\AlnumException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\AlnumException
 	 */
 	public function testInvokeMethod()
 	{

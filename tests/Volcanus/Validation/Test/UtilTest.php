@@ -15,7 +15,7 @@ use Volcanus\Validation\Util;
  *
  * @author     k.holy74@gmail.com
  */
-class UtilTest extends \PHPUnit_Framework_TestCase
+class UtilTest extends \PHPUnit\Framework\TestCase
 {
 
 	private function getArray()
@@ -48,7 +48,7 @@ class UtilTest extends \PHPUnit_Framework_TestCase
 	{
 		$options = array();
 		$values = $this->getArray();
-		$this->assertTrue(Util::recursiveCheck(function($value) {
+		$this->assertTrue(\Volcanus\Validation\Util::recursiveCheck(function($value) {
 			return (is_int($value));
 		}, $values, $options));
 	}
@@ -57,7 +57,7 @@ class UtilTest extends \PHPUnit_Framework_TestCase
 	{
 		$options = array();
 		$values = $this->getArray();
-		$this->assertFalse(Util::recursiveCheck(function($value) {
+		$this->assertFalse(\Volcanus\Validation\Util::recursiveCheck(function($value) {
 			return ($value > 10);
 		}, $values, $options));
 	}

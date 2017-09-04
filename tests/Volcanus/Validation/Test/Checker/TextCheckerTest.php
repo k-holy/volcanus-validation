@@ -15,9 +15,10 @@ use Volcanus\Validation\Checker\TextChecker;
  *
  * @author     k.holy74@gmail.com
  */
-class TextCheckerTest extends \PHPUnit_Framework_TestCase
+class TextCheckerTest extends \PHPUnit\Framework\TestCase
 {
 
+    /** @var  \Volcanus\Validation\Checker\TextChecker */
 	protected $checker;
 
 	public function setUp()
@@ -51,7 +52,7 @@ class TextCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MinLengthException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MinLengthException
 	 */
 	public function testRaiseMinLengthExceptionWhenHalfWidthedMultiByteCharactersLength()
 	{
@@ -59,7 +60,7 @@ class TextCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MinLengthException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MinLengthException
 	 */
 	public function testRaiseMinLengthExceptionWhenFullWidthedMultiByteCharactersLength()
 	{
@@ -67,7 +68,7 @@ class TextCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MinLengthException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MinLengthException
 	 */
 	public function testRaiseMinLengthExceptionWhenHalfWidthedMultiByteCharactersBytes()
 	{
@@ -75,7 +76,7 @@ class TextCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MinLengthException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MinLengthException
 	 */
 	public function testRaiseMinLengthExceptionWhenFullWidthedMultiByteCharactersBytes()
 	{
@@ -83,7 +84,7 @@ class TextCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MinLengthException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MinLengthException
 	 */
 	public function testRaiseMinLengthExceptionWhenHalfWidthedMultiByteCharactersWidth()
 	{
@@ -91,7 +92,7 @@ class TextCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MinLengthException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MinLengthException
 	 */
 	public function testRaiseMinLengthExceptionWhenFullWidthedMultiByteCharactersWidth()
 	{
@@ -99,7 +100,7 @@ class TextCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MaxLengthException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MaxLengthException
 	 */
 	public function testRaiseMaxLengthExceptionWhenHalfWidthedMultiByteCharactersLength()
 	{
@@ -107,7 +108,7 @@ class TextCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MaxLengthException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MaxLengthException
 	 */
 	public function testRaiseMaxLengthExceptionWhenFullWidthedMultiByteCharactersLength()
 	{
@@ -115,7 +116,7 @@ class TextCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MaxLengthException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MaxLengthException
 	 */
 	public function testRaiseMaxLengthExceptionWhenHalfWidthedMultiByteCharactersBytes()
 	{
@@ -123,7 +124,7 @@ class TextCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MaxLengthException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MaxLengthException
 	 */
 	public function testRaiseMaxLengthExceptionWhenFullWidthedMultiByteCharactersBytes()
 	{
@@ -131,7 +132,7 @@ class TextCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MaxLengthException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MaxLengthException
 	 */
 	public function testRaiseMaxLengthExceptionWhenHalfWidthedMultiByteCharactersWidth()
 	{
@@ -139,7 +140,7 @@ class TextCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MaxLengthException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MaxLengthException
 	 */
 	public function testRaiseMaxLengthExceptionWhenFullWidthedMultiByteCharactersWidth()
 	{
@@ -147,7 +148,7 @@ class TextCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MaxLengthException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MaxLengthException
 	 */
 	public function testInvokeMethod()
 	{

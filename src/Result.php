@@ -8,8 +8,6 @@
  */
 namespace Volcanus\Validation;
 
-use Volcanus\Validation\Error;
-
 /**
  * Result
  *
@@ -31,7 +29,7 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
 	/**
 	 * コンストラクタ
 	 *
-	 * @param array|object 検証データ
+     * @param array|object $values 検証データ
 	 */
 	public function __construct($values = null)
 	{
@@ -40,6 +38,8 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
 
 	/**
 	 * 検証結果をクリアします。
+     *
+     * @param array|object $values 検証データ
 	 */
 	public function init($values = null)
 	{
@@ -71,7 +71,7 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
 	/**
 	 * 検証データをセットします。
 	 *
-	 * @param array|object 検証データ
+	 * @param array|object $values 検証データ
 	 * @return $this
 	 */
 	public function setValues($values)
@@ -94,8 +94,8 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
 	/**
 	 * 検証データに値を追加します。
 	 *
-	 * @param string 項目名
-	 * @param mixed 検証データ値
+	 * @param string $name 項目名
+	 * @param mixed $value 検証データ値
 	 * @return $this
 	 */
 	public function setValue($name, $value)
@@ -117,7 +117,7 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
 	/**
 	 * 指定された項目の値を返します。
 	 *
-	 * @param string 項目名
+	 * @param string $name 項目名
 	 * @return mixed 検証データ値
 	 */
 	public function getValue($name)
@@ -128,15 +128,15 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
 	/**
 	 * 指定された項目にエラーをセットします。
 	 *
-	 * @param string 項目名
-	 * @param string 検証種別
-	 * @param mixed Array or Volcanus\Validation\Error
+	 * @param string $name 項目名
+	 * @param string $type 検証種別
+	 * @param array|\Volcanus\Validation\Error $error
 	 * @return $this
 	 */
 	public function setError($name, $type, $error = array())
 	{
-		if (false === ($error instanceof Error)) {
-			$error = new Error($type, $error);
+		if (false === ($error instanceof \Volcanus\Validation\Error)) {
+			$error = new \Volcanus\Validation\Error($type, $error);
 		}
 		$this->errors[$name] = $error;
 		return $this;
@@ -145,8 +145,8 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
 	/**
 	 * 指定された項目にエラーメッセージをセットします。
 	 *
-	 * @param string 項目名
-	 * @param string エラーメッセージ
+	 * @param string $name 項目名
+	 * @param string $message エラーメッセージ
 	 * @return $this
 	 */
 	public function setMessage($name, $message)
@@ -156,12 +156,13 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
 				sprintf('The value of "%s" is not defined.', $name));
 		}
 		$this->errors[$name]->setMessage($message);
+		return $this;
 	}
 
 	/**
 	 * 指定された項目にセットされたエラーをクリアします。
 	 *
-	 * @param string 項目名
+	 * @param string $name 項目名
 	 * @return $this
 	 */
 	public function unsetError($name)
@@ -175,9 +176,9 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
 	/**
 	 * 指定された検証種別および検証内容のエラー情報があるかどうかを返します。
 	 *
-	 * @param string 項目名
-	 * @param string 検証種別
-	 * @param array  検証内容
+	 * @param string $name 項目名
+	 * @param string $type 検証種別
+	 * @param array $options 検証内容
 	 * @return bool  比較値がこの検証種別のエラーに含まれているかどうか
 	 */
 	public function hasError($name = null, $type = null, $options = array())
@@ -206,7 +207,7 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
 	/**
 	 * 指定された項目名の検証エラーを返します
 	 *
-	 * @param string 項目名
+	 * @param string $name 項目名
 	 * @return mixed 検証エラー
 	 */
 	public function getError($name)
@@ -217,6 +218,7 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
 	/**
 	 * ArrayAccess::offsetExists()実装
 	 *
+     * @param mixed $offset
 	 * @return bool
 	 */
 	public function offsetExists($offset)
@@ -227,6 +229,7 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
 	/**
 	 * ArrayAccess::offsetGet()実装
 	 *
+     * @param mixed $offset
 	 * @return mixed
 	 */
 	public function offsetGet($offset)
@@ -237,6 +240,8 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
 	/**
 	 * ArrayAccess::offsetSet()実装
 	 *
+     * @param mixed $offset
+     * @param mixed $value
 	 */
 	public function offsetSet($offset, $value)
 	{
@@ -246,6 +251,7 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
 	/**
 	 * ArrayAccess::offsetUnset()実装
 	 *
+     * @param mixed $offset
 	 */
 	public function offsetUnset($offset)
 	{
@@ -264,7 +270,7 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
 	/**
 	 * IteratorAggregate::getIterator()実装
 	 *
-	 * @return object ArrayIterator
+	 * @return \ArrayIterator
 	 */
 	public function getIterator()
 	{

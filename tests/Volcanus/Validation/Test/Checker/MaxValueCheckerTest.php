@@ -15,9 +15,10 @@ use Volcanus\Validation\Checker\MaxValueChecker;
  *
  * @author     k.holy74@gmail.com
  */
-class MaxValueCheckerTest extends \PHPUnit_Framework_TestCase
+class MaxValueCheckerTest extends \PHPUnit\Framework\TestCase
 {
 
+    /** @var  \Volcanus\Validation\Checker\MaxValueChecker */
 	protected $checker;
 
 	public function setUp()
@@ -39,7 +40,7 @@ class MaxValueCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\InvalidValueException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\InvalidValueException
 	 */
 	public function testRaiseInvalidValueExceptionWhenCheckIsNgByFormat()
 	{
@@ -47,7 +48,7 @@ class MaxValueCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MaxValueException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MaxValueException
 	 */
 	public function testRaiseMaxValueExceptionWhenCheckIsNgByMaxValue()
 	{
@@ -63,7 +64,7 @@ class MaxValueCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MaxValueException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MaxValueException
 	 */
 	public function testInvokeMethod()
 	{

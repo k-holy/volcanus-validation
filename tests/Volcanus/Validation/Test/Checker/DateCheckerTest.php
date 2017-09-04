@@ -15,9 +15,10 @@ use Volcanus\Validation\Checker\DateChecker;
  *
  * @author     k.holy74@gmail.com
  */
-class DateCheckerTest extends \PHPUnit_Framework_TestCase
+class DateCheckerTest extends \PHPUnit\Framework\TestCase
 {
 
+    /** @var  \Volcanus\Validation\Checker\DateChecker */
 	protected $checker;
 
 	public function setUp()
@@ -58,8 +59,8 @@ class DateCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\DateException
-	 * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\DateException::INVALID_FORMAT
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\DateException
+	 * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\DateException::INVALID_FORMAT
 	 */
 	public function testRaiseDateExceptionWhenInvalidFormat()
 	{
@@ -67,8 +68,8 @@ class DateCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\DateException
-	 * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\DateException::DATE_OUT_OF_RANGE
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\DateException
+	 * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\DateException::DATE_OUT_OF_RANGE
 	 */
 	public function testRaiseDateExceptionWhenDateOutOfRange()
 	{
@@ -76,8 +77,8 @@ class DateCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\DateException
-	 * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\DateException::HOURS_OUT_OF_RANGE
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\DateException
+	 * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\DateException::HOURS_OUT_OF_RANGE
 	 */
 	public function testRaiseDateExceptionWhenHoursOutOfRange()
 	{
@@ -85,8 +86,8 @@ class DateCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\DateException
-	 * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\DateException::MINUTES_OUT_OF_RANGE
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\DateException
+	 * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\DateException::MINUTES_OUT_OF_RANGE
 	 */
 	public function testRaiseDateExceptionWhenMinutesOutOfRange()
 	{
@@ -94,8 +95,8 @@ class DateCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\DateException
-	 * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\DateException::SECONDS_OUT_OF_RANGE
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\DateException
+	 * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\DateException::SECONDS_OUT_OF_RANGE
 	 */
 	public function testRaiseDateExceptionWhenSecondsOutOfRange()
 	{
@@ -103,8 +104,8 @@ class DateCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\DateException
-	 * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\DateException::SECONDS_OUT_OF_RANGE
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\DateException
+	 * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\DateException::SECONDS_OUT_OF_RANGE
 	 */
 	public function testInvokeMethod()
 	{

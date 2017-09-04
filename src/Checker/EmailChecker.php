@@ -22,6 +22,11 @@ class EmailChecker extends AbstractChecker
 
 	public static $forVector = false;
 
+    /**
+     * __construct
+     *
+     * @param  array $options 検証オプション
+     */
 	public function __construct(array $options = array())
 	{
 		$this->options['allowDotEndOfLocalPart'] = false; // ローカルパートの末尾に.を許可するかどうか
@@ -32,8 +37,8 @@ class EmailChecker extends AbstractChecker
 	/**
 	 * 値がメールアドレスとして妥当か検証します。
 	 *
-	 * @param  mixed   検証値 (文字列または__toStringメソッド実装オブジェクト)
-	 * @param  array   検証オプション
+     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param  array $options 検証オプション
 	 * @return boolean 検証結果
 	 */
 	public function check($value, array $options = array())
@@ -54,13 +59,14 @@ class EmailChecker extends AbstractChecker
 		return true;
 	}
 
-	/**
-	 * メールアドレスを検証します。
-	 *
-	 * @param  string 検証値
-	 * @param  bool   ローカルパートの末尾に.を許可するかどうか
-	 * @return boolean 検証結果
-	 */
+    /**
+     * メールアドレスを検証します。
+     *
+     * @param  string $value 検証値
+     * @param  bool $allowDotEndOfLocalPart ローカルパートの末尾に.を許可するかどうか
+     * @return bool 検証結果
+     * @throws \Exception
+     */
 	public static function validateAddrSpec($value, $allowDotEndOfLocalPart=false)
 	{
 		$stringValue = (string)$value;
@@ -86,13 +92,14 @@ class EmailChecker extends AbstractChecker
 		return true;
 	}
 
-	/**
-	 * メールアドレスのローカルパートを検証します。
-	 *
-	 * @param  string 検証値
-	 * @param  bool   ローカルパートの末尾に.を許可するかどうか
-	 * @return boolean 検証結果
-	 */
+    /**
+     * メールアドレスのローカルパートを検証します。
+     *
+     * @param  string $value 検証値
+     * @param  bool $allowDotEndOfLocalPart ローカルパートの末尾に.を許可するかどうか
+     * @return bool 検証結果
+     * @throws \Exception
+     */
 	public static function validateLocalPart($value, $allowDotEndOfLocalPart=false)
 	{
 		$stringValue = (string)$value;
@@ -117,12 +124,13 @@ class EmailChecker extends AbstractChecker
 		return true;
 	}
 
-	/**
-	 * メールアドレスのドメインを検証します。
-	 *
-	 * @param  string 検証値
-	 * @return boolean 検証結果
-	 */
+    /**
+     * メールアドレスのドメインを検証します。
+     *
+     * @param  string $value 検証値
+     * @return bool 検証結果
+     * @throws \Exception
+     */
 	public static function validateDomain($value)
 	{
 		$stringValue = (string)$value;

@@ -15,9 +15,10 @@ use Volcanus\Validation\Checker\NotEmptyChecker;
  *
  * @author     k.holy74@gmail.com
  */
-class NotEmptyCheckerTest extends \PHPUnit_Framework_TestCase
+class NotEmptyCheckerTest extends \PHPUnit\Framework\TestCase
 {
 
+    /** @var  \Volcanus\Validation\Checker\NotEmptyChecker */
 	protected $checker;
 
 	public function setUp()
@@ -42,8 +43,8 @@ class NotEmptyCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\EmptyException
-	 * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\EmptyException::INVALID_NULL
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\EmptyException
+	 * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\EmptyException::INVALID_NULL
 	 */
 	public function testRaiseEmptyExceptionWhenValueIsNull()
 	{
@@ -52,8 +53,8 @@ class NotEmptyCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\EmptyException
-	 * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\EmptyException::EMPTY_STRING
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\EmptyException
+	 * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\EmptyException::EMPTY_STRING
 	 */
 	public function testRaiseEmptyExceptionWhenValueIsEmptyString()
 	{
@@ -62,8 +63,8 @@ class NotEmptyCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\EmptyException
-	 * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\EmptyException::EMPTY_ARRAY
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\EmptyException
+	 * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\EmptyException::EMPTY_ARRAY
 	 */
 	public function testRaiseEmptyExceptionWhenValueIsEmptyArray()
 	{
@@ -72,8 +73,8 @@ class NotEmptyCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\EmptyException
-	 * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\EmptyException::INVALID_NULL
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\EmptyException
+	 * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\EmptyException::INVALID_NULL
 	 */
 	public function testInvokeMethod()
 	{

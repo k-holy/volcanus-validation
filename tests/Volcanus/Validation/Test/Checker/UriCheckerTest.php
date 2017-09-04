@@ -15,9 +15,10 @@ use Volcanus\Validation\Checker\UriChecker;
  *
  * @author     k.holy74@gmail.com
  */
-class UriCheckerTest extends \PHPUnit_Framework_TestCase
+class UriCheckerTest extends \PHPUnit\Framework\TestCase
 {
 
+    /** @var  \Volcanus\Validation\Checker\UriChecker */
 	protected $checker;
 
 	public function setUp()
@@ -39,7 +40,7 @@ class UriCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\UriException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\UriException
 	 */
 	public function testRaiseUriExceptionWhenCheckIsNgByFormat()
 	{
@@ -47,7 +48,7 @@ class UriCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\UriException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\UriException
 	 */
 	public function testRaiseUriExceptionWhenCheckIsNgBySchemeIsNotAccepted()
 	{
@@ -55,7 +56,7 @@ class UriCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\UriException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\UriException
 	 */
 	public function testInvokeMethod()
 	{

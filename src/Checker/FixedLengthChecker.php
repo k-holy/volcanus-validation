@@ -20,6 +20,11 @@ class FixedLengthChecker extends AbstractChecker
 
 	public static $forVector = false;
 
+    /**
+     * __construct
+     *
+     * @param  array $options 検証オプション
+     */
 	public function __construct(array $options = array())
 	{
 		$this->options['length'  ] = null; // 文字長
@@ -29,13 +34,14 @@ class FixedLengthChecker extends AbstractChecker
 		$this->options = Util::mergeOptions($this->options, $options);
 	}
 
-	/**
-	 * 値の文字長が指定値であるか検証します。
-	 *
-	 * @param  mixed   検証値 (文字列または__toStringメソッド実装オブジェクト)
-	 * @param  array   検証オプション
-	 * @return boolean 検証結果
-	 */
+    /**
+     * 値の文字長が指定値であるか検証します。
+     *
+     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param  array $options 検証オプション
+     * @return bool 検証結果
+     * @throws \Exception
+     */
 	public function check($value, array $options = array())
 	{
 		$options = Util::mergeOptions($this->options, $options);

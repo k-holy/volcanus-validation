@@ -15,9 +15,10 @@ use Volcanus\Validation\Checker\MinValueChecker;
  *
  * @author     k.holy74@gmail.com
  */
-class MinValueCheckerTest extends \PHPUnit_Framework_TestCase
+class MinValueCheckerTest extends \PHPUnit\Framework\TestCase
 {
 
+    /** @var  \Volcanus\Validation\Checker\MinValueChecker */
 	protected $checker;
 
 	public function setUp()
@@ -39,7 +40,7 @@ class MinValueCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\InvalidValueException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\InvalidValueException
 	 */
 	public function testRaiseInvalidValueExceptionWhenCheckIsNgByFormat()
 	{
@@ -47,7 +48,7 @@ class MinValueCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MinValueException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MinValueException
 	 */
 	public function testRaiseMinValueExceptionWhenCheckIsNgByMinValue()
 	{
@@ -63,7 +64,7 @@ class MinValueCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MinValueException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MinValueException
 	 */
 	public function testInvokeMethod()
 	{

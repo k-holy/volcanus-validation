@@ -15,9 +15,10 @@ use Volcanus\Validation\Checker\PhoneChecker;
  *
  * @author     k.holy74@gmail.com
  */
-class PhoneCheckerTest extends \PHPUnit_Framework_TestCase
+class PhoneCheckerTest extends \PHPUnit\Framework\TestCase
 {
 
+    /** @var  \Volcanus\Validation\Checker\PhoneChecker */
 	protected $checker;
 
 	public function setUp()
@@ -36,7 +37,7 @@ class PhoneCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\PhoneException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\PhoneException
 	 */
 	public function testRaisePhoneExceptionWhenCheckIsNgByFormat()
 	{
@@ -44,7 +45,7 @@ class PhoneCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\PhoneException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\PhoneException
 	 */
 	public function testInvokeMethod()
 	{

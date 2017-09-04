@@ -15,9 +15,10 @@ use Volcanus\Validation\Checker\PostcodeChecker;
  *
  * @author     k.holy74@gmail.com
  */
-class PostcodeCheckerTest extends \PHPUnit_Framework_TestCase
+class PostcodeCheckerTest extends \PHPUnit\Framework\TestCase
 {
 
+    /** @var  \Volcanus\Validation\Checker\PostcodeChecker */
 	protected $checker;
 
 	public function setUp()
@@ -36,7 +37,7 @@ class PostcodeCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\PostcodeException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\PostcodeException
 	 */
 	public function testRaisePostcodeExceptionWhenCheckIsNgByFormat()
 	{
@@ -44,7 +45,7 @@ class PostcodeCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\PostcodeException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\PostcodeException
 	 */
 	public function testInvokeMethod()
 	{

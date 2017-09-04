@@ -15,9 +15,10 @@ use Volcanus\Validation\Checker\EmailChecker;
  *
  * @author     k.holy74@gmail.com
  */
-class EmailCheckerTest extends \PHPUnit_Framework_TestCase
+class EmailCheckerTest extends \PHPUnit\Framework\TestCase
 {
 
+    /** @var  \Volcanus\Validation\Checker\EmailChecker */
 	protected $checker;
 
 	public function setUp()
@@ -56,8 +57,8 @@ class EmailCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\EmailException
-	 * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\EmailException::INVALID_LOCAL_PART
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\EmailException
+	 * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\EmailException::INVALID_LOCAL_PART
 	 */
 	public function testRaiseEmailExceptionWhenNotAllowDotEndOfLocalPart()
 	{
@@ -65,7 +66,7 @@ class EmailCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MaxLengthException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MaxLengthException
 	 */
 	public function testRaiseMaxLengthExceptionWhenInvalidAddrSpecOver256Bytes()
 	{
@@ -73,8 +74,8 @@ class EmailCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\EmailException
-	 * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\EmailException::INVALID_LOCAL_PART
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\EmailException
+	 * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\EmailException::INVALID_LOCAL_PART
 	 */
 	public function testRaiseEmailExceptionWhenInvalidLocalPart()
 	{
@@ -82,7 +83,7 @@ class EmailCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MaxLengthException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MaxLengthException
 	 */
 	public function testRaiseMaxLengthExceptionWhenLocalPartIsOver64Bytes()
 	{
@@ -90,8 +91,8 @@ class EmailCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\EmailException
-	 * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\EmailException::INVALID_DOMAIN
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\EmailException
+	 * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\EmailException::INVALID_DOMAIN
 	 */
 	public function testRaiseEmailExceptionWhenInvalidDomain()
 	{
@@ -99,7 +100,7 @@ class EmailCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MaxLengthException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MaxLengthException
 	 */
 	public function testRaiseMaxLengthExceptionWhenDomainIsOver255Bytes()
 	{
@@ -107,8 +108,8 @@ class EmailCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\EmailException
-	 * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\EmailException::INVALID_LOCAL_PART
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\EmailException
+	 * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\EmailException::INVALID_LOCAL_PART
 	 */
 	public function testInvokeMethod()
 	{

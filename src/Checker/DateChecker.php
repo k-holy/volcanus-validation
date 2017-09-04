@@ -39,6 +39,11 @@ class DateChecker extends AbstractChecker
 	const PREG_PATTERN_YMDHI  = '#\A(\d+)[-/](\d{1,2})[-/](\d{1,2}) *(\d{1,2}):(\d{1,2})\z#';
 	const PREG_PATTERN_YMDHIS = '#\A(\d+)[-/](\d{1,2})[-/](\d{1,2}) *(\d{1,2}):(\d{1,2}):(\d{1,2})\z#';
 
+    /**
+     * __construct
+     *
+     * @param  array $options 検証オプション
+     */
 	public function __construct(array $options = array())
 	{
 		$this->options['pattern'] = self::PREG_PATTERN_YMD; // 日付解析用パターン
@@ -53,8 +58,8 @@ class DateChecker extends AbstractChecker
 	 * 書式    : 年月日(必須) YYYY-MM-DD または Y-M-D
 	 *           時分秒(任意) HH:II:SS   または H:I:S
 	 *
-	 * @param  mixed   検証値 (文字列または__toStringメソッド実装オブジェクト)
-	 * @param  array   検証オプション
+     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param  array $options 検証オプション
 	 * @return boolean 検証結果
 	 */
 	public function check($value, array $options = array())

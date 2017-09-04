@@ -8,14 +8,12 @@
  */
 namespace Volcanus\Validation\Test\Checker;
 
-use Volcanus\Validation\Checker\AbstractChecker;
-
 /**
  * AbstractCheckerTest
  *
  * @author     k.holy74@gmail.com
  */
-class AbstractCheckerTest extends \PHPUnit_Framework_TestCase
+class AbstractCheckerTest extends \PHPUnit\Framework\TestCase
 {
 
 	public function testGetInstance()
@@ -89,7 +87,7 @@ class AbstractCheckerTest extends \PHPUnit_Framework_TestCase
 
 }
 
-class NumericChecker extends AbstractChecker
+class NumericChecker extends \Volcanus\Validation\Checker\AbstractChecker
 {
 
 	public function __construct(array $options = array())

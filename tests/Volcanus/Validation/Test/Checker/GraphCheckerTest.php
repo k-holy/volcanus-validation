@@ -15,9 +15,10 @@ use Volcanus\Validation\Checker\GraphChecker;
  *
  * @author     k.holy74@gmail.com
  */
-class GraphCheckerTest extends \PHPUnit_Framework_TestCase
+class GraphCheckerTest extends \PHPUnit\Framework\TestCase
 {
 
+    /** @var  \Volcanus\Validation\Checker\GraphChecker */
 	protected $checker;
 
 	public function setUp()
@@ -31,7 +32,7 @@ class GraphCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\GraphException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\GraphException
 	 */
 	public function testRaiseGraphExceptionWhenCheckIsNgByFormat()
 	{
@@ -39,7 +40,7 @@ class GraphCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\GraphException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\GraphException
 	 */
 	public function testInvokeMethod()
 	{

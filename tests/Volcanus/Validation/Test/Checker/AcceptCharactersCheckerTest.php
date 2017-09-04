@@ -8,21 +8,20 @@
  */
 namespace Volcanus\Validation\Test\Checker;
 
-use Volcanus\Validation\Checker\AcceptCharactersChecker;
-
 /**
  * AcceptCharactersCheckerTest
  *
  * @author     k.holy74@gmail.com
  */
-class AcceptCharactersCheckerTest extends \PHPUnit_Framework_TestCase
+class AcceptCharactersCheckerTest extends \PHPUnit\Framework\TestCase
 {
 
+    /** @var  \Volcanus\Validation\Checker\AcceptCharactersChecker */
 	protected $checker;
 
 	public function setUp()
 	{
-		$this->checker = new AcceptCharactersChecker();
+		$this->checker = new \Volcanus\Validation\Checker\AcceptCharactersChecker();
 	}
 
 	private function getAcceptCharacters()
@@ -42,7 +41,7 @@ class AcceptCharactersCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\AcceptCharactersException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\AcceptCharactersException
 	 */
 	public function testRaiseAcceptCharactersExceptionWhenCharacterOtherThanAcceptCharactersAreContained()
 	{
@@ -52,7 +51,7 @@ class AcceptCharactersCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\AcceptCharactersException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\AcceptCharactersException
 	 */
 	public function testInvokeMethod()
 	{

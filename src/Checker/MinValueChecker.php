@@ -22,6 +22,11 @@ class MinValueChecker extends AbstractChecker
 
 	public static $forVector = false;
 
+    /**
+     * __construct
+     *
+     * @param  array $options 検証オプション
+     */
 	public function __construct(array $options = array())
 	{
 		$this->options['min'] = null; // 最小値
@@ -32,8 +37,8 @@ class MinValueChecker extends AbstractChecker
 	/**
 	 * 値が指定値以上であるか検証します。
 	 *
-	 * @param  mixed   検証値 (文字列または__toStringメソッド実装オブジェクト)
-	 * @param  array   検証オプション
+     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param  array $options 検証オプション
 	 * @return boolean 検証結果
 	 */
 	public function check($value, array $options = array())

@@ -15,9 +15,10 @@ use Volcanus\Validation\Checker\ChoiceChecker;
  *
  * @author     k.holy74@gmail.com
  */
-class ChoiceCheckerTest extends \PHPUnit_Framework_TestCase
+class ChoiceCheckerTest extends \PHPUnit\Framework\TestCase
 {
 
+    /** @var  \Volcanus\Validation\Checker\ChoiceChecker */
 	protected $checker;
 
 	public function setUp()
@@ -36,7 +37,7 @@ class ChoiceCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\ChoiceException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\ChoiceException
 	 */
 	public function testRaiseCheckerExceptionWhenCheckIsNgByInvalidChoice()
 	{
@@ -52,7 +53,7 @@ class ChoiceCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\ChoiceException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\ChoiceException
 	 */
 	public function testInvokeMethod()
 	{

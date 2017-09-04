@@ -21,7 +21,12 @@ class AcceptCharactersChecker extends AbstractChecker
 
 	public static $forVector = false;
 
-	public function __construct(array $options = array())
+    /**
+     * __construct
+     *
+     * @param  array $options 検証オプション
+     */
+    public function __construct(array $options = array())
 	{
 		$this->options['acceptCharacters'] = null; // 許容する文字列
 		$this->options = Util::mergeOptions($this->options, $options);
@@ -30,8 +35,8 @@ class AcceptCharactersChecker extends AbstractChecker
 	/**
 	 * 値が指定した文字だけで構成されているか検証します。
 	 *
-	 * @param  mixed   検証値 (文字列または__toStringメソッド実装オブジェクト)
-	 * @param  array   検証オプション
+     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param  array $options 検証オプション
 	 * @return boolean 検証結果
 	 */
 	public function check($value, array $options = array())

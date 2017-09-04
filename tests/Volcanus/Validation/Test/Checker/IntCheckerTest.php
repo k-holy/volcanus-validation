@@ -15,9 +15,10 @@ use Volcanus\Validation\Checker\IntChecker;
  *
  * @author     k.holy74@gmail.com
  */
-class IntCheckerTest extends \PHPUnit_Framework_TestCase
+class IntCheckerTest extends \PHPUnit\Framework\TestCase
 {
 
+    /** @var  \Volcanus\Validation\Checker\IntChecker */
 	protected $checker;
 
 	public function setUp()
@@ -43,7 +44,7 @@ class IntCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\IntException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\IntException
 	 */
 	public function testRaiseIntExceptionWhenCheckIsNgByFormat()
 	{
@@ -51,7 +52,7 @@ class IntCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MinValueException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MinValueException
 	 */
 	public function testRaiseMinValueExceptionWhenCheckIsNgByMin()
 	{
@@ -59,7 +60,7 @@ class IntCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MaxValueException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MaxValueException
 	 */
 	public function testRaiseMaxValueExceptionWhenCheckIsNgByMax()
 	{
@@ -83,7 +84,7 @@ class IntCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MinValueException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MinValueException
 	 */
 	public function testInvokeMethod()
 	{

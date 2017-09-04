@@ -21,6 +21,11 @@ class PostcodeChecker extends AbstractChecker
 
 	public static $forVector = false;
 
+    /**
+     * __construct
+     *
+     * @param  array $options 検証オプション
+     */
 	public function __construct(array $options = array())
 	{
 		$this->options['locale'] = null; // ロケール
@@ -31,8 +36,8 @@ class PostcodeChecker extends AbstractChecker
 	/**
 	 * 値が郵便番号として妥当か検証します。
 	 *
-	 * @param  mixed   検証値 (文字列または__toStringメソッド実装オブジェクト)
-	 * @param  array   検証オプション
+     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param  array $options 検証オプション
 	 * @return boolean 検証結果
 	 */
 	public function check($value, array $options = array())

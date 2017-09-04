@@ -15,9 +15,10 @@ use Volcanus\Validation\Checker\CompareChecker;
  *
  * @author     k.holy74@gmail.com
  */
-class CompareCheckerTest extends \PHPUnit_Framework_TestCase
+class CompareCheckerTest extends \PHPUnit\Framework\TestCase
 {
 
+    /** @var  \Volcanus\Validation\Checker\CompareChecker */
 	protected $checker;
 
 	public function setUp()
@@ -74,8 +75,8 @@ class CompareCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\CompareException
-	 * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\CompareException::INVALID_EQUAL_TO
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\CompareException
+	 * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\CompareException::INVALID_EQUAL_TO
 	 */
 	public function testRaiseCheckerExceptionWithCodeInvalidEqualToWhenCheckIsNg()
 	{
@@ -83,8 +84,8 @@ class CompareCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\CompareException
-	 * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\CompareException::INVALID_NOT_EQUAL
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\CompareException
+	 * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\CompareException::INVALID_NOT_EQUAL
 	 */
 	public function testRaiseCheckerExceptionWithCodeInvalidNotEqualWhenCheckIsNg()
 	{
@@ -92,8 +93,8 @@ class CompareCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\CompareException
-	 * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\CompareException::INVALID_GREATER_THAN
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\CompareException
+	 * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\CompareException::INVALID_GREATER_THAN
 	 */
 	public function testRaiseCheckerExceptionWithCodeInvalidGreaterThanWhenCheckIsNg()
 	{
@@ -101,8 +102,8 @@ class CompareCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\CompareException
-	 * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\CompareException::INVALID_LESS_THAN
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\CompareException
+	 * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\CompareException::INVALID_LESS_THAN
 	 */
 	public function testRaiseCheckerExceptionWithCodeInvalidLessThanWhenCheckIsNg()
 	{
@@ -110,8 +111,8 @@ class CompareCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\CompareException
-	 * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\CompareException::INVALID_GREATER_THAN_OR_EQUAL_TO
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\CompareException
+	 * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\CompareException::INVALID_GREATER_THAN_OR_EQUAL_TO
 	 */
 	public function testRaiseCheckerExceptionWithCodeInvalidGreaterThanOrEqualToWhenCheckIsNg()
 	{
@@ -119,8 +120,8 @@ class CompareCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\CompareException
-	 * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\CompareException::INVALID_LESS_THAN_OR_EQUAL_TO
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\CompareException
+	 * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\CompareException::INVALID_LESS_THAN_OR_EQUAL_TO
 	 */
 	public function testRaiseCheckerExceptionWithCodeInvalidLessThanOrEqualToWhenCheckIsNg()
 	{
@@ -152,8 +153,8 @@ class CompareCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\CompareException
-	 * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\CompareException::INVALID_EQUAL_TO
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\CompareException
+	 * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\CompareException::INVALID_EQUAL_TO
 	 */
 	public function testInvokeMethod()
 	{

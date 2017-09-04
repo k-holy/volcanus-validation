@@ -23,7 +23,7 @@ class NotEmptyChecker extends AbstractChecker
 	/**
 	 * 検証前のガードメソッドを実行します。このメソッドがFALSEを返した場合は検証メソッドを実行しません。
 	 *
-	 * @param  mixed   検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
 	 * @return boolean 
 	 */
 	public function guard($value)
@@ -34,8 +34,8 @@ class NotEmptyChecker extends AbstractChecker
 	/**
 	 * 値が存在するかどうか検証します。
 	 *
-	 * @param  mixed   検証値 (文字列または__toStringメソッド実装オブジェクト)
-	 * @param  array   検証オプション
+     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param  array $options 検証オプション
 	 * @return boolean 検証結果
 	 */
 	public function check($value, array $options = array())

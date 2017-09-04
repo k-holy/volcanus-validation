@@ -22,6 +22,11 @@ class ArraySizeChecker extends AbstractChecker
 
 	public static $forVector = true;
 
+    /**
+     * __construct
+     *
+     * @param  array $options 検証オプション
+     */
 	public function __construct(array $options = array())
 	{
 		$this->options['minSize'] = null; // 最小値
@@ -32,7 +37,7 @@ class ArraySizeChecker extends AbstractChecker
 	/**
 	 * 検証前のガードメソッドを実行します。このメソッドがFALSEを返した場合は検証メソッドを実行しません。
 	 *
-	 * @param  mixed   検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
 	 * @return boolean 
 	 */
 	public function guard($value)
@@ -43,8 +48,8 @@ class ArraySizeChecker extends AbstractChecker
 	/**
 	 * 値が指定された範囲の要素数を持つ配列かどうかを検証します。
 	 *
-	 * @param  mixed   検証値 (文字列または__toStringメソッド実装オブジェクト)
-	 * @param  array   検証オプション
+     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param  array $options 検証オプション
 	 * @return boolean 検証結果
 	 */
 	public function check($value, array $options = array())

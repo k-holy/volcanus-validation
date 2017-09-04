@@ -15,9 +15,10 @@ use Volcanus\Validation\Checker\FixedLengthChecker;
  *
  * @author     k.holy74@gmail.com
  */
-class FixedLengthCheckerTest extends \PHPUnit_Framework_TestCase
+class FixedLengthCheckerTest extends \PHPUnit\Framework\TestCase
 {
 
+    /** @var  \Volcanus\Validation\Checker\FixedLengthChecker */
 	protected $checker;
 
 	public function setUp()
@@ -32,7 +33,7 @@ class FixedLengthCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MaxLengthException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MaxLengthException
 	 */
 	public function testRaiseMaxLengthExceptionWhenLengthOfTheValueIsLongerThanMaxLength()
 	{
@@ -40,7 +41,7 @@ class FixedLengthCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MinLengthException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MinLengthException
 	 */
 	public function testRaiseMinLengthExceptionWhenLengthOfTheValueIsShorterThanMinLength()
 	{
@@ -56,7 +57,7 @@ class FixedLengthCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MaxLengthException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MaxLengthException
 	 */
 	public function testInvokeMethod()
 	{

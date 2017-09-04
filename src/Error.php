@@ -11,6 +11,10 @@ namespace Volcanus\Validation;
 /**
  * Error
  *
+ * @property $type
+ * @property $parameters
+ * @property $message
+ *
  * @author     k.holy74@gmail.com
  */
 class Error
@@ -34,8 +38,8 @@ class Error
 	/**
 	 * コンストラクタ
 	 *
-	 * @param string このエラーの検証種別
-	 * @param array  このエラーの検証パラメータ
+	 * @param string $type このエラーの検証種別
+	 * @param array $parameters このエラーの検証パラメータ
 	 */
 	public function __construct($type, array $parameters = array())
 	{
@@ -56,7 +60,7 @@ class Error
 	/**
 	 * このエラーの検証パラメータを返します。
 	 *
-	 * @return string
+	 * @return array
 	 */
 	public function getParameters()
 	{
@@ -66,7 +70,7 @@ class Error
 	/**
 	 * このエラーの検証パラメータに、指定された検証パラメータが含まれているかどうかを返します。
 	 *
-	 * @param mixed  検証パラメータ (可変引数)
+	 * @param mixed $options 検証パラメータ (可変引数)
 	 * @return bool  検証パラメータがこのエラーの検証パラメータに含まれているかどうか
 	 */
 	public function has($options = array())
@@ -74,11 +78,12 @@ class Error
 		return ($options === array_intersect_assoc($this->parameters, $options));
 	}
 
-	/**
-	 * このエラーの表示用メッセージを定義します。
-	 *
-	 * @params string
-	 */
+    /**
+     * このエラーの表示用メッセージを定義します。
+     *
+     * @param string $message
+     * @return $this
+     */
 	public function setMessage($message)
 	{
 		if (!is_string($message)) {
@@ -103,7 +108,7 @@ class Error
 	 * __getマジックメソッド
 	 * $this->foo で $this->getFoo() メソッドが呼ばれます。
 	 *
-	 * @param string
+	 * @param string $name
 	 */
 	public function __get($name)
 	{
@@ -119,8 +124,8 @@ class Error
 	 * __setマジックメソッド
 	 * $this->foo = $var で $this->setFoo($var) メソッドが呼ばれます。
 	 *
-	 * @param string
-	 * @param mixed
+	 * @param string $name
+	 * @param mixed $value
 	 */
 	public function __set($name, $value)
 	{

@@ -8,21 +8,20 @@
  */
 namespace Volcanus\Validation\Test;
 
-use Volcanus\Validation\Result;
-
 /**
  * ResultTest
  *
  * @author     k.holy74@gmail.com
  */
-class ResultTest extends \PHPUnit_Framework_TestCase
+class ResultTest extends \PHPUnit\Framework\TestCase
 {
 
+    /** @var \Volcanus\Validation\Result */
 	protected $result;
 
 	public function setUp()
 	{
-		$this->result = new Result();
+		$this->result = new \Volcanus\Validation\Result();
 	}
 
 	public function testInitialize()

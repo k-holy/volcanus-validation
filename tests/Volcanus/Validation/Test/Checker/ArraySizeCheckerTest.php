@@ -15,9 +15,10 @@ use Volcanus\Validation\Checker\ArraySizeChecker;
  *
  * @author     k.holy74@gmail.com
  */
-class ArraySizeCheckerTest extends \PHPUnit_Framework_TestCase
+class ArraySizeCheckerTest extends \PHPUnit\Framework\TestCase
 {
 
+    /** @var  \Volcanus\Validation\Checker\ArraySizeChecker */
 	protected $checker;
 
 	public function setUp()
@@ -33,7 +34,7 @@ class ArraySizeCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MinValueException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MinValueException
 	 */
 	public function testRaiseMinValueExceptionWhenCheckIsNgByMinValue()
 	{
@@ -41,7 +42,7 @@ class ArraySizeCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MaxValueException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MaxValueException
 	 */
 	public function testRaiseMaxValueExceptionWhenCheckIsNgByMaxValue()
 	{
@@ -73,7 +74,7 @@ class ArraySizeCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\MinValueException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\MinValueException
 	 */
 	public function testInvokeMethod()
 	{

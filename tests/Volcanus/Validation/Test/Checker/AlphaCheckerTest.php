@@ -15,9 +15,10 @@ use Volcanus\Validation\Checker\AlphaChecker;
  *
  * @author     k.holy74@gmail.com
  */
-class AlphaCheckerTest extends \PHPUnit_Framework_TestCase
+class AlphaCheckerTest extends \PHPUnit\Framework\TestCase
 {
 
+    /** @var  \Volcanus\Validation\Checker\AlphaChecker */
 	protected $checker;
 
 	public function setUp()
@@ -31,7 +32,7 @@ class AlphaCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\AlphaException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\AlphaException
 	 */
 	public function testRaiseAlphaExceptionWhenCheckIsNgByFormat()
 	{
@@ -39,7 +40,7 @@ class AlphaCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\AlphaException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\AlphaException
 	 */
 	public function testInvokeMethod()
 	{

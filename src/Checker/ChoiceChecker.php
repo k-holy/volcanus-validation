@@ -21,6 +21,11 @@ class ChoiceChecker extends AbstractChecker
 
 	public static $forVector = false;
 
+    /**
+     * __construct
+     *
+     * @param  array $options 検証オプション
+     */
 	public function __construct(array $options = array())
 	{
 		$this->options['choices'] = null; // 選択肢 (Array/Traversable または カンマ区切りの文字列)
@@ -31,8 +36,8 @@ class ChoiceChecker extends AbstractChecker
 	/**
 	 * 値が指定された配列の要素に含まれる値と同一かどうかを検証します。
 	 *
-	 * @param  mixed   検証値 (文字列または__toStringメソッド実装オブジェクト)
-	 * @param  array   検証オプション
+     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param  array $options 検証オプション
 	 * @return boolean 検証結果
 	 */
 	public function check($value, array $options = array())
@@ -48,7 +53,7 @@ class ChoiceChecker extends AbstractChecker
 		if (is_string($choices) && false !== strpos($choices, ',')) {
 			$choices = explode(',', $choices);
 		}
-		if (!is_array($choices) && !($choices instanceof Traversable)) {
+		if (!is_array($choices) && !($choices instanceof \Traversable)) {
 			throw new \InvalidArgumentException(
 				'The parameter "choices" is not valid Array/Traversable.');
 		}

@@ -15,7 +15,7 @@ use Volcanus\Validation\Checker\KanaChecker;
  *
  * @author     k.holy74@gmail.com
  */
-class KanaCheckerTest extends \PHPUnit_Framework_TestCase
+class KanaCheckerTest extends \PHPUnit\Framework\TestCase
 {
 
 	const ZENKAKU_HIRA = 'ぁあぃいぅうぇえぉおかがきぎくぐけげこごさざしじすずせぜそぞただちぢっつづてでとどなにぬねのはばぱひびぴふぶぷへべぺほぼぽまみむめもゃやゅゆょよらりるれろゎわゐゑをんー';
@@ -24,7 +24,9 @@ class KanaCheckerTest extends \PHPUnit_Framework_TestCase
 	const HANKAKU_KANA = 'ｦｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝﾞﾟ';
 	const HANKAKU_KIGO = '･';
 
+    /** @var  \Volcanus\Validation\Checker\KanaChecker */
 	protected $checker;
+
 	protected $internalEncoding;
 
 	public function setUp()
@@ -115,7 +117,7 @@ class KanaCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\KanaException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\KanaException
 	 */
 	public function testRaiseKanaExceptionWhenCheckIsNgByFormat()
 	{
@@ -123,7 +125,7 @@ class KanaCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\KanaException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\KanaException
 	 */
 	public function testRaiseKanaExceptionWhenCheckIsNgByNotAcceptSign()
 	{
@@ -132,7 +134,7 @@ class KanaCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\KanaException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\KanaException
 	 */
 	public function testRaiseKanaExceptionWhenCheckIsNgByNotAcceptSpace()
 	{
@@ -141,7 +143,7 @@ class KanaCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\KanaException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\KanaException
 	 */
 	public function testInvokeMethod()
 	{

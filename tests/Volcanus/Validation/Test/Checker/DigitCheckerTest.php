@@ -15,9 +15,10 @@ use Volcanus\Validation\Checker\DigitChecker;
  *
  * @author     k.holy74@gmail.com
  */
-class DigitCheckerTest extends \PHPUnit_Framework_TestCase
+class DigitCheckerTest extends \PHPUnit\Framework\TestCase
 {
 
+    /** @var  \Volcanus\Validation\Checker\DigitChecker */
 	protected $checker;
 
 	public function setUp()
@@ -31,7 +32,7 @@ class DigitCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\DigitException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\DigitException
 	 */
 	public function testRaiseDigitExceptionWhenCheckIsNgByFormat()
 	{
@@ -39,7 +40,7 @@ class DigitCheckerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\DigitException
+	 * @expectedException \Volcanus\Validation\Exception\CheckerException\DigitException
 	 */
 	public function testInvokeMethod()
 	{
