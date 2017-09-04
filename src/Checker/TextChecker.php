@@ -1,11 +1,11 @@
 <?php
 /**
- * PHP versions 5
+ * Volcanus libraries for PHP
  *
- * @copyright  2011 k-holy <k.holy74@gmail.com>
- * @author     k.holy74@gmail.com
- * @license    http://www.opensource.org/licenses/mit-license.php  The MIT License (MIT)
+ * @copyright k-holy <k.holy74@gmail.com>
+ * @license The MIT License (MIT)
  */
+
 namespace Volcanus\Validation\Checker;
 
 use Volcanus\Validation\Util;
@@ -18,22 +18,22 @@ use Volcanus\Validation\Util;
 class TextChecker extends AbstractChecker
 {
 
-	public static $forVector = false;
+    public static $forVector = false;
 
     /**
      * __construct
      *
      * @param  array $options 検証オプション
      */
-	public function __construct(array $options = array())
-	{
-		$this->options['minLength'] = null; // 最小文字長
-		$this->options['maxLength'] = null; // 最大文字長
-		$this->options['encoding' ] = null; // 文字エンコーディング
-		$this->options['mbLength' ] = self::LENGTH_CHARS; // 文字長測定モード 'B':バイト長 'C':文字長 'W':文字幅
-		$this->options['acceptArray'] = true;
-		$this->options = Util::mergeOptions($this->options, $options);
-	}
+    public function __construct(array $options = [])
+    {
+        $this->options['minLength'] = null; // 最小文字長
+        $this->options['maxLength'] = null; // 最大文字長
+        $this->options['encoding'] = null; // 文字エンコーディング
+        $this->options['mbLength'] = self::LENGTH_CHARS; // 文字長測定モード 'B':バイト長 'C':文字長 'W':文字幅
+        $this->options['acceptArray'] = true;
+        $this->options = Util::mergeOptions($this->options, $options);
+    }
 
     /**
      * 値が表示可能な文字だけで構成されているか検証します。
@@ -43,36 +43,36 @@ class TextChecker extends AbstractChecker
      * @return bool 検証結果
      * @throws \Exception
      */
-	public function check($value, array $options = array())
-	{
-		$options = Util::mergeOptions($this->options, $options);
+    public function check($value, array $options = [])
+    {
+        $options = Util::mergeOptions($this->options, $options);
 
-		try {
+        try {
 
-			if (isset($options['encoding'])) {
-				Util::checkEncoding($value, $options['encoding']);
-			}
+            if (isset($options['encoding'])) {
+                Util::checkEncoding($value, $options['encoding']);
+            }
 
-			if (isset($options['minLength'])) {
-				Util::checkMinLength($value,
-					$options['minLength'],
-					(isset($options['mbLength'])) ? $options['mbLength'] : null,
-					(isset($options['encoding'])) ? $options['encoding'] : null
-				);
-			}
+            if (isset($options['minLength'])) {
+                Util::checkMinLength($value,
+                    $options['minLength'],
+                    (isset($options['mbLength'])) ? $options['mbLength'] : null,
+                    (isset($options['encoding'])) ? $options['encoding'] : null
+                );
+            }
 
-			if (isset($options['maxLength'])) {
-				Util::checkMaxLength($value,
-					$options['maxLength'],
-					(isset($options['mbLength'])) ? $options['mbLength'] : null,
-					(isset($options['encoding'])) ? $options['encoding'] : null
-				);
-			}
+            if (isset($options['maxLength'])) {
+                Util::checkMaxLength($value,
+                    $options['maxLength'],
+                    (isset($options['mbLength'])) ? $options['mbLength'] : null,
+                    (isset($options['encoding'])) ? $options['encoding'] : null
+                );
+            }
 
-		} catch (\Exception $e) {
-			throw $e;
-		}
-		return true;
-	}
+        } catch (\Exception $e) {
+            throw $e;
+        }
+        return true;
+    }
 
 }

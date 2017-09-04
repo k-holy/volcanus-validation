@@ -1,11 +1,11 @@
 <?php
 /**
- * PHP versions 5
+ * Volcanus libraries for PHP
  *
- * @copyright  2011 k-holy <k.holy74@gmail.com>
- * @author     k.holy74@gmail.com
- * @license    http://www.opensource.org/licenses/mit-license.php  The MIT License (MIT)
+ * @copyright k-holy <k.holy74@gmail.com>
+ * @license The MIT License (MIT)
  */
+
 namespace Volcanus\Validation\Checker;
 
 use Volcanus\Validation\Util;
@@ -18,21 +18,21 @@ use Volcanus\Validation\Util;
 class MaxLengthChecker extends AbstractChecker
 {
 
-	public static $forVector = false;
+    public static $forVector = false;
 
     /**
      * __construct
      *
      * @param  array $options 検証オプション
      */
-	public function __construct(array $options = array())
-	{
-		$this->options['length'  ] = null; // 文字長
-		$this->options['encoding'] = null; // 文字エンコーディング
-		$this->options['mbLength'] = self::LENGTH_CHARS; // 文字長測定モード 'B':バイト長 'C':文字長 'W':文字幅
-		$this->options['acceptArray'] = true;
-		$this->options = Util::mergeOptions($this->options, $options);
-	}
+    public function __construct(array $options = [])
+    {
+        $this->options['length'] = null; // 文字長
+        $this->options['encoding'] = null; // 文字エンコーディング
+        $this->options['mbLength'] = self::LENGTH_CHARS; // 文字長測定モード 'B':バイト長 'C':文字長 'W':文字幅
+        $this->options['acceptArray'] = true;
+        $this->options = Util::mergeOptions($this->options, $options);
+    }
 
     /**
      * 値の文字長が指定値以下であるか検証します。
@@ -42,36 +42,36 @@ class MaxLengthChecker extends AbstractChecker
      * @return bool 検証結果
      * @throws \Exception
      */
-	public function check($value, array $options = array())
-	{
-		$options = Util::mergeOptions($this->options, $options);
+    public function check($value, array $options = [])
+    {
+        $options = Util::mergeOptions($this->options, $options);
 
-		if (!isset($options['length'])) {
-			throw new \InvalidArgumentException(
-				'The parameter "length" is not specified.');
-		}
+        if (!isset($options['length'])) {
+            throw new \InvalidArgumentException(
+                'The parameter "length" is not specified.');
+        }
 
-		if (!is_int($options['length'])) {
-			throw new \InvalidArgumentException(
-				'The parameter "length" is not integer.');
-		}
+        if (!is_int($options['length'])) {
+            throw new \InvalidArgumentException(
+                'The parameter "length" is not integer.');
+        }
 
-		try {
+        try {
 
-			if (isset($options['encoding'])) {
-				Util::checkEncoding($value, $options['encoding']);
-			}
+            if (isset($options['encoding'])) {
+                Util::checkEncoding($value, $options['encoding']);
+            }
 
-			Util::checkMaxLength($value,
-				$options['length'],
-				(isset($options['mbLength'])) ? $options['mbLength'] : null,
-				(isset($options['encoding'])) ? $options['encoding'] : null
-			);
+            Util::checkMaxLength($value,
+                $options['length'],
+                (isset($options['mbLength'])) ? $options['mbLength'] : null,
+                (isset($options['encoding'])) ? $options['encoding'] : null
+            );
 
-		} catch (\Exception $e) {
-			throw $e;
-		}
-		return true;
-	}
+        } catch (\Exception $e) {
+            throw $e;
+        }
+        return true;
+    }
 
 }

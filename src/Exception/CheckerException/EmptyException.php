@@ -1,11 +1,11 @@
 <?php
 /**
- * PHP versions 5
+ * Volcanus libraries for PHP
  *
- * @copyright  2011 k-holy <k.holy74@gmail.com>
- * @author     k.holy74@gmail.com
- * @license    http://www.opensource.org/licenses/mit-license.php  The MIT License (MIT)
+ * @copyright k-holy <k.holy74@gmail.com>
+ * @license The MIT License (MIT)
  */
+
 namespace Volcanus\Validation\Exception\CheckerException;
 
 /**
@@ -16,7 +16,7 @@ namespace Volcanus\Validation\Exception\CheckerException;
  */
 class EmptyException extends AbstractCheckerException
 {
-	const INVALID_NULL = 1;
-	const EMPTY_STRING = 2;
-	const EMPTY_ARRAY  = 3;
+    const INVALID_NULL = 1;
+    const EMPTY_STRING = 2;
+    const EMPTY_ARRAY = 3;
 }
