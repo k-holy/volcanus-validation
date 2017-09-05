@@ -13,7 +13,7 @@ use Volcanus\Validation\Checker\ArraySizeChecker;
 /**
  * ArraySizeCheckerTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class ArraySizeCheckerTest extends \PHPUnit\Framework\TestCase
 {

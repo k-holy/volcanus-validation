@@ -14,7 +14,9 @@ use Volcanus\Validation\Exception\CheckerException\DatetimeException;
 /**
  * DatetimeChecker
  *
- * @author     k.holy74@gmail.com
+ * @property array $options
+ *
+ * @author k.holy74@gmail.com
  */
 class DatetimeChecker extends AbstractChecker
 {

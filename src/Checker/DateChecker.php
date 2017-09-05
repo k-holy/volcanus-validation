@@ -14,7 +14,9 @@ use Volcanus\Validation\Exception\CheckerException\DateException;
 /**
  * DateChecker
  *
- * @author     k.holy74@gmail.com
+ * @property array $options
+ *
+ * @author k.holy74@gmail.com
  */
 class DateChecker extends AbstractChecker
 {
@@ -114,7 +116,9 @@ class DateChecker extends AbstractChecker
     /**
      * 日付文字列を解析し、日付部分ごとに値を数値化した配列を返します。
      *
-     * @param  string 日付文字列
+     * @param  string $value 日付文字列
+     * @param  string $pattern 日付解析用パターン
+     * @param  string $order 日付解析用順序
      * @return mixed  日付部分の配列または FALSE
      */
     private function parseDate($value, $pattern, $order)

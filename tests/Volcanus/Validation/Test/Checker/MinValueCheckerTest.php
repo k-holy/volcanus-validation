@@ -13,7 +13,7 @@ use Volcanus\Validation\Checker\MinValueChecker;
 /**
  * MinValueCheckerTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class MinValueCheckerTest extends \PHPUnit\Framework\TestCase
 {

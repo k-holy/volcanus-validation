@@ -11,7 +11,7 @@ namespace Volcanus\Validation;
 /**
  * Volcanus_Validation_Checker
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 interface Checker
 {

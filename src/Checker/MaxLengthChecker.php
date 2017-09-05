@@ -13,7 +13,9 @@ use Volcanus\Validation\Util;
 /**
  * MaxLengthChecker
  *
- * @author     k.holy74@gmail.com
+ * @property array $options
+ *
+ * @author k.holy74@gmail.com
  */
 class MaxLengthChecker extends AbstractChecker
 {

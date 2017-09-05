@@ -13,7 +13,7 @@ use Volcanus\Validation\Checker\FloatChecker;
 /**
  * FloatCheckerTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class FloatCheckerTest extends \PHPUnit\Framework\TestCase
 {

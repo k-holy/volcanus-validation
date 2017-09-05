@@ -14,7 +14,7 @@ use Volcanus\Validation\Checker;
 /**
  * AbstractChecker
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 abstract class AbstractChecker implements Checker
 {

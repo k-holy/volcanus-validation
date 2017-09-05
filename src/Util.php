@@ -17,7 +17,7 @@ use Volcanus\Validation\Exception\CheckerException\FloatException;
 /**
  * Util
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class Util
 {

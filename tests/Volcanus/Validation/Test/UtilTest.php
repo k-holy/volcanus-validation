@@ -13,7 +13,7 @@ use Volcanus\Validation\Util;
 /**
  * UtilTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class UtilTest extends \PHPUnit\Framework\TestCase
 {

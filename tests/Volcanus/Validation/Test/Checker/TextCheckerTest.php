@@ -13,7 +13,7 @@ use Volcanus\Validation\Checker\TextChecker;
 /**
  * TextCheckerTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class TextCheckerTest extends \PHPUnit\Framework\TestCase
 {

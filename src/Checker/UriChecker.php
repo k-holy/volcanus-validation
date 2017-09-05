@@ -14,7 +14,9 @@ use Volcanus\Validation\Exception\CheckerException\UriException;
 /**
  * UriChecker
  *
- * @author     k.holy74@gmail.com
+ * @property array $options
+ *
+ * @author k.holy74@gmail.com
  */
 class UriChecker extends AbstractChecker
 {

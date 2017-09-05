@@ -13,7 +13,7 @@ use Volcanus\Validation\Checker\GraphChecker;
 /**
  * GraphCheckerTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class GraphCheckerTest extends \PHPUnit\Framework\TestCase
 {

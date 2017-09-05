@@ -13,7 +13,7 @@ use Volcanus\Validation\Checker\ChoiceChecker;
 /**
  * ChoiceCheckerTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class ChoiceCheckerTest extends \PHPUnit\Framework\TestCase
 {

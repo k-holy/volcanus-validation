@@ -13,7 +13,7 @@ use Volcanus\Validation\Checker\DateChecker;
 /**
  * DateCheckerTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class DateCheckerTest extends \PHPUnit\Framework\TestCase
 {

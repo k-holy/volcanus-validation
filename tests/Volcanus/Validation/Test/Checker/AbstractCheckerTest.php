@@ -11,7 +11,7 @@ namespace Volcanus\Validation\Test\Checker;
 /**
  * AbstractCheckerTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class AbstractCheckerTest extends \PHPUnit\Framework\TestCase
 {
@@ -87,6 +87,9 @@ class AbstractCheckerTest extends \PHPUnit\Framework\TestCase
 
 }
 
+/**
+ * @property array $options
+ */
 class NumericChecker extends \Volcanus\Validation\Checker\AbstractChecker
 {
 

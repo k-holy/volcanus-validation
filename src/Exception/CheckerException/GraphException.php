@@ -11,8 +11,7 @@ namespace Volcanus\Validation\Exception\CheckerException;
 /**
  * GraphException
  *
- * @package    Volcanus\Validation
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class GraphException extends AbstractCheckerException
 {

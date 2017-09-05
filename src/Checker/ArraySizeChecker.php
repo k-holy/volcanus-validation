@@ -15,7 +15,9 @@ use Volcanus\Validation\Exception\CheckerException\MaxValueException;
 /**
  * ArraySizeChecker
  *
- * @author     k.holy74@gmail.com
+ * @property array $options
+ *
+ * @author k.holy74@gmail.com
  */
 class ArraySizeChecker extends AbstractChecker
 {

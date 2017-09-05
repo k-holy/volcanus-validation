@@ -13,7 +13,7 @@ use Volcanus\Validation\Checker\PhoneChecker;
 /**
  * PhoneCheckerTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class PhoneCheckerTest extends \PHPUnit\Framework\TestCase
 {

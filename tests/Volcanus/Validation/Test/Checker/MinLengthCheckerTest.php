@@ -13,7 +13,7 @@ use Volcanus\Validation\Checker\MinLengthChecker;
 /**
  * MinLengthCheckerTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class MinLengthCheckerTest extends \PHPUnit\Framework\TestCase
 {

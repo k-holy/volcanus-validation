@@ -15,7 +15,9 @@ use Volcanus\Validation\Exception\CheckerException\MinValueException;
 /**
  * MinValueChecker
  *
- * @author     k.holy74@gmail.com
+ * @property array $options
+ *
+ * @author k.holy74@gmail.com
  */
 class MinValueChecker extends AbstractChecker
 {

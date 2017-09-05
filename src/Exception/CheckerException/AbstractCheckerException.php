@@ -13,8 +13,7 @@ use Volcanus\Validation\Exception\CheckerException;
 /**
  * AbstractCheckerException
  *
- * @package    Volcanus\Validation
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 abstract class AbstractCheckerException extends \RuntimeException implements CheckerException
 {

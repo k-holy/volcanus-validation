@@ -13,7 +13,7 @@ use Volcanus\Validation\Checker\MaxValueChecker;
 /**
  * MaxValueCheckerTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class MaxValueCheckerTest extends \PHPUnit\Framework\TestCase
 {

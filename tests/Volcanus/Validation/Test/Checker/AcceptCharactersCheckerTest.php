@@ -8,10 +8,12 @@
 
 namespace Volcanus\Validation\Test\Checker;
 
+use Volcanus\Validation\Checker\AcceptCharactersChecker;
+
 /**
  * AcceptCharactersCheckerTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class AcceptCharactersCheckerTest extends \PHPUnit\Framework\TestCase
 {
@@ -21,7 +23,7 @@ class AcceptCharactersCheckerTest extends \PHPUnit\Framework\TestCase
 
     public function setUp()
     {
-        $this->checker = new \Volcanus\Validation\Checker\AcceptCharactersChecker();
+        $this->checker = new AcceptCharactersChecker();
     }
 
     private function getAcceptCharacters()

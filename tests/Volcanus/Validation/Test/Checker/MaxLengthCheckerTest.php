@@ -13,7 +13,7 @@ use Volcanus\Validation\Checker\MaxLengthChecker;
 /**
  * MaxLengthCheckerTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class MaxLengthCheckerTest extends \PHPUnit\Framework\TestCase
 {

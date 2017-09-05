@@ -13,9 +13,11 @@ use Volcanus\Validation\Exception\CheckerException\EmailException;
 use Volcanus\Validation\Exception\CheckerException\MaxLengthException;
 
 /**
- * Volcanus_Validation_Email
+ * EmailChecker
  *
- * @author     k.holy74@gmail.com
+ * @property array $options
+ *
+ * @author k.holy74@gmail.com
  */
 class EmailChecker extends AbstractChecker
 {

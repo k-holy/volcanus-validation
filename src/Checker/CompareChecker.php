@@ -14,7 +14,9 @@ use Volcanus\Validation\Exception\CheckerException\CompareException;
 /**
  * CompareChecker
  *
- * @author     k.holy74@gmail.com
+ * @property array $options
+ *
+ * @author k.holy74@gmail.com
  */
 class CompareChecker extends AbstractChecker
 {

@@ -11,8 +11,7 @@ namespace Volcanus\Validation\Exception\CheckerException;
 /**
  * AcceptCharactersException
  *
- * @package    Volcanus\Validation
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class AcceptCharactersException extends AbstractCheckerException
 {

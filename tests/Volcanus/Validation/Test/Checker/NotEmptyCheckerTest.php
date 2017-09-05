@@ -13,7 +13,7 @@ use Volcanus\Validation\Checker\NotEmptyChecker;
 /**
  * NotEmptyCheckerTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class NotEmptyCheckerTest extends \PHPUnit\Framework\TestCase
 {

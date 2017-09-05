@@ -14,7 +14,9 @@ use Volcanus\Validation\Exception\CheckerException\DigitException;
 /**
  * DigitChecker
  *
- * @author     k.holy74@gmail.com
+ * @property array $options
+ *
+ * @author k.holy74@gmail.com
  */
 class DigitChecker extends AbstractChecker
 {

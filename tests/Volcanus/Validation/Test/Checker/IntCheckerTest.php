@@ -13,7 +13,7 @@ use Volcanus\Validation\Checker\IntChecker;
 /**
  * IntCheckerTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class IntCheckerTest extends \PHPUnit\Framework\TestCase
 {

@@ -13,7 +13,7 @@ use Volcanus\Validation\Checker\KanaChecker;
 /**
  * KanaCheckerTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class KanaCheckerTest extends \PHPUnit\Framework\TestCase
 {

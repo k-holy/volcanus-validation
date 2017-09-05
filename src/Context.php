@@ -11,7 +11,12 @@ namespace Volcanus\Validation;
 /**
  * Context
  *
- * @author     k.holy74@gmail.com
+ * @property \Volcanus\Validation\Result $result
+ * @property array $errors
+ * @method callable checker(string $type)
+ * @method \Volcanus\Validation\Checker defaultChecker(string $type)
+ *
+ * @author k.holy74@gmail.com
  */
 class Context
 {
@@ -62,7 +67,7 @@ class Context
      */
     public function initResult($values = null)
     {
-        $this->result = new \Volcanus\Validation\Result($values);
+        $this->result = new Result($values);
     }
 
     /**

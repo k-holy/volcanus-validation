@@ -11,11 +11,11 @@ namespace Volcanus\Validation;
 /**
  * Error
  *
- * @property $type
- * @property $parameters
- * @property $message
+ * @property string $type
+ * @property array $parameters
+ * @property string $message
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class Error
 {

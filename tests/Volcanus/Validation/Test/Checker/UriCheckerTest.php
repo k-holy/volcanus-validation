@@ -13,7 +13,7 @@ use Volcanus\Validation\Checker\UriChecker;
 /**
  * UriCheckerTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class UriCheckerTest extends \PHPUnit\Framework\TestCase
 {

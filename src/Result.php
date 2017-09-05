@@ -11,7 +11,7 @@ namespace Volcanus\Validation;
 /**
  * Result
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class Result implements \ArrayAccess, \IteratorAggregate, \Countable
 {
@@ -136,7 +136,7 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
     public function setError($name, $type, $error = [])
     {
         if (false === ($error instanceof \Volcanus\Validation\Error)) {
-            $error = new \Volcanus\Validation\Error($type, $error);
+            $error = new Error($type, $error);
         }
         $this->errors[$name] = $error;
         return $this;

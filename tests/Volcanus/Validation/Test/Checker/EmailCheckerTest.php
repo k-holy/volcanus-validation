@@ -13,7 +13,7 @@ use Volcanus\Validation\Checker\EmailChecker;
 /**
  * EmailCheckerTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class EmailCheckerTest extends \PHPUnit\Framework\TestCase
 {

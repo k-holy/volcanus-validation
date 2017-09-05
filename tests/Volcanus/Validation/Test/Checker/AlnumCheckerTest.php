@@ -13,7 +13,7 @@ use Volcanus\Validation\Checker\AlnumChecker;
 /**
  * AlnumCheckerTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class AlnumCheckerTest extends \PHPUnit\Framework\TestCase
 {
