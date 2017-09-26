@@ -1,10 +1,9 @@
 <?php
 /**
- * PHP versions 5
+ * Volcanus libraries for PHP
  *
- * @copyright  2011 k-holy <k.holy74@gmail.com>
- * @author     k.holy74@gmail.com
- * @license    http://www.opensource.org/licenses/mit-license.php  The MIT License (MIT)
+ * @copyright k-holy <k.holy74@gmail.com>
+ * @license The MIT License (MIT)
  */
 
 namespace Volcanus\Validation\Test\Checker;
@@ -14,11 +13,12 @@ use Volcanus\Validation\Checker\AcceptCharactersChecker;
 /**
  * AcceptCharactersCheckerTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class AcceptCharactersCheckerTest extends \PHPUnit_Framework_TestCase
 {
 
+    /** @var  \Volcanus\Validation\Checker\AcceptCharactersChecker */
     protected $checker;
 
     public function setUp()
@@ -43,7 +43,7 @@ class AcceptCharactersCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\AcceptCharactersException
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\AcceptCharactersException
      */
     public function testRaiseAcceptCharactersExceptionWhenCharacterOtherThanAcceptCharactersAreContained()
     {
@@ -53,7 +53,7 @@ class AcceptCharactersCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\AcceptCharactersException
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\AcceptCharactersException
      */
     public function testInvokeMethod()
     {

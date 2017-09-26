@@ -1,10 +1,9 @@
 <?php
 /**
- * PHP versions 5
+ * Volcanus libraries for PHP
  *
- * @copyright  2011 k-holy <k.holy74@gmail.com>
- * @author     k.holy74@gmail.com
- * @license    http://www.opensource.org/licenses/mit-license.php  The MIT License (MIT)
+ * @copyright k-holy <k.holy74@gmail.com>
+ * @license The MIT License (MIT)
  */
 
 namespace Volcanus\Validation\Test;
@@ -14,7 +13,7 @@ use Volcanus\Validation\Context;
 /**
  * ContextTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class ContextTest extends \PHPUnit_Framework_TestCase
 {
@@ -49,6 +48,37 @@ class ContextTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($validation->isValid());
         $validation->unsetError('id');
         $this->assertFalse($validation->isError('id'));
+        $this->assertTrue($validation->isValid());
+    }
+
+    public function testSetErrorAndGetErrors()
+    {
+        $validation = new Context();
+        $validation->setError('id1', 'notFound');
+        $validation->setError('id2', 'notFound');
+        $errors = $validation->getErrors();
+        $this->assertArrayHasKey('id1', $errors);
+        $this->assertInstanceOf('\Volcanus\Validation\Error', $errors['id1']);
+        $this->assertArrayHasKey('id2', $errors);
+        $this->assertInstanceOf('\Volcanus\Validation\Error', $errors['id2']);
+    }
+
+    public function testSetErrorAndClearErrors()
+    {
+        $validation = new Context();
+        $this->assertTrue($validation->isValid());
+
+        $validation->setError('id1', 'notFound');
+        $this->assertTrue($validation->isError('id1'));
+        $this->assertFalse($validation->isValid());
+
+        $validation->setError('id2', 'notFound');
+        $this->assertTrue($validation->isError('id2'));
+        $this->assertFalse($validation->isValid());
+
+        $validation->clearErrors();
+        $this->assertFalse($validation->isError('id1'));
+        $this->assertFalse($validation->isError('id2'));
         $this->assertTrue($validation->isValid());
     }
 
@@ -239,6 +269,7 @@ class ContextTest extends \PHPUnit_Framework_TestCase
     {
         $validation = new Context();
         $validation->registerChecker('int', $this->intChecker());
+        /** @noinspection PhpUnusedParameterInspection */
         $validation->setMessageProcessor(function ($name, $type, $options) {
             switch ($type) {
                 case 'int':
@@ -252,6 +283,7 @@ class ContextTest extends \PHPUnit_Framework_TestCase
                     }
                     return implode(' ', $messages);
             }
+            return null;
         });
 
         $validation->InitResult(array('id' => 100));

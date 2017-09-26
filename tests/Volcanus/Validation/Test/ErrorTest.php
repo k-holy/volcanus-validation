@@ -1,10 +1,9 @@
 <?php
 /**
- * PHP versions 5
+ * Volcanus libraries for PHP
  *
- * @copyright  2011 k-holy <k.holy74@gmail.com>
- * @author     k.holy74@gmail.com
- * @license    http://www.opensource.org/licenses/mit-license.php  The MIT License (MIT)
+ * @copyright k-holy <k.holy74@gmail.com>
+ * @license The MIT License (MIT)
  */
 
 namespace Volcanus\Validation\Test;
@@ -14,7 +13,7 @@ use Volcanus\Validation\Error;
 /**
  * ErrorTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class ErrorTest extends \PHPUnit_Framework_TestCase
 {

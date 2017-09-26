@@ -1,10 +1,9 @@
 <?php
 /**
- * PHP versions 5
+ * Volcanus libraries for PHP
  *
- * @copyright  2011 k-holy <k.holy74@gmail.com>
- * @author     k.holy74@gmail.com
- * @license    http://www.opensource.org/licenses/mit-license.php  The MIT License (MIT)
+ * @copyright k-holy <k.holy74@gmail.com>
+ * @license The MIT License (MIT)
  */
 
 namespace Volcanus\Validation\Test\Checker;
@@ -14,11 +13,12 @@ use Volcanus\Validation\Checker\IntChecker;
 /**
  * IntCheckerTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class IntCheckerTest extends \PHPUnit_Framework_TestCase
 {
 
+    /** @var  \Volcanus\Validation\Checker\IntChecker */
     protected $checker;
 
     public function setUp()
@@ -44,7 +44,7 @@ class IntCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\IntException
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\IntException
      */
     public function testRaiseIntExceptionWhenCheckIsNgByFormat()
     {
@@ -52,7 +52,7 @@ class IntCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\MinValueException
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\MinValueException
      */
     public function testRaiseMinValueExceptionWhenCheckIsNgByMin()
     {
@@ -60,7 +60,7 @@ class IntCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\MaxValueException
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\MaxValueException
      */
     public function testRaiseMaxValueExceptionWhenCheckIsNgByMax()
     {
@@ -84,7 +84,7 @@ class IntCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\MinValueException
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\MinValueException
      */
     public function testInvokeMethod()
     {

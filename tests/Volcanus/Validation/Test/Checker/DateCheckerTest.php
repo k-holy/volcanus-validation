@@ -1,10 +1,9 @@
 <?php
 /**
- * PHP versions 5
+ * Volcanus libraries for PHP
  *
- * @copyright  2011 k-holy <k.holy74@gmail.com>
- * @author     k.holy74@gmail.com
- * @license    http://www.opensource.org/licenses/mit-license.php  The MIT License (MIT)
+ * @copyright k-holy <k.holy74@gmail.com>
+ * @license The MIT License (MIT)
  */
 
 namespace Volcanus\Validation\Test\Checker;
@@ -14,11 +13,12 @@ use Volcanus\Validation\Checker\DateChecker;
 /**
  * DateCheckerTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class DateCheckerTest extends \PHPUnit_Framework_TestCase
 {
 
+    /** @var  \Volcanus\Validation\Checker\DateChecker */
     protected $checker;
 
     public function setUp()
@@ -59,8 +59,8 @@ class DateCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\DateException
-     * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\DateException::INVALID_FORMAT
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\DateException
+     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\DateException::INVALID_FORMAT
      */
     public function testRaiseDateExceptionWhenInvalidFormat()
     {
@@ -68,8 +68,8 @@ class DateCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\DateException
-     * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\DateException::DATE_OUT_OF_RANGE
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\DateException
+     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\DateException::DATE_OUT_OF_RANGE
      */
     public function testRaiseDateExceptionWhenDateOutOfRange()
     {
@@ -77,8 +77,8 @@ class DateCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\DateException
-     * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\DateException::HOURS_OUT_OF_RANGE
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\DateException
+     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\DateException::HOURS_OUT_OF_RANGE
      */
     public function testRaiseDateExceptionWhenHoursOutOfRange()
     {
@@ -86,8 +86,8 @@ class DateCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\DateException
-     * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\DateException::MINUTES_OUT_OF_RANGE
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\DateException
+     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\DateException::MINUTES_OUT_OF_RANGE
      */
     public function testRaiseDateExceptionWhenMinutesOutOfRange()
     {
@@ -95,8 +95,8 @@ class DateCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\DateException
-     * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\DateException::SECONDS_OUT_OF_RANGE
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\DateException
+     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\DateException::SECONDS_OUT_OF_RANGE
      */
     public function testRaiseDateExceptionWhenSecondsOutOfRange()
     {
@@ -104,8 +104,8 @@ class DateCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\DateException
-     * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\DateException::SECONDS_OUT_OF_RANGE
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\DateException
+     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\DateException::SECONDS_OUT_OF_RANGE
      */
     public function testInvokeMethod()
     {

@@ -1,10 +1,9 @@
 <?php
 /**
- * PHP versions 5
+ * Volcanus libraries for PHP
  *
- * @copyright  2011 k-holy <k.holy74@gmail.com>
- * @author     k.holy74@gmail.com
- * @license    http://www.opensource.org/licenses/mit-license.php  The MIT License (MIT)
+ * @copyright k-holy <k.holy74@gmail.com>
+ * @license The MIT License (MIT)
  */
 
 namespace Volcanus\Validation\Checker;
@@ -16,13 +15,20 @@ use Volcanus\Validation\Exception\CheckerException\MaxValueException;
 /**
  * FloatChecker
  *
- * @author     k.holy74@gmail.com
+ * @property array $options
+ *
+ * @author k.holy74@gmail.com
  */
 class FloatChecker extends AbstractChecker
 {
 
     public static $forVector = false;
 
+    /**
+     * __construct
+     *
+     * @param  array $options 検証オプション
+     */
     public function __construct(array $options = array())
     {
         $this->options['min'] = null; // 最小値
@@ -35,9 +41,10 @@ class FloatChecker extends AbstractChecker
     /**
      * 値が+-符号および10進数の数字だけで構成されているか検証します。
      *
-     * @param  mixed   検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @param  array   検証オプション
-     * @return boolean 検証結果
+     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param  array $options 検証オプション
+     * @return bool 検証結果
+     * @throws \Exception
      */
     public function check($value, array $options = array())
     {

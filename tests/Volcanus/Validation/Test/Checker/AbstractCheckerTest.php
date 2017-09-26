@@ -1,20 +1,17 @@
 <?php
 /**
- * PHP versions 5
+ * Volcanus libraries for PHP
  *
- * @copyright  2011 k-holy <k.holy74@gmail.com>
- * @author     k.holy74@gmail.com
- * @license    http://www.opensource.org/licenses/mit-license.php  The MIT License (MIT)
+ * @copyright k-holy <k.holy74@gmail.com>
+ * @license The MIT License (MIT)
  */
 
 namespace Volcanus\Validation\Test\Checker;
 
-use Volcanus\Validation\Checker\AbstractChecker;
-
 /**
  * AbstractCheckerTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class AbstractCheckerTest extends \PHPUnit_Framework_TestCase
 {
@@ -90,7 +87,10 @@ class AbstractCheckerTest extends \PHPUnit_Framework_TestCase
 
 }
 
-class NumericChecker extends AbstractChecker
+/**
+ * @property array $options
+ */
+class NumericChecker extends \Volcanus\Validation\Checker\AbstractChecker
 {
 
     public function __construct(array $options = array())

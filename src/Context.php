@@ -1,22 +1,22 @@
 <?php
 /**
- * PHP versions 5
+ * Volcanus libraries for PHP
  *
- * @copyright  2011 k-holy <k.holy74@gmail.com>
- * @author     k.holy74@gmail.com
- * @license    http://www.opensource.org/licenses/mit-license.php  The MIT License (MIT)
+ * @copyright k-holy <k.holy74@gmail.com>
+ * @license The MIT License (MIT)
  */
 
 namespace Volcanus\Validation;
 
-use Volcanus\Validation\Util;
-use Volcanus\Validation\Checker;
-use Volcanus\Validation\Exception\CheckerException;
-
 /**
  * Context
  *
- * @author     k.holy74@gmail.com
+ * @property \Volcanus\Validation\Result $result
+ * @property array $errors
+ * @method callable checker(string $type)
+ * @method \Volcanus\Validation\Checker defaultChecker(string $type)
+ *
+ * @author k.holy74@gmail.com
  */
 class Context
 {
@@ -24,7 +24,7 @@ class Context
     /* @var array チェッカーの配列 */
     protected $checkers;
 
-    /* @var object 検証結果オブジェクト */
+    /* @var \Volcanus\Validation\Result 検証結果オブジェクト */
     protected $result;
 
     /* @var callable メッセージ生成処理のコールバック * */
@@ -36,8 +36,9 @@ class Context
     /**
      * コンストラクタ
      *
-     * @param mixed 検証データ
-     * @param array チェッカーの配列
+     * @param mixed $values 検証データ
+     * @param array $checkers チェッカーの配列
+     * @param  array $options 検証オプション
      */
     public function __construct($values = null, $checkers = null, $options = array())
     {
@@ -51,6 +52,7 @@ class Context
     /**
      * インスタンスを生成して返します。
      *
+     * @param mixed $values 検証データ
      * @return $this
      */
     public static function getInstance($values = null)
@@ -61,17 +63,17 @@ class Context
     /**
      * 検証結果オブジェクトを初期化します。
      *
-     * @param mixed 検証データ
+     * @param mixed $values 検証データ
      */
     public function initResult($values = null)
     {
-        $this->result = new \Volcanus\Validation\Result($values);
+        $this->result = new Result($values);
     }
 
     /**
      * チェッカーを初期化します。
      *
-     * @param array チェッカーの配列
+     * @param array $checkers チェッカーの配列
      * @return $this
      */
     public function initChecker($checkers = null)
@@ -88,7 +90,7 @@ class Context
     /**
      * 検証結果オブジェクトを返します。
      *
-     * @return object Volcanus\Validation\Result
+     * @return \Volcanus\Validation\Result
      */
     public function getResult()
     {
@@ -96,10 +98,30 @@ class Context
     }
 
     /**
+     * 検証結果からエラーのリストを返します。
+     *
+     * @return array
+     */
+    public function getErrors()
+    {
+        return $this->result->getErrors();
+    }
+
+    /**
+     * 検証結果からエラーをクリアします。
+     */
+    public function clearErrors()
+    {
+        $this->result->clearErrors();
+        return $this;
+    }
+
+    /**
      * チェッカーを登録します。
      *
-     * @param string 検証種別
-     * @param callable チェッカー
+     * @param string $type 検証種別
+     * @param callable $checker チェッカー
+     * @return $this
      */
     public function registerChecker($type, $checker)
     {
@@ -114,7 +136,7 @@ class Context
     /**
      * チェッカーを解放します。
      *
-     * @param string 検証種別
+     * @param string $type 検証種別
      */
     public function unregisterChecker($type)
     {
@@ -125,7 +147,7 @@ class Context
      * 検証種別を指定してチェッカーを返します。
      * セット済ではない場合、デフォルトの検証オブジェクトを返します。
      *
-     * @param  string  検証種別
+     * @param  string $type 検証種別
      * @return callable チェッカー
      */
     public function getChecker($type)
@@ -144,12 +166,12 @@ class Context
     /**
      * 検証種別を指定してデフォルトの検証オブジェクトを返します。
      *
-     * @param  string  検証種別
-     * @return object  Volcanus\Validation\Checker
+     * @param  string $type 検証種別
+     * @return \Volcanus\Validation\Checker
      */
     public function getDefaultChecker($type)
     {
-        $class = 'Volcanus\Validation\Checker\\' . ucfirst($type) . 'Checker';
+        $class = '\Volcanus\Validation\Checker\\' . ucfirst($type) . 'Checker';
         if (!class_exists($class, true)) {
             throw new \RuntimeException(
                 sprintf('The checker type "%s" is not defined.', $type));
@@ -160,7 +182,8 @@ class Context
     /**
      * メッセージ生成処理をセットします。
      *
-     * @param  callable メッセージ生成処理
+     * @param  callable $messageProcessor メッセージ生成処理
+     * @return $this
      */
     public function setMessageProcessor($messageProcessor)
     {
@@ -182,16 +205,17 @@ class Context
      * 対象項目がすでにエラーを検出されている場合はそのままFALSEを返します。
      * 検証処理で検証例外が発生した場合は検証結果オブジェクトにエラー情報をセットしてFALSEを返します。
      *
-     * @param string 検証データの項目名
-     * @param string 検証種別
-     * @return boolean 検証結果
+     * @param string $name 検証データの項目名
+     * @param string $type 検証種別
+     * @param  array $options 検証オプション
+     * @return boolean|null 検証結果
      */
     public function check($name, $type, $options = array())
     {
         if ($this->isError($name)) {
             return false;
         }
-        $checker = $this->checker($type);
+        $checker = $this->getChecker($type);
         if (!is_callable($checker)) {
             throw new \RuntimeException(
                 sprintf('The checker type "%s" is not defined.', $type));
@@ -199,7 +223,7 @@ class Context
         $value = $this->result->getValue($name);
         if ($checker instanceof Checker) {
             if (false === $checker->guard($value)) {
-                return;
+                return null;
             }
         }
         if (strcmp('compare', $type) === 0) {
@@ -215,13 +239,13 @@ class Context
             if (isset($options['acceptArray']) && $options['acceptArray']) {
                 try {
                     $valid = Util::recursiveCheck($checker, $value, $options);
-                } catch (CheckerException $e) {
+                } catch (\Volcanus\Validation\Exception\CheckerException $e) {
                     $valid = false;
                 }
-            } elseif ($checker instanceof Checker && true === $checker::$forVector) {
+            } elseif ($checker instanceof \Volcanus\Validation\Checker\AbstractChecker && true === $checker::$forVector) {
                 try {
                     $valid = call_user_func($checker, $value, $options);
-                } catch (CheckerException $e) {
+                } catch (\Volcanus\Validation\Exception\CheckerException $e) {
                     $valid = false;
                 }
             } else {
@@ -236,7 +260,7 @@ class Context
         } else {
             try {
                 $valid = call_user_func($checker, $value, $options);
-            } catch (CheckerException $e) {
+            } catch (\Volcanus\Validation\Exception\CheckerException $e) {
                 $valid = false;
             }
         }
@@ -259,9 +283,10 @@ class Context
     /**
      * 指定した項目名の検証エラーを設定します。
      *
-     * @param string 検証データの項目名
-     * @param  string  エラーの検証種別
-     * @param  array   エラーのパラメータ
+     * @param string $name 検証データの項目名
+     * @param  string $type エラーの検証種別
+     * @param  array $options エラーのパラメータ
+     * @return $this
      */
     public function setError($name, $type, $options = array())
     {
@@ -276,7 +301,8 @@ class Context
     /**
      * 指定した項目名の検証エラーをクリアします。
      *
-     * @param string 検証データの項目名
+     * @param string $name 検証データの項目名
+     * @return $this
      */
     public function unsetError($name)
     {
@@ -287,9 +313,9 @@ class Context
     /**
      * 検証結果に、指定した項目名の検証エラーが含まれているかどうかを返します。
      *
-     * @param string 検証データの項目名
-     * @param  string  エラーの検証種別
-     * @param  array   エラーのパラメータ
+     * @param string $name 検証データの項目名
+     * @param  string $type エラーの検証種別
+     * @param  array $options エラーのパラメータ
      * @return bool エラーが含まれているかどうか
      */
     public function isError($name, $type = null, $options = array())
@@ -300,8 +326,8 @@ class Context
     /**
      * 指定した項目名の検証エラーメッセージを返します。
      *
-     * @param string 検証データの項目名
-     * @return string 検証エラーメッセージ
+     * @param string $name 検証データの項目名
+     * @return string|null 検証エラーメッセージ
      */
     public function getMessage($name)
     {
@@ -309,6 +335,7 @@ class Context
         if (!is_null($error)) {
             return $error->getMessage();
         }
+        return null;
     }
 
     /**
@@ -320,6 +347,7 @@ class Context
     {
         $messages = array();
         foreach ($this->result->getErrors() as $name => $error) {
+            /** @var $error \Volcanus\Validation\Error */
             $messages[$name] = $error->getMessage();
         }
         return $messages;
@@ -329,7 +357,7 @@ class Context
      * __getマジックメソッド
      * $this->foo で $this->getFoo() メソッドが呼ばれます。
      *
-     * @param string
+     * @param string $name
      */
     public function __get($name)
     {
@@ -345,8 +373,8 @@ class Context
      * __setマジックメソッド
      * $this->foo = $var で $this->setFoo($var) メソッドが呼ばれます。
      *
-     * @param string
-     * @param mixed
+     * @param string $name
+     * @param mixed $value
      */
     public function __set($name, $value)
     {
@@ -362,8 +390,9 @@ class Context
      * __callマジックメソッド
      * $this->foo($var) で $this->getFoo($var) メソッドが呼ばれます。
      *
-     * @param string
-     * @param array
+     * @param string $name
+     * @param array $args
+     * @return mixed
      */
     public function __call($name, $args)
     {

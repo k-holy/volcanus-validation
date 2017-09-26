@@ -1,10 +1,9 @@
 <?php
 /**
- * PHP versions 5
+ * Volcanus libraries for PHP
  *
- * @copyright  2011 k-holy <k.holy74@gmail.com>
- * @author     k.holy74@gmail.com
- * @license    http://www.opensource.org/licenses/mit-license.php  The MIT License (MIT)
+ * @copyright k-holy <k.holy74@gmail.com>
+ * @license The MIT License (MIT)
  */
 
 namespace Volcanus\Validation;
@@ -18,7 +17,7 @@ use Volcanus\Validation\Exception\CheckerException\FloatException;
 /**
  * Util
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class Util
 {
@@ -27,9 +26,9 @@ class Util
      * 配列に対して再帰的に検証処理を実行した結果を返します。
      * エラーを検出した時点で処理を終了します。
      *
-     * @param callable チェッカー
-     * @param array 配列データ
-     * @param array オプション設定
+     * @param callable $checker チェッカー
+     * @param array $value 配列データ
+     * @param array $options オプション設定
      * @return boolean 検証結果
      */
     public static function recursiveCheck($checker, $value, $options = array())
@@ -62,8 +61,8 @@ class Util
      * オプション設定をマージして返します。
      * デフォルト設定に存在しないキーを追加設定で検出した場合はInvalidArgumentExceptionをスローします。
      *
-     * @param array デフォルト設定
-     * @param array 追加設定
+     * @param array $defaults デフォルト設定
+     * @param array $appends 追加設定
      * @return array オプション設定
      */
     public static function mergeOptions(array $defaults, array $appends)
@@ -84,13 +83,13 @@ class Util
     /**
      * 値の文字長が指定値以上であるか検証します。
      *
-     * @param  mixed   検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @param  int     文字長
-     * @param  int     文字長測定モード
+     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param  int $length 文字長
+     * @param  int $mbLength 文字長測定モード
      *                 Volcanus\Validation\Checker::LENGTH_BYTES //バイト長
      *                 Volcanus\Validation\Checker::LENGTH_CHARS //文字長
      *                 Volcanus\Validation\Checker::LENGTH_WIDTH //文字幅
-     * @param  string  文字エンコーディング
+     * @param  string $encoding 文字エンコーディング
      * @return boolean 検証結果
      */
     public static function checkMinLength($value, $length, $mbLength, $encoding = null)
@@ -105,10 +104,6 @@ class Util
                 'The parameter "length" is not integer.');
         }
         switch ($mbLength) {
-            case \Volcanus\Validation\Checker::LENGTH_BYTES:
-                $characterLength = strlen($stringValue);
-                $mbLengthType = 'bytes';
-                break;
             case \Volcanus\Validation\Checker::LENGTH_CHARS:
                 $characterLength = (isset($encoding))
                     ? mb_strlen($stringValue, $encoding)
@@ -120,6 +115,11 @@ class Util
                     ? mb_strwidth($stringValue, $encoding)
                     : mb_strwidth($stringValue);
                 $mbLengthType = 'width';
+                break;
+            case \Volcanus\Validation\Checker::LENGTH_BYTES:
+            default:
+                $characterLength = strlen($stringValue);
+                $mbLengthType = 'bytes';
                 break;
         }
         if (!isset($characterLength) || !isset($mbLengthType)) {
@@ -137,13 +137,13 @@ class Util
     /**
      * 値の文字長が指定値以下であるか検証します。
      *
-     * @param  mixed   検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @param  int     文字長
-     * @param  int     文字長測定モード
+     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param  int $length 文字長
+     * @param  int $mbLength 文字長測定モード
      *                 Volcanus\Validation\Checker::LENGTH_BYTES //バイト長
      *                 Volcanus\Validation\Checker::LENGTH_CHARS //文字長
      *                 Volcanus\Validation\Checker::LENGTH_WIDTH //文字幅
-     * @param  string  文字エンコーディング
+     * @param  string $encoding 文字エンコーディング
      * @return boolean 検証結果
      */
     public static function checkMaxLength($value, $length, $mbLength, $encoding = null)
@@ -158,10 +158,6 @@ class Util
                 'The parameter "length" is not integer.');
         }
         switch ($mbLength) {
-            case \Volcanus\Validation\Checker::LENGTH_BYTES:
-                $characterLength = strlen($stringValue);
-                $mbLengthType = 'bytes';
-                break;
             case \Volcanus\Validation\Checker::LENGTH_WIDTH:
                 $characterLength = (isset($encoding))
                     ? mb_strwidth($stringValue, $encoding)
@@ -173,6 +169,11 @@ class Util
                     ? mb_strlen($stringValue, $encoding)
                     : mb_strlen($stringValue);
                 $mbLengthType = 'characters';
+                break;
+            case \Volcanus\Validation\Checker::LENGTH_BYTES:
+            default:
+                $characterLength = strlen($stringValue);
+                $mbLengthType = 'bytes';
                 break;
         }
         if (!isset($characterLength) || !isset($mbLengthType)) {
@@ -190,8 +191,8 @@ class Util
     /**
      * 値が+-符号および10進数の数字だけで構成されているか検証します。
      *
-     * @param  mixed   検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @param  bool +-を無効とするかどうか
+     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param  bool $unsigned +-を無効とするかどうか
      * @return boolean 検証結果
      */
     public static function checkInt($value, $unsigned = false)
@@ -222,8 +223,8 @@ class Util
     /**
      * 値が+-符号および10進数の数字と.だけで構成されているか検証します。
      *
-     * @param  mixed   検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @param  bool +-を無効とするかどうか
+     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param  bool $unsigned +-を無効とするかどうか
      * @return boolean 検証結果
      */
     public static function checkFloat($value, $unsigned = false)
@@ -246,8 +247,8 @@ class Util
     /**
      * 値が指定された文字エンコーディングとして妥当かどうかを再帰的に検証します。
      *
-     * @param mixed  検証したい文字列または配列
-     * @param string 文字エンコーディング
+     * @param mixed $value 検証したい文字列または配列
+     * @param string $encoding 文字エンコーディング
      * @return bool 検証結果
      */
     public static function checkEncoding($value, $encoding)
@@ -278,8 +279,8 @@ class Util
     /**
      * 配列に対して再帰的に処理を実行した結果を返します。
      *
-     * @param callable 処理
-     * @param array 配列
+     * @param callable $func 処理
+     * @param array $value 配列
      * @return array 処理後の配列
      */
     public static function map($func, $value)

@@ -1,10 +1,9 @@
 <?php
 /**
- * PHP versions 5
+ * Volcanus libraries for PHP
  *
- * @copyright  2011 k-holy <k.holy74@gmail.com>
- * @author     k.holy74@gmail.com
- * @license    http://www.opensource.org/licenses/mit-license.php  The MIT License (MIT)
+ * @copyright k-holy <k.holy74@gmail.com>
+ * @license The MIT License (MIT)
  */
 
 namespace Volcanus\Validation\Checker;
@@ -15,7 +14,9 @@ use Volcanus\Validation\Exception\CheckerException\CompareException;
 /**
  * CompareChecker
  *
- * @author     k.holy74@gmail.com
+ * @property array $options
+ *
+ * @author k.holy74@gmail.com
  */
 class CompareChecker extends AbstractChecker
 {
@@ -29,6 +30,11 @@ class CompareChecker extends AbstractChecker
     const IS_GREATER_THAN_OR_EQUAL_TO = 'ge';
     const IS_LESS_THAN_OR_EQUAL_TO = 'le';
 
+    /**
+     * __construct
+     *
+     * @param  array $options 検証オプション
+     */
     public function __construct(array $options = array())
     {
         $this->options['operator'] = self::IS_EQUAL_TO; // 比較演算子
@@ -39,8 +45,8 @@ class CompareChecker extends AbstractChecker
     /**
      * 2つの値の比較結果を検証します。
      *
-     * @param  mixed   検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @param  array   検証オプション
+     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param  array $options 検証オプション
      * @return boolean 検証結果
      */
     public function check($value, array $options = array())

@@ -1,10 +1,9 @@
 <?php
 /**
- * PHP versions 5
+ * Volcanus libraries for PHP
  *
- * @copyright  2011 k-holy <k.holy74@gmail.com>
- * @author     k.holy74@gmail.com
- * @license    http://www.opensource.org/licenses/mit-license.php  The MIT License (MIT)
+ * @copyright k-holy <k.holy74@gmail.com>
+ * @license The MIT License (MIT)
  */
 
 namespace Volcanus\Validation\Checker;
@@ -15,13 +14,20 @@ use Volcanus\Validation\Exception\CheckerException\ChoiceException;
 /**
  * ChoiceChecker
  *
- * @author     k.holy74@gmail.com
+ * @property array $options
+ *
+ * @author k.holy74@gmail.com
  */
 class ChoiceChecker extends AbstractChecker
 {
 
     public static $forVector = false;
 
+    /**
+     * __construct
+     *
+     * @param  array $options 検証オプション
+     */
     public function __construct(array $options = array())
     {
         $this->options['choices'] = null; // 選択肢 (Array/Traversable または カンマ区切りの文字列)
@@ -32,8 +38,8 @@ class ChoiceChecker extends AbstractChecker
     /**
      * 値が指定された配列の要素に含まれる値と同一かどうかを検証します。
      *
-     * @param  mixed   検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @param  array   検証オプション
+     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param  array $options 検証オプション
      * @return boolean 検証結果
      */
     public function check($value, array $options = array())
@@ -49,7 +55,7 @@ class ChoiceChecker extends AbstractChecker
         if (is_string($choices) && false !== strpos($choices, ',')) {
             $choices = explode(',', $choices);
         }
-        if (!is_array($choices) && !($choices instanceof Traversable)) {
+        if (!is_array($choices) && !($choices instanceof \Traversable)) {
             throw new \InvalidArgumentException(
                 'The parameter "choices" is not valid Array/Traversable.');
         }

@@ -1,10 +1,9 @@
 <?php
 /**
- * PHP versions 5
+ * Volcanus libraries for PHP
  *
- * @copyright  2011 k-holy <k.holy74@gmail.com>
- * @author     k.holy74@gmail.com
- * @license    http://www.opensource.org/licenses/mit-license.php  The MIT License (MIT)
+ * @copyright k-holy <k.holy74@gmail.com>
+ * @license The MIT License (MIT)
  */
 
 namespace Volcanus\Validation\Test\Checker;
@@ -14,11 +13,12 @@ use Volcanus\Validation\Checker\DatetimeChecker;
 /**
  * DatetimeCheckerTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class DatetimeCheckerTest extends \PHPUnit_Framework_TestCase
 {
 
+    /** @var  \Volcanus\Validation\Checker\DatetimeChecker */
     protected $checker;
 
     public function setUp()
@@ -33,8 +33,8 @@ class DatetimeCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\DatetimeException
-     * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\DatetimeException::INVALID_FORMAT
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\DatetimeException
+     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\DatetimeException::INVALID_FORMAT
      */
     public function testRaiseDatetimeExceptionWhenInvalidFormat()
     {
@@ -42,8 +42,8 @@ class DatetimeCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\DatetimeException
-     * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\DatetimeException::DATE_OUT_OF_RANGE
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\DatetimeException
+     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\DatetimeException::DATE_OUT_OF_RANGE
      */
     public function testRaiseDatetimeExceptionWhenDateOutOfRange()
     {
@@ -51,8 +51,8 @@ class DatetimeCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\DatetimeException
-     * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\DatetimeException::HOURS_OUT_OF_RANGE
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\DatetimeException
+     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\DatetimeException::HOURS_OUT_OF_RANGE
      */
     public function testRaiseDatetimeExceptionWhenHoursOutOfRange()
     {
@@ -60,8 +60,8 @@ class DatetimeCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\DatetimeException
-     * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\DatetimeException::MINUTES_OUT_OF_RANGE
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\DatetimeException
+     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\DatetimeException::MINUTES_OUT_OF_RANGE
      */
     public function testRaiseDatetimeExceptionWhenMinutesOutOfRange()
     {
@@ -69,8 +69,8 @@ class DatetimeCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\DatetimeException
-     * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\DatetimeException::SECONDS_OUT_OF_RANGE
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\DatetimeException
+     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\DatetimeException::SECONDS_OUT_OF_RANGE
      */
     public function testRaiseDatetimeExceptionWhenSecondsOutOfRange()
     {
@@ -78,8 +78,8 @@ class DatetimeCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\DatetimeException
-     * @expectedExceptionCode Volcanus\Validation\Exception\CheckerException\DatetimeException::SECONDS_OUT_OF_RANGE
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\DatetimeException
+     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\DatetimeException::SECONDS_OUT_OF_RANGE
      */
     public function testInvokeMethod()
     {

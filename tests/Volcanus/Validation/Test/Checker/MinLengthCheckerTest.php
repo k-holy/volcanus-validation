@@ -1,10 +1,9 @@
 <?php
 /**
- * PHP versions 5
+ * Volcanus libraries for PHP
  *
- * @copyright  2011 k-holy <k.holy74@gmail.com>
- * @author     k.holy74@gmail.com
- * @license    http://www.opensource.org/licenses/mit-license.php  The MIT License (MIT)
+ * @copyright k-holy <k.holy74@gmail.com>
+ * @license The MIT License (MIT)
  */
 
 namespace Volcanus\Validation\Test\Checker;
@@ -14,11 +13,12 @@ use Volcanus\Validation\Checker\MinLengthChecker;
 /**
  * MinLengthCheckerTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class MinLengthCheckerTest extends \PHPUnit_Framework_TestCase
 {
 
+    /** @var  \Volcanus\Validation\Checker\MinLengthChecker */
     protected $checker;
 
     public function setUp()
@@ -64,7 +64,7 @@ class MinLengthCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\MinLengthException
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\MinLengthException
      */
     public function testRaiseMinLengthExceptionWhenHalfWidthedMultiByteCharactersLength()
     {
@@ -72,7 +72,7 @@ class MinLengthCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\MinLengthException
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\MinLengthException
      */
     public function testRaiseMinLengthExceptionWhenFullWidthedMultiByteCharactersLength()
     {
@@ -80,7 +80,7 @@ class MinLengthCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\MinLengthException
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\MinLengthException
      */
     public function testRaiseMinLengthExceptionWhenHalfWidthedMultiByteCharactersBytes()
     {
@@ -88,7 +88,7 @@ class MinLengthCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\MinLengthException
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\MinLengthException
      */
     public function testRaiseMinLengthExceptionWhenFullWidthedMultiByteCharactersBytes()
     {
@@ -96,7 +96,7 @@ class MinLengthCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\MinLengthException
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\MinLengthException
      */
     public function testRaiseMinLengthExceptionWhenHalfWidthedMultiByteCharactersWidth()
     {
@@ -104,7 +104,7 @@ class MinLengthCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\MinLengthException
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\MinLengthException
      */
     public function testRaiseMinLengthExceptionWhenFullWidthedMultiByteCharactersWidth()
     {
@@ -120,7 +120,7 @@ class MinLengthCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\MinLengthException
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\MinLengthException
      */
     public function testInvokeMethod()
     {

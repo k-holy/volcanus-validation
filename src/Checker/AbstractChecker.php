@@ -1,34 +1,47 @@
 <?php
 /**
- * PHP versions 5
+ * Volcanus libraries for PHP
  *
- * @copyright  2011 k-holy <k.holy74@gmail.com>
- * @author     k.holy74@gmail.com
- * @license    http://www.opensource.org/licenses/mit-license.php  The MIT License (MIT)
+ * @copyright k-holy <k.holy74@gmail.com>
+ * @license The MIT License (MIT)
  */
 
 namespace Volcanus\Validation\Checker;
 
 use Volcanus\Validation\Util;
-use Volcanus\Validation\Exception\CheckerException;
+use Volcanus\Validation\Checker;
 
 /**
  * AbstractChecker
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
-abstract class AbstractChecker implements \Volcanus\Validation\Checker
+abstract class AbstractChecker implements Checker
 {
 
     public static $forVector = false;
 
+    /**
+     * @var array 検証オプション
+     */
     protected $options = array();
 
+    /**
+     * __construct
+     *
+     * @param  array $options 検証オプション
+     */
     public function __construct(array $options = array())
     {
         $this->options = Util::mergeOptions($this->options, $options);
     }
 
+    /**
+     * インスタンスを生成して返します。
+     *
+     * @param  array $options 検証オプション
+     * @return static
+     */
     public static function getInstance(array $options = array())
     {
         return new static($options);
@@ -37,8 +50,8 @@ abstract class AbstractChecker implements \Volcanus\Validation\Checker
     /**
      * __invoke
      *
-     * @param  mixed   検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @param  array   検証オプション
+     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param  array $options 検証オプション
      * @return boolean 検証結果
      */
     public function __invoke($value, array $options = array())
@@ -49,13 +62,13 @@ abstract class AbstractChecker implements \Volcanus\Validation\Checker
     /**
      * 値が指定した文字だけで構成されているか検証します。
      *
-     * @param  mixed   検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @param  array   検証オプション
+     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param  array $options 検証オプション
      * @return boolean 検証結果
      */
     public function check($value, array $options = array())
     {
-        $options = Util::mergeOptions($this->options, $options);
+        $this->options = Util::mergeOptions($this->options, $options);
         return true;
     }
 
@@ -63,7 +76,7 @@ abstract class AbstractChecker implements \Volcanus\Validation\Checker
      * 検証前のガードメソッドを実行します。
      * このメソッドがFALSEを返した場合は検証メソッドを実行しません。
      *
-     * @param  mixed   検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
      * @return boolean
      */
     public function guard($value)
@@ -86,8 +99,9 @@ abstract class AbstractChecker implements \Volcanus\Validation\Checker
     /**
      * 検証オプションを設定します。
      *
-     * @param string オプション名
-     * @param mixed オプション値
+     * @param string $name オプション名
+     * @param mixed $value オプション値
+     * @return $this
      */
     public function setOption($name, $value)
     {
@@ -102,7 +116,7 @@ abstract class AbstractChecker implements \Volcanus\Validation\Checker
     /**
      * 検証オプションが有効かどうかを返します。
      *
-     * @param string オプション名
+     * @param string $name オプション名
      * @return boolean
      */
     public function isEnableOption($name)

@@ -1,10 +1,9 @@
 <?php
 /**
- * PHP versions 5
+ * Volcanus libraries for PHP
  *
- * @copyright  2011 k-holy <k.holy74@gmail.com>
- * @author     k.holy74@gmail.com
- * @license    http://www.opensource.org/licenses/mit-license.php  The MIT License (MIT)
+ * @copyright k-holy <k.holy74@gmail.com>
+ * @license The MIT License (MIT)
  */
 
 namespace Volcanus\Validation\Checker;
@@ -15,7 +14,9 @@ use Volcanus\Validation\Exception\CheckerException\DateException;
 /**
  * DateChecker
  *
- * @author     k.holy74@gmail.com
+ * @property array $options
+ *
+ * @author k.holy74@gmail.com
  */
 class DateChecker extends AbstractChecker
 {
@@ -40,6 +41,11 @@ class DateChecker extends AbstractChecker
     const PREG_PATTERN_YMDHI = '#\A(\d+)[-/](\d{1,2})[-/](\d{1,2}) *(\d{1,2}):(\d{1,2})\z#';
     const PREG_PATTERN_YMDHIS = '#\A(\d+)[-/](\d{1,2})[-/](\d{1,2}) *(\d{1,2}):(\d{1,2}):(\d{1,2})\z#';
 
+    /**
+     * __construct
+     *
+     * @param  array $options 検証オプション
+     */
     public function __construct(array $options = array())
     {
         $this->options['pattern'] = self::PREG_PATTERN_YMD; // 日付解析用パターン
@@ -54,8 +60,8 @@ class DateChecker extends AbstractChecker
      * 書式    : 年月日(必須) YYYY-MM-DD または Y-M-D
      *           時分秒(任意) HH:II:SS   または H:I:S
      *
-     * @param  mixed   検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @param  array   検証オプション
+     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param  array $options 検証オプション
      * @return boolean 検証結果
      */
     public function check($value, array $options = array())
@@ -110,7 +116,9 @@ class DateChecker extends AbstractChecker
     /**
      * 日付文字列を解析し、日付部分ごとに値を数値化した配列を返します。
      *
-     * @param  string 日付文字列
+     * @param  string $value 日付文字列
+     * @param  string $pattern 日付解析用パターン
+     * @param  string $order 日付解析用順序
      * @return mixed  日付部分の配列または FALSE
      */
     private function parseDate($value, $pattern, $order)

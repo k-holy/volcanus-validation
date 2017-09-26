@@ -1,10 +1,9 @@
 <?php
 /**
- * PHP versions 5
+ * Volcanus libraries for PHP
  *
- * @copyright  2011 k-holy <k.holy74@gmail.com>
- * @author     k.holy74@gmail.com
- * @license    http://www.opensource.org/licenses/mit-license.php  The MIT License (MIT)
+ * @copyright k-holy <k.holy74@gmail.com>
+ * @license The MIT License (MIT)
  */
 
 namespace Volcanus\Validation\Test\Checker;
@@ -14,11 +13,12 @@ use Volcanus\Validation\Checker\FloatChecker;
 /**
  * FloatCheckerTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class FloatCheckerTest extends \PHPUnit_Framework_TestCase
 {
 
+    /** @var  \Volcanus\Validation\Checker\FloatChecker */
     protected $checker;
 
     public function setUp()
@@ -38,7 +38,7 @@ class FloatCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\FloatException
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\FloatException
      */
     public function testRaiseFloatExceptionWhenCheckIsNgByFormat()
     {
@@ -46,7 +46,7 @@ class FloatCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\MinValueException
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\MinValueException
      */
     public function testRaiseMinValueExceptionWhenCheckIsNgByMin()
     {
@@ -54,7 +54,7 @@ class FloatCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\MaxValueException
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\MaxValueException
      */
     public function testRaiseMaxValueExceptionWhenCheckIsNgByMax()
     {
@@ -78,7 +78,7 @@ class FloatCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\MinValueException
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\MinValueException
      */
     public function testInvokeMethod()
     {

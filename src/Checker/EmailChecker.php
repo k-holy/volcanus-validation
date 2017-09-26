@@ -1,10 +1,9 @@
 <?php
 /**
- * PHP versions 5
+ * Volcanus libraries for PHP
  *
- * @copyright  2011 k-holy <k.holy74@gmail.com>
- * @author     k.holy74@gmail.com
- * @license    http://www.opensource.org/licenses/mit-license.php  The MIT License (MIT)
+ * @copyright k-holy <k.holy74@gmail.com>
+ * @license The MIT License (MIT)
  */
 
 namespace Volcanus\Validation\Checker;
@@ -14,15 +13,22 @@ use Volcanus\Validation\Exception\CheckerException\EmailException;
 use Volcanus\Validation\Exception\CheckerException\MaxLengthException;
 
 /**
- * Volcanus_Validation_Email
+ * EmailChecker
  *
- * @author     k.holy74@gmail.com
+ * @property array $options
+ *
+ * @author k.holy74@gmail.com
  */
 class EmailChecker extends AbstractChecker
 {
 
     public static $forVector = false;
 
+    /**
+     * __construct
+     *
+     * @param  array $options 検証オプション
+     */
     public function __construct(array $options = array())
     {
         $this->options['allowDotEndOfLocalPart'] = false; // ローカルパートの末尾に.を許可するかどうか
@@ -33,8 +39,8 @@ class EmailChecker extends AbstractChecker
     /**
      * 値がメールアドレスとして妥当か検証します。
      *
-     * @param  mixed   検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @param  array   検証オプション
+     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param  array $options 検証オプション
      * @return boolean 検証結果
      */
     public function check($value, array $options = array())
@@ -58,9 +64,10 @@ class EmailChecker extends AbstractChecker
     /**
      * メールアドレスを検証します。
      *
-     * @param  string 検証値
-     * @param  bool   ローカルパートの末尾に.を許可するかどうか
-     * @return boolean 検証結果
+     * @param  string $value 検証値
+     * @param  bool $allowDotEndOfLocalPart ローカルパートの末尾に.を許可するかどうか
+     * @return bool 検証結果
+     * @throws \Exception
      */
     public static function validateAddrSpec($value, $allowDotEndOfLocalPart = false)
     {
@@ -89,9 +96,10 @@ class EmailChecker extends AbstractChecker
     /**
      * メールアドレスのローカルパートを検証します。
      *
-     * @param  string 検証値
-     * @param  bool   ローカルパートの末尾に.を許可するかどうか
-     * @return boolean 検証結果
+     * @param  string $value 検証値
+     * @param  bool $allowDotEndOfLocalPart ローカルパートの末尾に.を許可するかどうか
+     * @return bool 検証結果
+     * @throws \Exception
      */
     public static function validateLocalPart($value, $allowDotEndOfLocalPart = false)
     {
@@ -120,8 +128,9 @@ class EmailChecker extends AbstractChecker
     /**
      * メールアドレスのドメインを検証します。
      *
-     * @param  string 検証値
-     * @return boolean 検証結果
+     * @param  string $value 検証値
+     * @return bool 検証結果
+     * @throws \Exception
      */
     public static function validateDomain($value)
     {

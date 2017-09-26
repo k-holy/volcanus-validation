@@ -1,10 +1,9 @@
 <?php
 /**
- * PHP versions 5
+ * Volcanus libraries for PHP
  *
- * @copyright  2011 k-holy <k.holy74@gmail.com>
- * @author     k.holy74@gmail.com
- * @license    http://www.opensource.org/licenses/mit-license.php  The MIT License (MIT)
+ * @copyright k-holy <k.holy74@gmail.com>
+ * @license The MIT License (MIT)
  */
 
 namespace Volcanus\Validation\Test\Checker;
@@ -14,11 +13,12 @@ use Volcanus\Validation\Checker\PostcodeChecker;
 /**
  * PostcodeCheckerTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class PostcodeCheckerTest extends \PHPUnit_Framework_TestCase
 {
 
+    /** @var  \Volcanus\Validation\Checker\PostcodeChecker */
     protected $checker;
 
     public function setUp()
@@ -37,7 +37,7 @@ class PostcodeCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\PostcodeException
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\PostcodeException
      */
     public function testRaisePostcodeExceptionWhenCheckIsNgByFormat()
     {
@@ -45,7 +45,7 @@ class PostcodeCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\PostcodeException
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\PostcodeException
      */
     public function testInvokeMethod()
     {

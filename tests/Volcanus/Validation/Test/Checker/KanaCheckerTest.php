@@ -1,10 +1,9 @@
 <?php
 /**
- * PHP versions 5
+ * Volcanus libraries for PHP
  *
- * @copyright  2011 k-holy <k.holy74@gmail.com>
- * @author     k.holy74@gmail.com
- * @license    http://www.opensource.org/licenses/mit-license.php  The MIT License (MIT)
+ * @copyright k-holy <k.holy74@gmail.com>
+ * @license The MIT License (MIT)
  */
 
 namespace Volcanus\Validation\Test\Checker;
@@ -14,7 +13,7 @@ use Volcanus\Validation\Checker\KanaChecker;
 /**
  * KanaCheckerTest
  *
- * @author     k.holy74@gmail.com
+ * @author k.holy74@gmail.com
  */
 class KanaCheckerTest extends \PHPUnit_Framework_TestCase
 {
@@ -25,7 +24,9 @@ class KanaCheckerTest extends \PHPUnit_Framework_TestCase
     const HANKAKU_KANA = 'ｦｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝﾞﾟ';
     const HANKAKU_KIGO = '･';
 
+    /** @var  \Volcanus\Validation\Checker\KanaChecker */
     protected $checker;
+
     protected $internalEncoding;
 
     public function setUp()
@@ -116,7 +117,7 @@ class KanaCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\KanaException
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\KanaException
      */
     public function testRaiseKanaExceptionWhenCheckIsNgByFormat()
     {
@@ -124,7 +125,7 @@ class KanaCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\KanaException
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\KanaException
      */
     public function testRaiseKanaExceptionWhenCheckIsNgByNotAcceptSign()
     {
@@ -133,7 +134,7 @@ class KanaCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\KanaException
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\KanaException
      */
     public function testRaiseKanaExceptionWhenCheckIsNgByNotAcceptSpace()
     {
@@ -142,7 +143,7 @@ class KanaCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Volcanus\Validation\Exception\CheckerException\KanaException
+     * @expectedException \Volcanus\Validation\Exception\CheckerException\KanaException
      */
     public function testInvokeMethod()
     {
