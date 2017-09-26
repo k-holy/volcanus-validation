@@ -6,6 +6,7 @@
  * @author     k.holy74@gmail.com
  * @license    http://www.opensource.org/licenses/mit-license.php  The MIT License (MIT)
  */
+
 namespace Volcanus\Validation\Exception\CheckerException;
 
 /**
@@ -16,8 +17,8 @@ namespace Volcanus\Validation\Exception\CheckerException;
  */
 class EmailException extends AbstractCheckerException
 {
-	const INVALID_FORMAT     = 1;
-	const INVALID_ADDR_SPEC  = 2;
-	const INVALID_LOCAL_PART = 3;
-	const INVALID_DOMAIN     = 4;
+    const INVALID_FORMAT = 1;
+    const INVALID_ADDR_SPEC = 2;
+    const INVALID_LOCAL_PART = 3;
+    const INVALID_DOMAIN = 4;
 }

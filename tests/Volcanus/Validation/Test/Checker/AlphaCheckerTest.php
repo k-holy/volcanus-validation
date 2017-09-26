@@ -6,6 +6,7 @@
  * @author     k.holy74@gmail.com
  * @license    http://www.opensource.org/licenses/mit-license.php  The MIT License (MIT)
  */
+
 namespace Volcanus\Validation\Test\Checker;
 
 use Volcanus\Validation\Checker\AlphaChecker;
@@ -18,33 +19,33 @@ use Volcanus\Validation\Checker\AlphaChecker;
 class AlphaCheckerTest extends \PHPUnit_Framework_TestCase
 {
 
-	protected $checker;
+    protected $checker;
 
-	public function setUp()
-	{
-		$this->checker = new AlphaChecker();
-	}
+    public function setUp()
+    {
+        $this->checker = new AlphaChecker();
+    }
 
-	public function testCheckIsOk()
-	{
-		$this->assertTrue($this->checker->check('ABC'));
-	}
+    public function testCheckIsOk()
+    {
+        $this->assertTrue($this->checker->check('ABC'));
+    }
 
-	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\AlphaException
-	 */
-	public function testRaiseAlphaExceptionWhenCheckIsNgByFormat()
-	{
-		$this->checker->check('123');
-	}
+    /**
+     * @expectedException Volcanus\Validation\Exception\CheckerException\AlphaException
+     */
+    public function testRaiseAlphaExceptionWhenCheckIsNgByFormat()
+    {
+        $this->checker->check('123');
+    }
 
-	/**
-	 * @expectedException Volcanus\Validation\Exception\CheckerException\AlphaException
-	 */
-	public function testInvokeMethod()
-	{
-		$checker = $this->checker;
-		$checker('123');
-	}
+    /**
+     * @expectedException Volcanus\Validation\Exception\CheckerException\AlphaException
+     */
+    public function testInvokeMethod()
+    {
+        $checker = $this->checker;
+        $checker('123');
+    }
 
 }

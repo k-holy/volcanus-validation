@@ -6,6 +6,7 @@
  * @author     k.holy74@gmail.com
  * @license    http://www.opensource.org/licenses/mit-license.php  The MIT License (MIT)
  */
+
 namespace Volcanus\Validation\Exception\CheckerException;
 
 /**
@@ -15,4 +16,5 @@ namespace Volcanus\Validation\Exception\CheckerException;
  * @author     k.holy74@gmail.com
  */
 class UriException extends AbstractCheckerException
-{}
+{
+}
