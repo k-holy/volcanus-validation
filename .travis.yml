@@ -37,7 +37,6 @@ matrix:
       env: dependencies=highest
 
 before_install:
-  - mv ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini{,.disabled} || echo "xdebug not available"
   - composer self-update
 
 install:
@@ -45,11 +44,10 @@ install:
   - if [ -z "$dependencies" ]; then composer install --prefer-dist; fi;
   - if [ "$dependencies" = "lowest" ]; then composer update --prefer-lowest --prefer-dist -n; fi;
   - if [ "$dependencies" = "highest" ]; then composer update --prefer-dist -n; fi;
-  - composer show
 
 script:
   - mkdir -p build/logs
-  - vendor/bin/phpunit -c phpunit.xml --coverage-clover build/logs/clover.xml
+  - php vendor/bin/phpunit -c phpunit.xml --coverage-clover build/logs/clover.xml
 
 after_script:
   - php vendor/bin/coveralls -v -c .coveralls.yml
