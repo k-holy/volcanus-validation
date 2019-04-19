@@ -1,24 +1,51 @@
 language: php
+sudo: false
 
 php:
   - 5.6
-  - 7.0
   - 7.1
   - 7.2
+  - 7.3
+  - nightly
 
 cache:
   directories:
     - vendor
     - $HOME/.composer/cache
-env:
-  matrix:
-    - DEPENDENCIES=""
-    - DEPENDENCIES="--prefer-lowest --prefer-stable"
 
-before_script:
+matrix:
+  include:
+    - php: 5.6
+      env: dependencies=lowest
+    - php: 7.1
+      env: dependencies=lowest
+    - php: 7.2
+      env: dependencies=lowest
+    - php: 7.3
+      env: dependencies=lowest
+    - php: nightly
+      env: dependencies=lowest
+    - php: 5.6
+      env: dependencies=highest
+    - php: 7.1
+      env: dependencies=highest
+    - php: 7.2
+      env: dependencies=highest
+    - php: 7.3
+      env: dependencies=highest
+    - php: nightly
+      env: dependencies=highest
+
+before_install:
+  - mv ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini{,.disabled} || echo "xdebug not available"
   - composer self-update
+
+install:
   - composer require php-coveralls/php-coveralls
-  - composer update $DEPENDENCIES
+  - if [ -z "$dependencies" ]; then composer install --prefer-dist; fi;
+  - if [ "$dependencies" = "lowest" ]; then composer update --prefer-lowest --prefer-dist -n; fi;
+  - if [ "$dependencies" = "highest" ]; then composer update --prefer-dist -n; fi;
+  - composer show
 
 script:
   - mkdir -p build/logs
