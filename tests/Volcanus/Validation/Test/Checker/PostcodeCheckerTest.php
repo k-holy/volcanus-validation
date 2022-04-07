@@ -8,20 +8,22 @@
 
 namespace Volcanus\Validation\Test\Checker;
 
+use PHPUnit\Framework\TestCase;
 use Volcanus\Validation\Checker\PostcodeChecker;
+use Volcanus\Validation\Exception\CheckerException\PostcodeException;
 
 /**
  * PostcodeCheckerTest
  *
  * @author k.holy74@gmail.com
  */
-class PostcodeCheckerTest extends \PHPUnit\Framework\TestCase
+class PostcodeCheckerTest extends TestCase
 {
 
-    /** @var  \Volcanus\Validation\Checker\PostcodeChecker */
+    /** @var  PostcodeChecker */
     protected $checker;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->checker = new PostcodeChecker();
     }
@@ -36,19 +38,15 @@ class PostcodeCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($this->checker->check('658-0032', ['locale' => 'jp']));
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\PostcodeException
-     */
     public function testRaisePostcodeExceptionWhenCheckIsNgByFormat()
     {
+        $this->expectException(PostcodeException::class);
         $this->checker->check('a');
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\PostcodeException
-     */
     public function testInvokeMethod()
     {
+        $this->expectException(PostcodeException::class);
         $checker = $this->checker;
         $checker('658');
     }

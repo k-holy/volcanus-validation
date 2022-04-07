@@ -8,6 +8,7 @@
 
 namespace Volcanus\Validation\Test;
 
+use PHPUnit\Framework\TestCase;
 use Volcanus\Validation\Error;
 
 /**
@@ -15,7 +16,7 @@ use Volcanus\Validation\Error;
  *
  * @author k.holy74@gmail.com
  */
-class ErrorTest extends \PHPUnit\Framework\TestCase
+class ErrorTest extends TestCase
 {
 
     public function testGetType()
@@ -28,7 +29,7 @@ class ErrorTest extends \PHPUnit\Framework\TestCase
     public function testGetParameters()
     {
         $error = new Error('foo', [1, 2, 3]);
-        $this->assertEquals($error->getParameters(), [1, 2, 3]);
+        $this->assertEquals([1, 2, 3], $error->getParameters());
     }
 
     public function testHasParameter()

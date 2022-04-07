@@ -8,20 +8,22 @@
 
 namespace Volcanus\Validation\Test\Checker;
 
+use PHPUnit\Framework\TestCase;
 use Volcanus\Validation\Checker\CompareChecker;
+use Volcanus\Validation\Exception\CheckerException\CompareException;
 
 /**
  * CompareCheckerTest
  *
  * @author k.holy74@gmail.com
  */
-class CompareCheckerTest extends \PHPUnit\Framework\TestCase
+class CompareCheckerTest extends TestCase
 {
 
-    /** @var  \Volcanus\Validation\Checker\CompareChecker */
+    /** @var  CompareChecker */
     protected $checker;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->checker = new CompareChecker();
     }
@@ -74,90 +76,70 @@ class CompareCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($this->checker->check('A', ['compareTo' => 'B']));
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\CompareException
-     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\CompareException::INVALID_EQUAL_TO
-     */
     public function testRaiseCheckerExceptionWithCodeInvalidEqualToWhenCheckIsNg()
     {
+        $this->expectException(CompareException::class);
+        $this->expectExceptionCode(CompareException::INVALID_EQUAL_TO);
         $this->checker->check(1, ['operator' => CompareChecker::IS_EQUAL_TO, 'compareTo' => 2]);
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\CompareException
-     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\CompareException::INVALID_NOT_EQUAL
-     */
     public function testRaiseCheckerExceptionWithCodeInvalidNotEqualWhenCheckIsNg()
     {
+        $this->expectException(CompareException::class);
+        $this->expectExceptionCode(CompareException::INVALID_NOT_EQUAL);
         $this->checker->check(1, ['operator' => CompareChecker::IS_NOT_EQUAL, 'compareTo' => 1]);
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\CompareException
-     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\CompareException::INVALID_GREATER_THAN
-     */
     public function testRaiseCheckerExceptionWithCodeInvalidGreaterThanWhenCheckIsNg()
     {
+        $this->expectException(CompareException::class);
+        $this->expectExceptionCode(CompareException::INVALID_GREATER_THAN);
         $this->checker->check(1, ['operator' => CompareChecker::IS_GREATER_THAN, 'compareTo' => 2]);
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\CompareException
-     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\CompareException::INVALID_LESS_THAN
-     */
     public function testRaiseCheckerExceptionWithCodeInvalidLessThanWhenCheckIsNg()
     {
+        $this->expectException(CompareException::class);
+        $this->expectExceptionCode(CompareException::INVALID_LESS_THAN);
         $this->checker->check(2, ['operator' => CompareChecker::IS_LESS_THAN, 'compareTo' => 1]);
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\CompareException
-     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\CompareException::INVALID_GREATER_THAN_OR_EQUAL_TO
-     */
     public function testRaiseCheckerExceptionWithCodeInvalidGreaterThanOrEqualToWhenCheckIsNg()
     {
+        $this->expectException(CompareException::class);
+        $this->expectExceptionCode(CompareException::INVALID_GREATER_THAN_OR_EQUAL_TO);
         $this->checker->check(1, ['operator' => CompareChecker::IS_GREATER_THAN_OR_EQUAL_TO, 'compareTo' => 2]);
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\CompareException
-     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\CompareException::INVALID_LESS_THAN_OR_EQUAL_TO
-     */
     public function testRaiseCheckerExceptionWithCodeInvalidLessThanOrEqualToWhenCheckIsNg()
     {
+        $this->expectException(CompareException::class);
+        $this->expectExceptionCode(CompareException::INVALID_LESS_THAN_OR_EQUAL_TO);
         $this->checker->check(2, ['operator' => CompareChecker::IS_LESS_THAN_OR_EQUAL_TO, 'compareTo' => 1]);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testRaiseInvalidArgumentExceptionWhenOperatorParameterIsNotSpecified()
     {
+        $this->expectException(\InvalidArgumentException::class);
         $this->checker->check('1', ['operator' => null, 'compareTo' => '2']);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testRaiseInvalidArgumentExceptionWhenCompareValueParameterIsNotSpecified()
     {
+        $this->expectException(\InvalidArgumentException::class);
         $this->checker->check('1', ['operator' => CompareChecker::IS_EQUAL_TO]);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testRaiseInvalidArgumentExceptionWhenInvalidOperatorParameterIsSpecified()
     {
+        $this->expectException(\InvalidArgumentException::class);
         $this->checker->check('1', ['operator' => 'foo', 'compareTo' => '2']);
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\CompareException
-     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\CompareException::INVALID_EQUAL_TO
-     */
     public function testInvokeMethod()
     {
+        $this->expectException(CompareException::class);
+        $this->expectExceptionCode(CompareException::INVALID_EQUAL_TO);
         $checker = $this->checker;
         $checker->setOption('operator', CompareChecker::IS_EQUAL_TO);
         $checker->setOption('compareTo', '2');

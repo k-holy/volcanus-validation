@@ -8,20 +8,22 @@
 
 namespace Volcanus\Validation\Test\Checker;
 
+use PHPUnit\Framework\TestCase;
 use Volcanus\Validation\Checker\DateChecker;
+use Volcanus\Validation\Exception\CheckerException\DateException;
 
 /**
  * DateCheckerTest
  *
  * @author k.holy74@gmail.com
  */
-class DateCheckerTest extends \PHPUnit\Framework\TestCase
+class DateCheckerTest extends TestCase
 {
 
-    /** @var  \Volcanus\Validation\Checker\DateChecker */
+    /** @var  DateChecker */
     protected $checker;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->checker = new DateChecker();
     }
@@ -58,57 +60,45 @@ class DateCheckerTest extends \PHPUnit\Framework\TestCase
         ]));
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\DateException
-     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\DateException::INVALID_FORMAT
-     */
     public function testRaiseDateExceptionWhenInvalidFormat()
     {
+        $this->expectException(DateException::class);
+        $this->expectExceptionCode(DateException::INVALID_FORMAT);
         $this->checker->check('a-8-9');
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\DateException
-     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\DateException::DATE_OUT_OF_RANGE
-     */
     public function testRaiseDateExceptionWhenDateOutOfRange()
     {
+        $this->expectException(DateException::class);
+        $this->expectExceptionCode(DateException::DATE_OUT_OF_RANGE);
         $this->checker->check('0-8-9');
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\DateException
-     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\DateException::HOURS_OUT_OF_RANGE
-     */
     public function testRaiseDateExceptionWhenHoursOutOfRange()
     {
+        $this->expectException(DateException::class);
+        $this->expectExceptionCode(DateException::HOURS_OUT_OF_RANGE);
         $this->checker->check('2012-02-07 25:00:00', ['pattern' => DateChecker::PATTERN_YMDHIS]);
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\DateException
-     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\DateException::MINUTES_OUT_OF_RANGE
-     */
     public function testRaiseDateExceptionWhenMinutesOutOfRange()
     {
+        $this->expectException(DateException::class);
+        $this->expectExceptionCode(DateException::MINUTES_OUT_OF_RANGE);
         $this->checker->check('2012-02-07 00:60:00', ['pattern' => DateChecker::PATTERN_YMDHIS]);
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\DateException
-     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\DateException::SECONDS_OUT_OF_RANGE
-     */
     public function testRaiseDateExceptionWhenSecondsOutOfRange()
     {
+        $this->expectException(DateException::class);
+        $this->expectExceptionCode(DateException::SECONDS_OUT_OF_RANGE);
         $this->checker->check('2012-02-07 00:00:60', ['pattern' => DateChecker::PATTERN_YMDHIS]);
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\DateException
-     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\DateException::SECONDS_OUT_OF_RANGE
-     */
     public function testInvokeMethod()
     {
+        $this->expectException(DateException::class);
+        $this->expectExceptionCode(DateException::SECONDS_OUT_OF_RANGE);
         $checker = $this->checker;
         $checker->setOption('pattern', DateChecker::PATTERN_YMDHIS);
         $checker('2012-02-07 00:00:60');

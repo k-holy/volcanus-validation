@@ -8,6 +8,7 @@
 
 namespace Volcanus\Validation\Test;
 
+use PHPUnit\Framework\TestCase;
 use Volcanus\Validation\Context;
 
 /**
@@ -15,7 +16,7 @@ use Volcanus\Validation\Context;
  *
  * @author k.holy74@gmail.com
  */
-class ContextTest extends \PHPUnit\Framework\TestCase
+class ContextTest extends TestCase
 {
 
     public function testArrayAccessForResultWhenNewInstanceWithArrayValues()
@@ -111,20 +112,9 @@ class ContextTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($validation->check('entry2', 'abc'));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testRaiseInvalidArgumentExceptionWhenCheckerIsNotCallable()
-    {
-        $validation = new Context();
-        $validation->registerChecker('abc', ['hoge', 'fuga']);
-    }
-
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testRaiseRuntimeExceptionWhenUndefinedCheckerIsCalled()
     {
+        $this->expectException(\RuntimeException::class);
         $validation = new Context();
         $validation->getChecker('def');
     }
@@ -142,11 +132,9 @@ class ContextTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($validation->check('entry2', 'abc'));
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testRaiseRuntimeExceptionWhenUndefinedCheckerIsCalledAfterInitChecker()
     {
+        $this->expectException(\RuntimeException::class);
         $validation = new Context();
         $validation->registerChecker('abc', $this->abcChecker());
         $this->assertTrue(is_callable($validation->getChecker('abc')));
@@ -271,34 +259,32 @@ class ContextTest extends \PHPUnit\Framework\TestCase
     {
         $validation = new Context();
         $validation->registerChecker('int', $this->intChecker());
-        /** @noinspection PhpUnusedParameterInspection */
         $validation->setMessageProcessor(function ($name, $type, $options) {
-            switch ($type) {
-                case 'int':
-                    $messages = [];
-                    $messages[] = sprintf('input numeric values');
-                    if (isset($options['min'])) {
-                        $messages[] = sprintf('from %d', $options['min']);
-                    }
-                    if (isset($options['max'])) {
-                        $messages[] = sprintf('to %d', $options['max']);
-                    }
-                    return implode(' ', $messages);
+            if ($type == 'int') {
+                $messages = [];
+                $messages[] = 'input numeric values';
+                if (isset($options['min'])) {
+                    $messages[] = sprintf('from %d', $options['min']);
+                }
+                if (isset($options['max'])) {
+                    $messages[] = sprintf('to %d', $options['max']);
+                }
+                return implode(' ', $messages);
             }
             return null;
         });
 
         $validation->InitResult(['id' => 100]);
         $validation->check('id', 'int', ['min' => 1, 'max' => 10]);
-        $this->assertContains('input numeric values from 1 to 10', $validation->getMessage('id'));
+        $this->assertStringContainsString('input numeric values from 1 to 10', $validation->getMessage('id'));
 
         $validation->InitResult(['id' => 0]);
         $validation->check('id', 'int', ['min' => 1]);
-        $this->assertContains('input numeric values from 1', $validation->getMessage('id'));
+        $this->assertStringContainsString('input numeric values from 1', $validation->getMessage('id'));
 
         $validation->InitResult(['id' => 100]);
         $validation->check('id', 'int', ['max' => 10]);
-        $this->assertContains('input numeric values to 10', $validation->getMessage('id'));
+        $this->assertStringContainsString('input numeric values to 10', $validation->getMessage('id'));
     }
 
     public function testCheckArrayValueWithAcceptArrayOption()
@@ -341,14 +327,14 @@ class ContextTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($validation->check('id_ng', 'int', ['acceptArray' => true]));
     }
 
-    private function abcChecker()
+    private function abcChecker(): \Closure
     {
         return function ($value) {
             return (strcmp('abc', strtolower($value)) === 0);
         };
     }
 
-    private function intChecker()
+    private function intChecker(): \Closure
     {
         return function ($value, $options = []) {
             if (!ctype_digit(strval($value)) ||
@@ -366,7 +352,7 @@ class ContextTest extends \PHPUnit\Framework\TestCase
         };
     }
 
-    private function notEmptyChecker()
+    private function notEmptyChecker(): \Closure
     {
         return function ($value) {
             return (isset($value) && strlen($value) !== 0);

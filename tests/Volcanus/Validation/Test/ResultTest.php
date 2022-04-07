@@ -8,6 +8,7 @@
 
 namespace Volcanus\Validation\Test;
 
+use PHPUnit\Framework\TestCase;
 use Volcanus\Validation\Result;
 
 /**
@@ -15,13 +16,13 @@ use Volcanus\Validation\Result;
  *
  * @author k.holy74@gmail.com
  */
-class ResultTest extends \PHPUnit\Framework\TestCase
+class ResultTest extends TestCase
 {
 
-    /** @var \Volcanus\Validation\Result */
+    /** @var Result */
     protected $result;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->result = new Result();
     }
@@ -111,7 +112,7 @@ class ResultTest extends \PHPUnit\Framework\TestCase
             'name' => 'foo',
         ];
         $this->result->setValues($values);
-        $this->assertEquals(count($values), count($this->result));
+        $this->assertSameSize($values, $this->result);
     }
 
 }

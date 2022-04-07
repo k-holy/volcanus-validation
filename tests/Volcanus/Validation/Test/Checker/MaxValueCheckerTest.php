@@ -8,20 +8,23 @@
 
 namespace Volcanus\Validation\Test\Checker;
 
+use PHPUnit\Framework\TestCase;
 use Volcanus\Validation\Checker\MaxValueChecker;
+use Volcanus\Validation\Exception\CheckerException\InvalidValueException;
+use Volcanus\Validation\Exception\CheckerException\MaxValueException;
 
 /**
  * MaxValueCheckerTest
  *
  * @author k.holy74@gmail.com
  */
-class MaxValueCheckerTest extends \PHPUnit\Framework\TestCase
+class MaxValueCheckerTest extends TestCase
 {
 
-    /** @var  \Volcanus\Validation\Checker\MaxValueChecker */
+    /** @var  MaxValueChecker */
     protected $checker;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->checker = new MaxValueChecker();
     }
@@ -39,35 +42,27 @@ class MaxValueCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($this->checker->check('4294967296', ['max' => 4294967296]));
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\InvalidValueException
-     */
     public function testRaiseInvalidValueExceptionWhenCheckIsNgByFormat()
     {
+        $this->expectException(InvalidValueException::class);
         $this->checker->check('A', ['max' => 123]);
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\MaxValueException
-     */
     public function testRaiseMaxValueExceptionWhenCheckIsNgByMaxValue()
     {
+        $this->expectException(MaxValueException::class);
         $this->checker->check('123', ['max' => 122]);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testRaiseInvalidArgumentExceptionWhenInvalidMaxValueParameterIsSpecified()
     {
+        $this->expectException(\InvalidArgumentException::class);
         $this->checker->check('123', ['max' => 'A']);
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\MaxValueException
-     */
     public function testInvokeMethod()
     {
+        $this->expectException(MaxValueException::class);
         $checker = $this->checker;
         $checker->setOption('max', -1);
         $checker('1');

@@ -8,20 +8,23 @@
 
 namespace Volcanus\Validation\Test\Checker;
 
+use PHPUnit\Framework\TestCase;
 use Volcanus\Validation\Checker\ArraySizeChecker;
+use Volcanus\Validation\Exception\CheckerException\MaxValueException;
+use Volcanus\Validation\Exception\CheckerException\MinValueException;
 
 /**
  * ArraySizeCheckerTest
  *
  * @author k.holy74@gmail.com
  */
-class ArraySizeCheckerTest extends \PHPUnit\Framework\TestCase
+class ArraySizeCheckerTest extends TestCase
 {
 
-    /** @var  \Volcanus\Validation\Checker\ArraySizeChecker */
+    /** @var  ArraySizeChecker */
     protected $checker;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->checker = new ArraySizeChecker();
     }
@@ -33,51 +36,39 @@ class ArraySizeCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($this->checker->check([1, 2, 3], ['minSize' => 3, 'maxSize' => 3]));
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\MinValueException
-     */
     public function testRaiseMinValueExceptionWhenCheckIsNgByMinValue()
     {
+        $this->expectException(MinValueException::class);
         $this->checker->check([1, 2, 3], ['minSize' => 4]);
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\MaxValueException
-     */
     public function testRaiseMaxValueExceptionWhenCheckIsNgByMaxValue()
     {
+        $this->expectException(MaxValueException::class);
         $this->checker->check([1, 2, 3], ['minSize' => 1, 'maxSize' => 2]);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testRaiseInvalidArgumentExceptionWhenValueIsNotArrayAndNotTraversable()
     {
+        $this->expectException(\InvalidArgumentException::class);
         $this->checker->check('123');
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testRaiseInvalidArgumentExceptionWhenInvalidMinValueParameterIsSpecified()
     {
+        $this->expectException(\InvalidArgumentException::class);
         $this->checker->check([1, 2, 3], ['minSize' => 'A', 'maxSize' => 4]);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testRaiseInvalidArgumentExceptionWhenInvalidMaxValueParameterIsSpecified()
     {
+        $this->expectException(\InvalidArgumentException::class);
         $this->checker->check([1, 2, 3], ['minSize' => 1, 'maxSize' => 'A']);
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\MinValueException
-     */
     public function testInvokeMethod()
     {
+        $this->expectException(MinValueException::class);
         $checker = $this->checker;
         $checker->setOption('minSize', 4);
         $checker([1, 2, 3]);

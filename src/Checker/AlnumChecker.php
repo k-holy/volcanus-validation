@@ -32,11 +32,11 @@ class AlnumChecker extends AbstractChecker
     /**
      * 値が英字と10進数の数字だけで構成されているか検証します。
      *
-     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @param  array $options 検証オプション
-     * @return boolean 検証結果
+     * @param mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param array $options 検証オプション
+     * @return bool 検証結果
      */
-    public function check($value, array $options = [])
+    public function check($value, array $options = []): bool
     {
         $stringValue = (string)$value;
         if (!ctype_alnum($stringValue)) {

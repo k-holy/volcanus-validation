@@ -8,20 +8,22 @@
 
 namespace Volcanus\Validation\Test\Checker;
 
+use PHPUnit\Framework\TestCase;
 use Volcanus\Validation\Checker\GraphChecker;
+use Volcanus\Validation\Exception\CheckerException\GraphException;
 
 /**
  * GraphCheckerTest
  *
  * @author k.holy74@gmail.com
  */
-class GraphCheckerTest extends \PHPUnit\Framework\TestCase
+class GraphCheckerTest extends TestCase
 {
 
-    /** @var  \Volcanus\Validation\Checker\GraphChecker */
+    /** @var  GraphChecker */
     protected $checker;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->checker = new GraphChecker();
     }
@@ -31,19 +33,15 @@ class GraphCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($this->checker->check('+ABC123.@#%'));
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\GraphException
-     */
     public function testRaiseGraphExceptionWhenCheckIsNgByFormat()
     {
+        $this->expectException(GraphException::class);
         $this->checker->check("ABC\n\r\t");
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\GraphException
-     */
     public function testInvokeMethod()
     {
+        $this->expectException(GraphException::class);
         $checker = $this->checker;
         $checker("ABC\n\r\t");
     }

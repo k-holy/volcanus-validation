@@ -8,6 +8,7 @@
 
 namespace Volcanus\Validation\Test;
 
+use PHPUnit\Framework\TestCase;
 use Volcanus\Validation\Util;
 
 /**
@@ -15,10 +16,10 @@ use Volcanus\Validation\Util;
  *
  * @author k.holy74@gmail.com
  */
-class UtilTest extends \PHPUnit\Framework\TestCase
+class UtilTest extends TestCase
 {
 
-    private function getArray()
+    private function getArray(): array
     {
         $arr = [];
         $arr[0] = 1;
@@ -48,7 +49,7 @@ class UtilTest extends \PHPUnit\Framework\TestCase
     {
         $options = [];
         $values = $this->getArray();
-        $this->assertTrue(\Volcanus\Validation\Util::recursiveCheck(function ($value) {
+        $this->assertTrue(Util::recursiveCheck(function ($value) {
             return (is_int($value));
         }, $values, $options));
     }
@@ -57,7 +58,7 @@ class UtilTest extends \PHPUnit\Framework\TestCase
     {
         $options = [];
         $values = $this->getArray();
-        $this->assertFalse(\Volcanus\Validation\Util::recursiveCheck(function ($value) {
+        $this->assertFalse(Util::recursiveCheck(function ($value) {
             return ($value > 10);
         }, $values, $options));
     }

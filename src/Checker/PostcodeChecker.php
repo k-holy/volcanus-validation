@@ -26,7 +26,7 @@ class PostcodeChecker extends AbstractChecker
     /**
      * __construct
      *
-     * @param  array $options 検証オプション
+     * @param array $options 検証オプション
      */
     public function __construct(array $options = [])
     {
@@ -38,11 +38,11 @@ class PostcodeChecker extends AbstractChecker
     /**
      * 値が郵便番号として妥当か検証します。
      *
-     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @param  array $options 検証オプション
-     * @return boolean 検証結果
+     * @param mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param array $options 検証オプション
+     * @return bool 検証結果
      */
-    public function check($value, array $options = [])
+    public function check($value, array $options = []): bool
     {
         $options = Util::mergeOptions($this->options, $options);
 
@@ -51,7 +51,7 @@ class PostcodeChecker extends AbstractChecker
         switch ($locale) {
             case 'jp':
             default:
-                if (!preg_match('/\A([0-9]{3})\-*([0-9]{4})\z/', $stringValue, $matches)) {
+                if (!preg_match('/\A([0-9]{3})-*([0-9]{4})\z/', $stringValue)) {
                     throw new PostcodeException(
                         'The value is not of the Japanese postcode format.');
                 }

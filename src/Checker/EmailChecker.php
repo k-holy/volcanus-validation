@@ -27,7 +27,7 @@ class EmailChecker extends AbstractChecker
     /**
      * __construct
      *
-     * @param  array $options 検証オプション
+     * @param array $options 検証オプション
      */
     public function __construct(array $options = [])
     {
@@ -39,18 +39,19 @@ class EmailChecker extends AbstractChecker
     /**
      * 値がメールアドレスとして妥当か検証します。
      *
-     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @param  array $options 検証オプション
-     * @return boolean 検証結果
+     * @param mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param array $options 検証オプション
+     * @return bool 検証結果
+     * @throws \Exception
      */
-    public function check($value, array $options = [])
+    public function check($value, array $options = []): bool
     {
         $options = Util::mergeOptions($this->options, $options);
 
         $allowDotEndOfLocalPart = $options['allowDotEndOfLocalPart'];
         $stringValue = (string)$value;
         // name-addr 形式の場合は add-spec のみ切り出して検証する
-        $valid = (bool)(preg_match('/\A[^,<>]+<([^,<>]+)>\s*\z/', $stringValue, $matches))
+        $valid = preg_match('/\A[^,<>]+<([^,<>]+)>\s*\z/', $stringValue, $matches)
             ? self::validateAddrSpec(trim($matches[1]), $allowDotEndOfLocalPart)
             : self::validateAddrSpec($value, $allowDotEndOfLocalPart);
         if (false === $valid) {
@@ -64,12 +65,12 @@ class EmailChecker extends AbstractChecker
     /**
      * メールアドレスを検証します。
      *
-     * @param  string $value 検証値
-     * @param  bool $allowDotEndOfLocalPart ローカルパートの末尾に.を許可するかどうか
+     * @param mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param bool $allowDotEndOfLocalPart ローカルパートの末尾に.を許可するかどうか
      * @return bool 検証結果
      * @throws \Exception
      */
-    public static function validateAddrSpec($value, $allowDotEndOfLocalPart = false)
+    public static function validateAddrSpec($value, bool $allowDotEndOfLocalPart = false): bool
     {
         $stringValue = (string)$value;
         $separatorPosition = strrpos($stringValue, '@');
@@ -96,12 +97,12 @@ class EmailChecker extends AbstractChecker
     /**
      * メールアドレスのローカルパートを検証します。
      *
-     * @param  string $value 検証値
-     * @param  bool $allowDotEndOfLocalPart ローカルパートの末尾に.を許可するかどうか
+     * @param mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param bool $allowDotEndOfLocalPart ローカルパートの末尾に.を許可するかどうか
      * @return bool 検証結果
      * @throws \Exception
      */
-    public static function validateLocalPart($value, $allowDotEndOfLocalPart = false)
+    public static function validateLocalPart($value, bool $allowDotEndOfLocalPart = false): bool
     {
         $stringValue = (string)$value;
         $pattern = (!$allowDotEndOfLocalPart)
@@ -128,11 +129,11 @@ class EmailChecker extends AbstractChecker
     /**
      * メールアドレスのドメインを検証します。
      *
-     * @param  string $value 検証値
+     * @param mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
      * @return bool 検証結果
      * @throws \Exception
      */
-    public static function validateDomain($value)
+    public static function validateDomain($value): bool
     {
         $stringValue = (string)$value;
         $pattern = '[-!#-\'*+\/-9=?A-Z^-~]+(?:\.[-!#-\'*+\/-9=?A-Z^-~]+)*';
