@@ -8,20 +8,23 @@
 
 namespace Volcanus\Validation\Test\Checker;
 
+use PHPUnit\Framework\TestCase;
 use Volcanus\Validation\Checker\MinValueChecker;
+use Volcanus\Validation\Exception\CheckerException\InvalidValueException;
+use Volcanus\Validation\Exception\CheckerException\MinValueException;
 
 /**
  * MinValueCheckerTest
  *
  * @author k.holy74@gmail.com
  */
-class MinValueCheckerTest extends \PHPUnit\Framework\TestCase
+class MinValueCheckerTest extends TestCase
 {
 
-    /** @var  \Volcanus\Validation\Checker\MinValueChecker */
+    /** @var  MinValueChecker */
     protected $checker;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->checker = new MinValueChecker();
     }
@@ -39,35 +42,27 @@ class MinValueCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($this->checker->check('4294967296', ['min' => 4294967296]));
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\InvalidValueException
-     */
     public function testRaiseInvalidValueExceptionWhenCheckIsNgByFormat()
     {
+        $this->expectException(InvalidValueException::class);
         $this->checker->check('A', ['min' => 123]);
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\MinValueException
-     */
     public function testRaiseMinValueExceptionWhenCheckIsNgByMinValue()
     {
+        $this->expectException(MinValueException::class);
         $this->checker->check('123', ['min' => 124]);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testRaiseInvalidArgumentExceptionWhenInvalidMinValueParameterIsSpecified()
     {
+        $this->expectException(\InvalidArgumentException::class);
         $this->checker->check('123', ['min' => 'A']);
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\MinValueException
-     */
     public function testInvokeMethod()
     {
+        $this->expectException(MinValueException::class);
         $checker = $this->checker;
         $checker->setOption('min', 1);
         $checker('-1');

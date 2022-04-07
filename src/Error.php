@@ -41,7 +41,7 @@ class Error
      * @param string $type このエラーの検証種別
      * @param array $parameters このエラーの検証パラメータ
      */
-    public function __construct($type, array $parameters = [])
+    public function __construct(string $type, array $parameters = [])
     {
         $this->type = $type;
         $this->parameters = $parameters;
@@ -52,7 +52,7 @@ class Error
      *
      * @return string
      */
-    public function getType()
+    public function getType(): ?string
     {
         return $this->type;
     }
@@ -62,7 +62,7 @@ class Error
      *
      * @return array
      */
-    public function getParameters()
+    public function getParameters(): array
     {
         return $this->parameters;
     }
@@ -73,7 +73,7 @@ class Error
      * @param mixed $options 検証パラメータ (可変引数)
      * @return bool  検証パラメータがこのエラーの検証パラメータに含まれているかどうか
      */
-    public function has($options = [])
+    public function has($options = []): bool
     {
         return ($options === array_intersect_assoc($this->parameters, $options));
     }
@@ -82,14 +82,10 @@ class Error
      * このエラーの表示用メッセージを定義します。
      *
      * @param string $message
-     * @return $this
+     * @return self
      */
-    public function setMessage($message)
+    public function setMessage(string $message): self
     {
-        if (!is_string($message)) {
-            throw new \InvalidArgumentException(
-                'The message is not string.');
-        }
         $this->message = $message;
         return $this;
     }
@@ -99,7 +95,7 @@ class Error
      *
      * @return string
      */
-    public function getMessage()
+    public function getMessage(): ?string
     {
         return $this->message;
     }
@@ -109,8 +105,9 @@ class Error
      * $this->foo で $this->getFoo() メソッドが呼ばれます。
      *
      * @param string $name
+     * @return mixed
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         $method = 'get' . ucfirst($name);
         if (method_exists($this, $method)) {
@@ -126,8 +123,9 @@ class Error
      *
      * @param string $name
      * @param mixed $value
+     * @return mixed
      */
-    public function __set($name, $value)
+    public function __set(string $name, $value)
     {
         $method = 'set' . ucfirst($name);
         if (method_exists($this, $method)) {

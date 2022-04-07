@@ -44,7 +44,7 @@ class DateChecker extends AbstractChecker
     /**
      * __construct
      *
-     * @param  array $options 検証オプション
+     * @param array $options 検証オプション
      */
     public function __construct(array $options = [])
     {
@@ -60,11 +60,11 @@ class DateChecker extends AbstractChecker
      * 書式    : 年月日(必須) YYYY-MM-DD または Y-M-D
      *           時分秒(任意) HH:II:SS   または H:I:S
      *
-     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @param  array $options 検証オプション
-     * @return boolean 検証結果
+     * @param mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param array $options 検証オプション
+     * @return bool 検証結果
      */
-    public function check($value, array $options = [])
+    public function check($value, array $options = []): bool
     {
         $options = Util::mergeOptions($this->options, $options);
 
@@ -116,12 +116,12 @@ class DateChecker extends AbstractChecker
     /**
      * 日付文字列を解析し、日付部分ごとに値を数値化した配列を返します。
      *
-     * @param  string $value 日付文字列
-     * @param  string $pattern 日付解析用パターン
-     * @param  string $order 日付解析用順序
-     * @return mixed  日付部分の配列または FALSE
+     * @param string $value 日付文字列
+     * @param string $pattern 日付解析用パターン
+     * @param string|null $order 日付解析用順序
+     * @return array|false  日付部分の配列または FALSE
      */
-    private function parseDate($value, $pattern, $order)
+    private function parseDate(string $value, string $pattern, string $order = null)
     {
 
         $parsed = [];

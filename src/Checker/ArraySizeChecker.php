@@ -27,7 +27,7 @@ class ArraySizeChecker extends AbstractChecker
     /**
      * __construct
      *
-     * @param  array $options 検証オプション
+     * @param array $options 検証オプション
      */
     public function __construct(array $options = [])
     {
@@ -39,10 +39,10 @@ class ArraySizeChecker extends AbstractChecker
     /**
      * 検証前のガードメソッドを実行します。このメソッドがFALSEを返した場合は検証メソッドを実行しません。
      *
-     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @return boolean
+     * @param mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @return bool
      */
-    public function guard($value)
+    public function guard($value): bool
     {
         return true;
     }
@@ -50,11 +50,11 @@ class ArraySizeChecker extends AbstractChecker
     /**
      * 値が指定された範囲の要素数を持つ配列かどうかを検証します。
      *
-     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @param  array $options 検証オプション
-     * @return boolean 検証結果
+     * @param mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param array $options 検証オプション
+     * @return bool 検証結果
      */
-    public function check($value, array $options = [])
+    public function check($value, array $options = []): bool
     {
         $options = Util::mergeOptions($this->options, $options);
 
@@ -84,7 +84,7 @@ class ArraySizeChecker extends AbstractChecker
             }
             if ($size > $maxSize) {
                 throw new MaxValueException(
-                    'The array lingth is greater than maximum value.');
+                    'The array length is greater than maximum value.');
             }
         }
         return true;

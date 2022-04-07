@@ -25,7 +25,7 @@ class MinLengthChecker extends AbstractChecker
     /**
      * __construct
      *
-     * @param  array $options 検証オプション
+     * @param array $options 検証オプション
      */
     public function __construct(array $options = [])
     {
@@ -39,12 +39,12 @@ class MinLengthChecker extends AbstractChecker
     /**
      * 値の文字長が指定値以上であるか検証します。
      *
-     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @param  array $options 検証オプション
+     * @param mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param array $options 検証オプション
      * @return bool 検証結果
      * @throws \Exception
      */
-    public function check($value, array $options = [])
+    public function check($value, array $options = []): bool
     {
         $options = Util::mergeOptions($this->options, $options);
 
@@ -64,10 +64,11 @@ class MinLengthChecker extends AbstractChecker
                 Util::checkEncoding($value, $options['encoding']);
             }
 
-            Util::checkMinLength($value,
+            Util::checkMinLength(
+                $value,
                 $options['length'],
-                (isset($options['mbLength'])) ? $options['mbLength'] : null,
-                (isset($options['encoding'])) ? $options['encoding'] : null
+                $options['mbLength'] ?? null,
+                $options['encoding'] ?? null
             );
 
         } catch (\Exception $e) {

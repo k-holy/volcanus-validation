@@ -27,22 +27,12 @@ abstract class AbstractChecker implements Checker
     protected $options = [];
 
     /**
-     * __construct
-     *
-     * @param  array $options 検証オプション
-     */
-    public function __construct(array $options = [])
-    {
-        $this->options = Util::mergeOptions($this->options, $options);
-    }
-
-    /**
      * インスタンスを生成して返します。
      *
-     * @param  array $options 検証オプション
+     * @param array $options 検証オプション
      * @return static
      */
-    public static function getInstance(array $options = [])
+    public static function getInstance(array $options = []): Checker
     {
         return new static($options);
     }
@@ -50,11 +40,11 @@ abstract class AbstractChecker implements Checker
     /**
      * __invoke
      *
-     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @param  array $options 検証オプション
-     * @return boolean 検証結果
+     * @param mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param array $options 検証オプション
+     * @return bool 検証結果
      */
-    public function __invoke($value, array $options = [])
+    public function __invoke($value, array $options = []): bool
     {
         return $this->check($value, $options);
     }
@@ -62,11 +52,11 @@ abstract class AbstractChecker implements Checker
     /**
      * 値が指定した文字だけで構成されているか検証します。
      *
-     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @param  array $options 検証オプション
-     * @return boolean 検証結果
+     * @param mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param array $options 検証オプション
+     * @return bool 検証結果
      */
-    public function check($value, array $options = [])
+    public function check($value, array $options = []): bool
     {
         $this->options = Util::mergeOptions($this->options, $options);
         return true;
@@ -76,10 +66,10 @@ abstract class AbstractChecker implements Checker
      * 検証前のガードメソッドを実行します。
      * このメソッドがFALSEを返した場合は検証メソッドを実行しません。
      *
-     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @return boolean
+     * @param mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @return bool
      */
-    public function guard($value)
+    public function guard($value): bool
     {
         if (!isset($value)) {
             return false;
@@ -101,9 +91,9 @@ abstract class AbstractChecker implements Checker
      *
      * @param string $name オプション名
      * @param mixed $value オプション値
-     * @return $this
+     * @return self
      */
-    public function setOption($name, $value)
+    public function setOption(string $name, $value): Checker
     {
         if (!$this->isEnableOption($name)) {
             throw new \InvalidArgumentException(
@@ -117,9 +107,9 @@ abstract class AbstractChecker implements Checker
      * 検証オプションが有効かどうかを返します。
      *
      * @param string $name オプション名
-     * @return boolean
+     * @return bool
      */
-    public function isEnableOption($name)
+    public function isEnableOption(string $name): bool
     {
         return array_key_exists($name, $this->options);
     }

@@ -8,20 +8,22 @@
 
 namespace Volcanus\Validation\Test\Checker;
 
+use PHPUnit\Framework\TestCase;
 use Volcanus\Validation\Checker\NotEmptyChecker;
+use Volcanus\Validation\Exception\CheckerException\EmptyException;
 
 /**
  * NotEmptyCheckerTest
  *
  * @author k.holy74@gmail.com
  */
-class NotEmptyCheckerTest extends \PHPUnit\Framework\TestCase
+class NotEmptyCheckerTest extends TestCase
 {
 
-    /** @var  \Volcanus\Validation\Checker\NotEmptyChecker */
+    /** @var  NotEmptyChecker */
     protected $checker;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->checker = new NotEmptyChecker();
     }
@@ -42,42 +44,34 @@ class NotEmptyCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($this->checker->check($counter));
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\EmptyException
-     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\EmptyException::INVALID_NULL
-     */
     public function testRaiseEmptyExceptionWhenValueIsNull()
     {
+        $this->expectException(EmptyException::class);
+        $this->expectExceptionCode(EmptyException::INVALID_NULL);
         $value = null;
         $this->checker->check($value);
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\EmptyException
-     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\EmptyException::EMPTY_STRING
-     */
     public function testRaiseEmptyExceptionWhenValueIsEmptyString()
     {
+        $this->expectException(EmptyException::class);
+        $this->expectExceptionCode(EmptyException::EMPTY_STRING);
         $value = '';
         $this->checker->check($value);
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\EmptyException
-     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\EmptyException::EMPTY_ARRAY
-     */
     public function testRaiseEmptyExceptionWhenValueIsEmptyArray()
     {
+        $this->expectException(EmptyException::class);
+        $this->expectExceptionCode(EmptyException::EMPTY_ARRAY);
         $value = [];
         $this->checker->check($value);
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\EmptyException
-     * @expectedExceptionCode \Volcanus\Validation\Exception\CheckerException\EmptyException::INVALID_NULL
-     */
     public function testInvokeMethod()
     {
+        $this->expectException(EmptyException::class);
+        $this->expectExceptionCode(EmptyException::INVALID_NULL);
         $checker = $this->checker;
         $checker(null);
     }

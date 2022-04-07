@@ -27,7 +27,7 @@ class MinValueChecker extends AbstractChecker
     /**
      * __construct
      *
-     * @param  array $options 検証オプション
+     * @param array $options 検証オプション
      */
     public function __construct(array $options = [])
     {
@@ -39,11 +39,11 @@ class MinValueChecker extends AbstractChecker
     /**
      * 値が指定値以上であるか検証します。
      *
-     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @param  array $options 検証オプション
-     * @return boolean 検証結果
+     * @param mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param array $options 検証オプション
+     * @return bool 検証結果
      */
-    public function check($value, array $options = [])
+    public function check($value, array $options = []): bool
     {
         $options = Util::mergeOptions($this->options, $options);
 
@@ -75,8 +75,8 @@ class MinValueChecker extends AbstractChecker
         }
 
         $stringValue = (string)$value;
-        if (is_float($stringValue) || is_float($options['min'])) {
-            if (floatval($stringValue) < floatval($options['min'])) {
+        if (is_float($options['min'])) {
+            if (floatval($stringValue) < $options['min']) {
                 throw new MinValueException(
                     sprintf('The value "%s" is less than minimum value "%d".', $stringValue, $options['min']));
             }

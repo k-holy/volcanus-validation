@@ -8,20 +8,22 @@
 
 namespace Volcanus\Validation\Test\Checker;
 
+use PHPUnit\Framework\TestCase;
 use Volcanus\Validation\Checker\AlphaChecker;
+use Volcanus\Validation\Exception\CheckerException\AlphaException;
 
 /**
  * AlphaCheckerTest
  *
  * @author k.holy74@gmail.com
  */
-class AlphaCheckerTest extends \PHPUnit\Framework\TestCase
+class AlphaCheckerTest extends TestCase
 {
 
-    /** @var  \Volcanus\Validation\Checker\AlphaChecker */
+    /** @var  AlphaChecker */
     protected $checker;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->checker = new AlphaChecker();
     }
@@ -31,19 +33,15 @@ class AlphaCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($this->checker->check('ABC'));
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\AlphaException
-     */
     public function testRaiseAlphaExceptionWhenCheckIsNgByFormat()
     {
+        $this->expectException(AlphaException::class);
         $this->checker->check('123');
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\AlphaException
-     */
     public function testInvokeMethod()
     {
+        $this->expectException(AlphaException::class);
         $checker = $this->checker;
         $checker('123');
     }

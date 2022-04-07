@@ -72,9 +72,9 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
      * 検証データをセットします。
      *
      * @param array|object $values 検証データ
-     * @return $this
+     * @return self
      */
-    public function setValues($values)
+    public function setValues($values): self
     {
         if (is_array($values) || ($values instanceof \Traversable)) {
             foreach ($values as $name => $value) {
@@ -96,9 +96,9 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
      *
      * @param string $name 項目名
      * @param mixed $value 検証データ値
-     * @return $this
+     * @return self
      */
-    public function setValue($name, $value)
+    public function setValue(string $name, $value): self
     {
         $this->values[$name] = $value;
         return $this;
@@ -109,7 +109,7 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
      *
      * @return array
      */
-    public function getValues()
+    public function getValues(): array
     {
         return $this->values;
     }
@@ -120,9 +120,9 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
      * @param string $name 項目名
      * @return mixed 検証データ値
      */
-    public function getValue($name)
+    public function getValue(string $name)
     {
-        return (isset($this->values[$name])) ? $this->values[$name] : null;
+        return $this->values[$name] ?? null;
     }
 
     /**
@@ -130,12 +130,12 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
      *
      * @param string $name 項目名
      * @param string $type 検証種別
-     * @param array|\Volcanus\Validation\Error $error
-     * @return $this
+     * @param array|Error $error
+     * @return self
      */
-    public function setError($name, $type, $error = [])
+    public function setError(string $name, string $type, $error = []): self
     {
-        if (false === ($error instanceof \Volcanus\Validation\Error)) {
+        if (false === ($error instanceof Error)) {
             $error = new Error($type, $error);
         }
         $this->errors[$name] = $error;
@@ -147,9 +147,9 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
      *
      * @param string $name 項目名
      * @param string $message エラーメッセージ
-     * @return $this
+     * @return self
      */
-    public function setMessage($name, $message)
+    public function setMessage(string $name, string $message): self
     {
         if (!isset($this->errors[$name])) {
             throw new \InvalidArgumentException(
@@ -163,9 +163,9 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
      * 指定された項目にセットされたエラーをクリアします。
      *
      * @param string $name 項目名
-     * @return $this
+     * @return self
      */
-    public function unsetError($name)
+    public function unsetError(string $name): self
     {
         if (array_key_exists($name, $this->errors)) {
             unset($this->errors[$name]);
@@ -176,12 +176,12 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
     /**
      * 指定された検証種別および検証内容のエラー情報があるかどうかを返します。
      *
-     * @param string $name 項目名
-     * @param string $type 検証種別
+     * @param string|null $name 項目名
+     * @param string|null $type 検証種別
      * @param array $options 検証内容
      * @return bool  比較値がこの検証種別のエラーに含まれているかどうか
      */
-    public function hasError($name = null, $type = null, $options = [])
+    public function hasError(string $name = null, string $type = null, array $options = []): bool
     {
         if (!isset($name)) {
             return (count($this->errors) >= 1);
@@ -199,7 +199,7 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
      *
      * @return array
      */
-    public function getErrors()
+    public function getErrors(): array
     {
         return $this->errors;
     }
@@ -210,9 +210,9 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
      * @param string $name 項目名
      * @return mixed 検証エラー
      */
-    public function getError($name)
+    public function getError(string $name)
     {
-        return (isset($this->errors[$name])) ? $this->errors[$name] : null;
+        return $this->errors[$name] ?? null;
     }
 
     /**
@@ -221,7 +221,7 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
      * @param mixed $offset
      * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->values[$offset]);
     }
@@ -263,7 +263,7 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
      *
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->values);
     }
@@ -273,7 +273,7 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
      *
      * @return \ArrayIterator
      */
-    public function getIterator()
+    public function getIterator(): \ArrayIterator
     {
         return new \ArrayIterator($this->values);
     }

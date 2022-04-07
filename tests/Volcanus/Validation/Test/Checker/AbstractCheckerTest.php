@@ -8,12 +8,15 @@
 
 namespace Volcanus\Validation\Test\Checker;
 
+use PHPUnit\Framework\TestCase;
+use Volcanus\Validation\Checker\AbstractChecker;
+
 /**
  * AbstractCheckerTest
  *
  * @author k.holy74@gmail.com
  */
-class AbstractCheckerTest extends \PHPUnit\Framework\TestCase
+class AbstractCheckerTest extends TestCase
 {
 
     public function testGetInstance()
@@ -68,11 +71,9 @@ class AbstractCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($checker->check(10));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testRaiseInvalidArgumentExceptionWhenUndefinedOptionIsSpecified()
     {
+        $this->expectException(\InvalidArgumentException::class);
         $checker = new NumericChecker();
         $checker->setOption('foo', true);
     }
@@ -90,7 +91,7 @@ class AbstractCheckerTest extends \PHPUnit\Framework\TestCase
 /**
  * @property array $options
  */
-class NumericChecker extends \Volcanus\Validation\Checker\AbstractChecker
+class NumericChecker extends AbstractChecker
 {
 
     public function __construct(array $options = [])
@@ -100,7 +101,7 @@ class NumericChecker extends \Volcanus\Validation\Checker\AbstractChecker
         $this->options = array_replace_recursive($this->options, $options);
     }
 
-    public function check($value, array $options = [])
+    public function check($value, array $options = []): bool
     {
         $options = array_replace_recursive($this->options, $options);
         if (!preg_match('/\A\d+\z/', $value)) {

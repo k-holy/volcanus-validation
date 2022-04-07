@@ -8,20 +8,22 @@
 
 namespace Volcanus\Validation\Test\Checker;
 
+use PHPUnit\Framework\TestCase;
 use Volcanus\Validation\Checker\ChoiceChecker;
+use Volcanus\Validation\Exception\CheckerException\ChoiceException;
 
 /**
  * ChoiceCheckerTest
  *
  * @author k.holy74@gmail.com
  */
-class ChoiceCheckerTest extends \PHPUnit\Framework\TestCase
+class ChoiceCheckerTest extends TestCase
 {
 
-    /** @var  \Volcanus\Validation\Checker\ChoiceChecker */
+    /** @var  ChoiceChecker */
     protected $checker;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->checker = new ChoiceChecker();
     }
@@ -36,27 +38,21 @@ class ChoiceCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($this->checker->check('3', ['choices' => '1,2,3']));
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\ChoiceException
-     */
     public function testRaiseCheckerExceptionWhenCheckIsNgByInvalidChoice()
     {
+        $this->expectException(ChoiceException::class);
         $this->checker->check('4', ['choices' => ['1', '2', '3']]);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testRaiseInvalidArgumentExceptionWhenInvalidChoicesParameterIsSpecified()
     {
+        $this->expectException(\InvalidArgumentException::class);
         $this->checker->check('1', ['choices' => 'Foo']);
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\ChoiceException
-     */
     public function testInvokeMethod()
     {
+        $this->expectException(ChoiceException::class);
         $checker = $this->checker;
         $checker->setOption('choices', ['1', '2', '3']);
         $checker('4');

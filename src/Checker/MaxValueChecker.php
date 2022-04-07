@@ -41,9 +41,9 @@ class MaxValueChecker extends AbstractChecker
      *
      * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
      * @param  array $options 検証オプション
-     * @return boolean 検証結果
+     * @return bool 検証結果
      */
-    public function check($value, array $options = [])
+    public function check($value, array $options = []):bool
     {
         $options = Util::mergeOptions($this->options, $options);
 
@@ -75,8 +75,8 @@ class MaxValueChecker extends AbstractChecker
         }
 
         $stringValue = (string)$value;
-        if (is_float($stringValue) || is_float($options['max'])) {
-            if (floatval($stringValue) > floatval($options['max'])) {
+        if (is_float($options['max'])) {
+            if (floatval($stringValue) > $options['max']) {
                 throw new MaxValueException(
                     sprintf('The value "%s" is greater than maximum value "%d".', $stringValue, $options['max']));
             }

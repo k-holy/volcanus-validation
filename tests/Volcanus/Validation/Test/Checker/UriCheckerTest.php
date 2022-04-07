@@ -8,20 +8,22 @@
 
 namespace Volcanus\Validation\Test\Checker;
 
+use PHPUnit\Framework\TestCase;
 use Volcanus\Validation\Checker\UriChecker;
+use Volcanus\Validation\Exception\CheckerException\UriException;
 
 /**
  * UriCheckerTest
  *
  * @author k.holy74@gmail.com
  */
-class UriCheckerTest extends \PHPUnit\Framework\TestCase
+class UriCheckerTest extends TestCase
 {
 
-    /** @var  \Volcanus\Validation\Checker\UriChecker */
+    /** @var  UriChecker */
     protected $checker;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->checker = new UriChecker();
     }
@@ -39,27 +41,21 @@ class UriCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($this->checker->check('http://日本語ドメイン.com/'));
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\UriException
-     */
     public function testRaiseUriExceptionWhenCheckIsNgByFormat()
     {
+        $this->expectException(UriException::class);
         $this->checker->check('::');
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\UriException
-     */
     public function testRaiseUriExceptionWhenCheckIsNgBySchemeIsNotAccepted()
     {
+        $this->expectException(UriException::class);
         $this->checker->check('ftp://www.example.com/', ['acceptScheme' => 'http,https']);
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\UriException
-     */
     public function testInvokeMethod()
     {
+        $this->expectException(UriException::class);
         $checker = $this->checker;
         $checker->setOption('acceptScheme', 'http,https');
         $checker('ftp://www.example.com/');
