@@ -8,150 +8,184 @@
 
 namespace Volcanus\Validation\Test\Checker;
 
+use PHPUnit\Framework\TestCase;
+use Volcanus\Validation\Checker;
 use Volcanus\Validation\Checker\TextChecker;
+use Volcanus\Validation\Exception\CheckerException\MaxLengthException;
+use Volcanus\Validation\Exception\CheckerException\MinLengthException;
 
 /**
  * TextCheckerTest
  *
  * @author k.holy74@gmail.com
  */
-class TextCheckerTest extends \PHPUnit\Framework\TestCase
+class TextCheckerTest extends TestCase
 {
 
-    /** @var  \Volcanus\Validation\Checker\TextChecker */
+    /** @var  TextChecker */
     protected $checker;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->checker = new TextChecker();
         $this->checker->setOption('encoding', 'UTF-8');
-        $this->checker->setOption('mbLength', TextChecker::LENGTH_CHARS);
+        $this->checker->setOption('mbLength', Checker::LENGTH_CHARS);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function testCheckIsOk()
     {
         $this->assertTrue($this->checker->check('1', ['maxLength' => 1]));
     }
 
+    /**
+     * @throws \Exception
+     */
     public function testCheckIsOkWhenMultiByteCharactersLength()
     {
         $this->assertTrue($this->checker->check('ｱｲｳ', ['maxLength' => 3]));
         $this->assertTrue($this->checker->check('アイウ', ['maxLength' => 3]));
     }
 
+    /**
+     * @throws \Exception
+     */
     public function testRaiseMaxlengthExceptionWhenckIsOkWhenMultiByteCharactersBytes()
     {
-        $this->assertTrue($this->checker->check('ｱｲｳ', ['maxLength' => 9, 'mbLength' => TextChecker::LENGTH_BYTES]));
-        $this->assertTrue($this->checker->check('アイウ', ['maxLength' => 9, 'mbLength' => TextChecker::LENGTH_BYTES]));
-    }
-
-    public function testCheckIsOkWhenMultiByteCharactersWidth()
-    {
-        $this->assertTrue($this->checker->check('ｱｲｳ', ['maxLength' => 3, 'mbLength' => TextChecker::LENGTH_WIDTH]));
-        $this->assertTrue($this->checker->check('アイウ', ['maxLength' => 6, 'mbLength' => TextChecker::LENGTH_WIDTH]));
+        $this->assertTrue(
+            $this->checker->check('ｱｲｳ', ['maxLength' => 9, 'mbLength' => Checker::LENGTH_BYTES])
+        );
+        $this->assertTrue(
+            $this->checker->check('アイウ', ['maxLength' => 9, 'mbLength' => Checker::LENGTH_BYTES])
+        );
     }
 
     /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\MinLengthException
+     * @throws \Exception
+     */
+    public function testCheckIsOkWhenMultiByteCharactersWidth()
+    {
+        $this->assertTrue(
+            $this->checker->check('ｱｲｳ', ['maxLength' => 3, 'mbLength' => Checker::LENGTH_WIDTH])
+        );
+        $this->assertTrue(
+            $this->checker->check('アイウ', ['maxLength' => 6, 'mbLength' => Checker::LENGTH_WIDTH])
+        );
+    }
+
+    /**
+     * @throws \Exception
      */
     public function testRaiseMinLengthExceptionWhenHalfWidthedMultiByteCharactersLength()
     {
+        $this->expectException(MinLengthException::class);
         $this->checker->check('ｱｲｳ', ['minLength' => 4]);
     }
 
     /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\MinLengthException
+     * @throws \Exception
      */
     public function testRaiseMinLengthExceptionWhenFullWidthedMultiByteCharactersLength()
     {
+        $this->expectException(MinLengthException::class);
         $this->checker->check('アイウ', ['minLength' => 4]);
     }
 
     /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\MinLengthException
+     * @throws \Exception
      */
     public function testRaiseMinLengthExceptionWhenHalfWidthedMultiByteCharactersBytes()
     {
-        $this->checker->check('ｱｲｳ', ['minLength' => 10, 'mbLength' => TextChecker::LENGTH_BYTES]);
+        $this->expectException(MinLengthException::class);
+        $this->checker->check('ｱｲｳ', ['minLength' => 10, 'mbLength' => Checker::LENGTH_BYTES]);
     }
 
     /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\MinLengthException
+     * @throws \Exception
      */
     public function testRaiseMinLengthExceptionWhenFullWidthedMultiByteCharactersBytes()
     {
-        $this->checker->check('アイウ', ['minLength' => 10, 'mbLength' => TextChecker::LENGTH_BYTES]);
+        $this->expectException(MinLengthException::class);
+        $this->checker->check('アイウ', ['minLength' => 10, 'mbLength' => Checker::LENGTH_BYTES]);
     }
 
     /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\MinLengthException
+     * @throws \Exception
      */
     public function testRaiseMinLengthExceptionWhenHalfWidthedMultiByteCharactersWidth()
     {
-        $this->checker->check('ｱｲｳ', ['minLength' => 4, 'mbLength' => TextChecker::LENGTH_WIDTH]);
+        $this->expectException(MinLengthException::class);
+        $this->checker->check('ｱｲｳ', ['minLength' => 4, 'mbLength' => Checker::LENGTH_WIDTH]);
     }
 
     /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\MinLengthException
+     * @throws \Exception
      */
     public function testRaiseMinLengthExceptionWhenFullWidthedMultiByteCharactersWidth()
     {
-        $this->checker->check('アイウ', ['minLength' => 7, 'mbLength' => TextChecker::LENGTH_WIDTH]);
+        $this->expectException(MinLengthException::class);
+        $this->checker->check('アイウ', ['minLength' => 7, 'mbLength' => Checker::LENGTH_WIDTH]);
     }
 
     /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\MaxLengthException
+     * @throws \Exception
      */
     public function testRaiseMaxLengthExceptionWhenHalfWidthedMultiByteCharactersLength()
     {
+        $this->expectException(MaxLengthException::class);
         $this->checker->check('ｱｲｳ', ['maxLength' => 2]);
     }
 
     /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\MaxLengthException
+     * @throws \Exception
      */
     public function testRaiseMaxLengthExceptionWhenFullWidthedMultiByteCharactersLength()
     {
+        $this->expectException(MaxLengthException::class);
         $this->checker->check('アイウ', ['maxLength' => 2]);
     }
 
     /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\MaxLengthException
+     * @throws \Exception
      */
     public function testRaiseMaxLengthExceptionWhenHalfWidthedMultiByteCharactersBytes()
     {
-        $this->checker->check('ｱｲｳ', ['maxLength' => 8, 'mbLength' => TextChecker::LENGTH_BYTES]);
+        $this->expectException(MaxLengthException::class);
+        $this->checker->check('ｱｲｳ', ['maxLength' => 8, 'mbLength' => Checker::LENGTH_BYTES]);
     }
 
     /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\MaxLengthException
+     * @throws \Exception
      */
     public function testRaiseMaxLengthExceptionWhenFullWidthedMultiByteCharactersBytes()
     {
-        $this->checker->check('アイウ', ['maxLength' => 8, 'mbLength' => TextChecker::LENGTH_BYTES]);
+        $this->expectException(MaxLengthException::class);
+        $this->checker->check('アイウ', ['maxLength' => 8, 'mbLength' => Checker::LENGTH_BYTES]);
     }
 
     /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\MaxLengthException
+     * @throws \Exception
      */
     public function testRaiseMaxLengthExceptionWhenHalfWidthedMultiByteCharactersWidth()
     {
-        $this->checker->check('ｱｲｳ', ['maxLength' => 2, 'mbLength' => TextChecker::LENGTH_WIDTH]);
+        $this->expectException(MaxLengthException::class);
+        $this->checker->check('ｱｲｳ', ['maxLength' => 2, 'mbLength' => Checker::LENGTH_WIDTH]);
     }
 
     /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\MaxLengthException
+     * @throws \Exception
      */
     public function testRaiseMaxLengthExceptionWhenFullWidthedMultiByteCharactersWidth()
     {
-        $this->checker->check('アイウ', ['maxLength' => 5, 'mbLength' => TextChecker::LENGTH_WIDTH]);
+        $this->expectException(MaxLengthException::class);
+        $this->checker->check('アイウ', ['maxLength' => 5, 'mbLength' => Checker::LENGTH_WIDTH]);
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\MaxLengthException
-     */
     public function testInvokeMethod()
     {
+        $this->expectException(MaxLengthException::class);
         $checker = $this->checker;
         $checker->setOption('maxLength', 2);
         $checker('123');

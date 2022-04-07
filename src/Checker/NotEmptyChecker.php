@@ -9,6 +9,7 @@
 namespace Volcanus\Validation\Checker;
 
 use Volcanus\Validation\Exception\CheckerException\EmptyException;
+use Volcanus\Validation\Util;
 
 /**
  * NotEmptyChecker
@@ -23,12 +24,22 @@ class NotEmptyChecker extends AbstractChecker
     public static $forVector = true;
 
     /**
+     * __construct
+     *
+     * @param array $options 検証オプション
+     */
+    public function __construct(array $options = [])
+    {
+        $this->options = Util::mergeOptions($this->options, $options);
+    }
+
+    /**
      * 検証前のガードメソッドを実行します。このメソッドがFALSEを返した場合は検証メソッドを実行しません。
      *
-     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @return boolean
+     * @param mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @return bool
      */
-    public function guard($value)
+    public function guard($value): bool
     {
         return true;
     }
@@ -36,11 +47,11 @@ class NotEmptyChecker extends AbstractChecker
     /**
      * 値が存在するかどうか検証します。
      *
-     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @param  array $options 検証オプション
-     * @return boolean 検証結果
+     * @param mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param array $options 検証オプション
+     * @return bool 検証結果
      */
-    public function check($value, array $options = [])
+    public function check($value, array $options = []): bool
     {
         if (is_null($value)) {
             throw new EmptyException(

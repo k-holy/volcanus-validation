@@ -8,25 +8,27 @@
 
 namespace Volcanus\Validation\Test\Checker;
 
+use PHPUnit\Framework\TestCase;
 use Volcanus\Validation\Checker\AcceptCharactersChecker;
+use Volcanus\Validation\Exception\CheckerException\AcceptCharactersException;
 
 /**
  * AcceptCharactersCheckerTest
  *
  * @author k.holy74@gmail.com
  */
-class AcceptCharactersCheckerTest extends \PHPUnit\Framework\TestCase
+class AcceptCharactersCheckerTest extends TestCase
 {
 
-    /** @var  \Volcanus\Validation\Checker\AcceptCharactersChecker */
+    /** @var  AcceptCharactersChecker */
     protected $checker;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->checker = new AcceptCharactersChecker();
     }
 
-    private function getAcceptCharacters()
+    private function getAcceptCharacters(): string
     {
         return 'ABC123+-=@{}';
     }
@@ -42,32 +44,26 @@ class AcceptCharactersCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($this->checker->check('A1+=B2-@C3{}', $options));
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\AcceptCharactersException
-     */
     public function testRaiseAcceptCharactersExceptionWhenCharacterOtherThanAcceptCharactersAreContained()
     {
+        $this->expectException(AcceptCharactersException::class);
         $this->checker->check('A1+=B2-@C3{}%', [
             'acceptCharacters' => $this->getAcceptCharacters(),
         ]);
     }
 
-    /**
-     * @expectedException \Volcanus\Validation\Exception\CheckerException\AcceptCharactersException
-     */
     public function testInvokeMethod()
     {
+        $this->expectException(AcceptCharactersException::class);
         $checker = $this->checker;
         $checker('A1+=B2-@C3{}%', [
             'acceptCharacters' => $this->getAcceptCharacters(),
         ]);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testRaiseInvalidArgumentExceptionWhenAcceptCharactersParameterIsNotSpecified()
     {
+        $this->expectException(\InvalidArgumentException::class);
         $this->checker->check('A1+=B2-@C3{}');
     }
 

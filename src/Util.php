@@ -29,15 +29,10 @@ class Util
      * @param callable $checker チェッカー
      * @param array $value 配列データ
      * @param array $options オプション設定
-     * @return boolean 検証結果
+     * @return bool 検証結果
      */
-    public static function recursiveCheck($checker, $value, $options = [])
+    public static function recursiveCheck(callable $checker, array $value, array $options = []): bool
     {
-        if (!is_callable($checker)) {
-            throw new \InvalidArgumentException(
-                sprintf('The checker is not callable. received:%s',
-                    (is_object($checker)) ? get_class($checker) : gettype($checker)));
-        }
         return self::_walk($checker, $value, $options);
     }
 
@@ -65,7 +60,7 @@ class Util
      * @param array $appends 追加設定
      * @return array オプション設定
      */
-    public static function mergeOptions(array $defaults, array $appends)
+    public static function mergeOptions(array $defaults, array $appends): array
     {
         $merged = $defaults;
         if (count($appends) >= 1) {
@@ -83,40 +78,32 @@ class Util
     /**
      * 値の文字長が指定値以上であるか検証します。
      *
-     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @param  int $length 文字長
-     * @param  int $mbLength 文字長測定モード
+     * @param mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param int $length 文字長
+     * @param string $mbLength 文字長測定モード
      *                 Volcanus\Validation\Checker::LENGTH_BYTES //バイト長
      *                 Volcanus\Validation\Checker::LENGTH_CHARS //文字長
      *                 Volcanus\Validation\Checker::LENGTH_WIDTH //文字幅
-     * @param  string $encoding 文字エンコーディング
-     * @return boolean 検証結果
+     * @param string|null $encoding 文字エンコーディング
+     * @return bool 検証結果
      */
-    public static function checkMinLength($value, $length, $mbLength, $encoding = null)
+    public static function checkMinLength($value, int $length, string $mbLength, string $encoding = null): bool
     {
         $stringValue = (string)$value;
-        if (!isset($length)) {
-            throw new \InvalidArgumentException(
-                'The parameter "length" is not specified.');
-        }
-        if (!is_int($length)) {
-            throw new \InvalidArgumentException(
-                'The parameter "length" is not integer.');
-        }
         switch ($mbLength) {
-            case \Volcanus\Validation\Checker::LENGTH_CHARS:
+            case Checker::LENGTH_CHARS:
                 $characterLength = (isset($encoding))
                     ? mb_strlen($stringValue, $encoding)
                     : mb_strlen($stringValue);
                 $mbLengthType = 'characters';
                 break;
-            case \Volcanus\Validation\Checker::LENGTH_WIDTH:
+            case Checker::LENGTH_WIDTH:
                 $characterLength = (isset($encoding))
                     ? mb_strwidth($stringValue, $encoding)
                     : mb_strwidth($stringValue);
                 $mbLengthType = 'width';
                 break;
-            case \Volcanus\Validation\Checker::LENGTH_BYTES:
+            case Checker::LENGTH_BYTES:
             default:
                 $characterLength = strlen($stringValue);
                 $mbLengthType = 'bytes';
@@ -137,40 +124,32 @@ class Util
     /**
      * 値の文字長が指定値以下であるか検証します。
      *
-     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @param  int $length 文字長
-     * @param  int $mbLength 文字長測定モード
+     * @param mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param int $length 文字長
+     * @param string $mbLength 文字長測定モード
      *                 Volcanus\Validation\Checker::LENGTH_BYTES //バイト長
      *                 Volcanus\Validation\Checker::LENGTH_CHARS //文字長
      *                 Volcanus\Validation\Checker::LENGTH_WIDTH //文字幅
-     * @param  string $encoding 文字エンコーディング
-     * @return boolean 検証結果
+     * @param string|null $encoding 文字エンコーディング
+     * @return bool 検証結果
      */
-    public static function checkMaxLength($value, $length, $mbLength, $encoding = null)
+    public static function checkMaxLength($value, int $length, string $mbLength, string $encoding = null): bool
     {
         $stringValue = (string)$value;
-        if (!isset($length)) {
-            throw new \InvalidArgumentException(
-                'The parameter "length" is not specified.');
-        }
-        if (!is_int($length)) {
-            throw new \InvalidArgumentException(
-                'The parameter "length" is not integer.');
-        }
         switch ($mbLength) {
-            case \Volcanus\Validation\Checker::LENGTH_WIDTH:
+            case Checker::LENGTH_WIDTH:
                 $characterLength = (isset($encoding))
                     ? mb_strwidth($stringValue, $encoding)
                     : mb_strwidth($stringValue);
                 $mbLengthType = 'width';
                 break;
-            case \Volcanus\Validation\Checker::LENGTH_CHARS:
+            case Checker::LENGTH_CHARS:
                 $characterLength = (isset($encoding))
                     ? mb_strlen($stringValue, $encoding)
                     : mb_strlen($stringValue);
                 $mbLengthType = 'characters';
                 break;
-            case \Volcanus\Validation\Checker::LENGTH_BYTES:
+            case Checker::LENGTH_BYTES:
             default:
                 $characterLength = strlen($stringValue);
                 $mbLengthType = 'bytes';
@@ -191,11 +170,11 @@ class Util
     /**
      * 値が+-符号および10進数の数字だけで構成されているか検証します。
      *
-     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @param  bool $unsigned +-を無効とするかどうか
-     * @return boolean 検証結果
+     * @param mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param bool $unsigned +-を無効とするかどうか
+     * @return bool 検証結果
      */
-    public static function checkInt($value, $unsigned = false)
+    public static function checkInt($value, bool $unsigned = false): bool
     {
         if (is_string($value)) {
             $stringValue = $value;
@@ -207,12 +186,12 @@ class Util
             $stringValue = (string)$value;
         }
         if ($unsigned) {
-            if (!preg_match('/\A(?:0|[1-9][0-9]*)\z/', $stringValue, $matches)) {
+            if (!preg_match('/\A(?:0|[1-9][0-9]*)\z/', $stringValue)) {
                 throw new IntException(
                     'The value contains characters other than digits.');
             }
         } else {
-            if (!preg_match('/\A(?:[+-])?0*(?:0|[1-9][0-9]*)\z/', $stringValue, $matches)) {
+            if (!preg_match('/\A[+-]?0*(?:0|[1-9][0-9]*)\z/', $stringValue)) {
                 throw new IntException(
                     'The value contains characters other than sign and digits.');
             }
@@ -223,20 +202,20 @@ class Util
     /**
      * 値が+-符号および10進数の数字と.だけで構成されているか検証します。
      *
-     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @param  bool $unsigned +-を無効とするかどうか
-     * @return boolean 検証結果
+     * @param mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param bool $unsigned +-を無効とするかどうか
+     * @return bool 検証結果
      */
-    public static function checkFloat($value, $unsigned = false)
+    public static function checkFloat($value, bool $unsigned = false): bool
     {
         $stringValue = (string)$value;
         if ($unsigned) {
-            if (!preg_match('/\A(?:\d+)(?:\.\d+)?\z/', $stringValue, $matches)) {
+            if (!preg_match('/\A\d+(?:\.\d+)?\z/', $stringValue)) {
                 throw new FloatException(
                     'The value contains characters other than digits and dot.');
             }
         } else {
-            if (!preg_match('/\A(?:[+-])?(?:\d+)(?:\.\d+)?\z/', $stringValue, $matches)) {
+            if (!preg_match('/\A[+-]?\d+(?:\.\d+)?\z/', $stringValue)) {
                 throw new FloatException(
                     'The value contains characters other than sign and digits and dot.');
             }
@@ -251,7 +230,7 @@ class Util
      * @param string $encoding 文字エンコーディング
      * @return bool 検証結果
      */
-    public static function checkEncoding($value, $encoding)
+    public static function checkEncoding($value, string $encoding): bool
     {
         if (false === self::_checkEncoding($value, $encoding)) {
             throw new InvalidEncodingException(
@@ -260,7 +239,7 @@ class Util
         return true;
     }
 
-    private static function _checkEncoding($value, $encoding)
+    private static function _checkEncoding($value, $encoding): bool
     {
         if (isset($value)) {
             if (is_array($value) || $value instanceof \Traversable) {
@@ -283,17 +262,12 @@ class Util
      * @param array $value 配列
      * @return array 処理後の配列
      */
-    public static function map($func, $value)
+    public static function map(callable $func, array $value): array
     {
-        if (!is_callable($func)) {
-            throw new \InvalidArgumentException(
-                sprintf('The function is not callable. received:%s',
-                    (is_object($func)) ? get_class($func) : gettype($func)));
-        }
         return self::_map($func, $value);
     }
 
-    private static function _map($func, $value)
+    private static function _map($func, $value): array
     {
         $return = [];
         foreach ($value as $key => $val) {

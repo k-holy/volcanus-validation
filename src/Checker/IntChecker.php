@@ -27,7 +27,7 @@ class IntChecker extends AbstractChecker
     /**
      * __construct
      *
-     * @param  array $options 検証オプション
+     * @param array $options 検証オプション
      */
     public function __construct(array $options = [])
     {
@@ -41,12 +41,12 @@ class IntChecker extends AbstractChecker
     /**
      * 値が+-符号および10進数の数字だけで構成されているか検証します。
      *
-     * @param  mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
-     * @param  array $options 検証オプション
+     * @param mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
+     * @param array $options 検証オプション
      * @return bool 検証結果
      * @throws \Exception
      */
-    public function check($value, array $options = [])
+    public function check($value, array $options = []): bool
     {
         $options = Util::mergeOptions($this->options, $options);
 
