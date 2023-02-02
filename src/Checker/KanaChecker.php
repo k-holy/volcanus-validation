@@ -1,6 +1,6 @@
 <?php
 /**
- * Volcanus libraries for PHP
+ * Volcanus libraries for PHP 8.1~
  *
  * @copyright k-holy <k.holy74@gmail.com>
  * @license The MIT License (MIT)
@@ -21,7 +21,7 @@ use Volcanus\Validation\Exception\CheckerException\KanaException;
 class KanaChecker extends AbstractChecker
 {
 
-    public static $forVector = false;
+    public static bool $forVector = false;
 
     /**
      * __construct
@@ -45,7 +45,7 @@ class KanaChecker extends AbstractChecker
      * @param array $options 検証オプション
      * @return bool 検証結果
      */
-    public function check($value, array $options = []): bool
+    public function check(mixed $value, array $options = []): bool
     {
         $options = Util::mergeOptions($this->options, $options);
 
@@ -65,24 +65,24 @@ class KanaChecker extends AbstractChecker
 
         $patterns = [];
         // 全角かな＋ー
-        if (false !== strpos($acceptFlag, 'H')) {
+        if (str_contains($acceptFlag, 'H')) {
             $patterns[] = '(\xe3(\x81[\x81-\xbf]|\x82[\x80-\x96]|\x83\xbc))';
         }
         // 全角カナ＋ー
-        if (false !== strpos($acceptFlag, 'K')) {
+        if (str_contains($acceptFlag, 'K')) {
             $patterns[] = '(\xe3(\x82[\xa1-\xbf]|\x83[\x80-\xba]|\x83\xbc))';
         }
         // 半角ｶﾅ＋ｰﾞﾟ
-        if (false !== strpos($acceptFlag, 'k')) {
+        if (str_contains($acceptFlag, 'k')) {
             $patterns[] = '(\xef(\xbd[\xa6-\xbf]|\xbe[\x80-\x9f]))';
         }
         if ($acceptSign) {
             // 全角かな/全角カナ記号（・ヽヾ）
-            if (false !== strpos($acceptFlag, 'H') || false !== strpos($acceptFlag, 'K')) {
+            if (str_contains($acceptFlag, 'H') || str_contains($acceptFlag, 'K')) {
                 $patterns[] = '(\xe3\x83(\xbb|\xbd|\xbe))';
             }
             // 半角ｶﾅ記号（･）
-            if (false !== strpos($acceptFlag, 'k')) {
+            if (str_contains($acceptFlag, 'k')) {
                 $patterns[] = '(\xef\xbd\xa5)';
             }
         }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Volcanus libraries for PHP
+ * Volcanus libraries for PHP 8.1~
  *
  * @copyright k-holy <k.holy74@gmail.com>
  * @license The MIT License (MIT)
@@ -25,25 +25,25 @@ class Context
 {
 
     /* @var array チェッカーの配列 */
-    protected $checkers;
+    protected array $checkers;
 
     /* @var Result 検証結果オブジェクト */
-    protected $result;
+    protected Result $result;
 
     /* @var callable メッセージ生成処理のコールバック * */
     protected $messageProcessor;
 
     /* @var array 検証オプションのグローバル設定 */
-    protected $options;
+    protected array $options;
 
     /**
      * コンストラクタ
      *
-     * @param mixed $values 検証データ
+     * @param mixed|null $values 検証データ
      * @param array $checkers チェッカーの配列
      * @param array $options 検証オプション
      */
-    public function __construct($values = null, array $checkers = [], array $options = [])
+    public function __construct(mixed $values = null, array $checkers = [], array $options = [])
     {
         $this->options['encoding'] = null; // 入力エンコーディング
         $this->options['acceptArray'] = false; // 配列の検証値を処理するかどうか
@@ -55,10 +55,10 @@ class Context
     /**
      * インスタンスを生成して返します。
      *
-     * @param mixed $values 検証データ
+     * @param mixed|null $values 検証データ
      * @return self
      */
-    public static function getInstance($values = null): self
+    public static function getInstance(mixed $values = null): self
     {
         return new self($values);
     }
@@ -66,9 +66,10 @@ class Context
     /**
      * 検証結果オブジェクトを初期化します。
      *
-     * @param mixed $values 検証データ
+     * @param mixed|null $values 検証データ
+     * @return void
      */
-    public function initResult($values = null)
+    public function initResult(mixed $values = null): void
     {
         $this->result = new Result($values);
     }
@@ -138,8 +139,9 @@ class Context
      * チェッカーを解放します。
      *
      * @param string $type 検証種別
+     * @return void
      */
-    public function unregisterChecker(string $type)
+    public function unregisterChecker(string $type): void
     {
         unset($this->checkers[$type]);
     }
@@ -151,7 +153,7 @@ class Context
      * @param string $type 検証種別
      * @return callable チェッカー
      */
-    public function getChecker(string $type)
+    public function getChecker(string $type): callable
     {
         if (!isset($this->checkers[$type])) {
             try {
@@ -365,7 +367,7 @@ class Context
      * @param mixed $value
      * @return mixed
      */
-    public function __set(string $name, $value)
+    public function __set(string $name, mixed $value)
     {
         $method = 'set' . ucfirst($name);
         if (method_exists($this, $method)) {

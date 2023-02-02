@@ -1,6 +1,6 @@
 <?php
 /**
- * Volcanus libraries for PHP
+ * Volcanus libraries for PHP 8.1~
  *
  * @copyright k-holy <k.holy74@gmail.com>
  * @license The MIT License (MIT)
@@ -22,7 +22,7 @@ use Volcanus\Validation\Exception\CheckerException\MaxValueException;
 class IntChecker extends AbstractChecker
 {
 
-    public static $forVector = false;
+    public static bool $forVector = false;
 
     /**
      * __construct
@@ -46,7 +46,7 @@ class IntChecker extends AbstractChecker
      * @return bool 検証結果
      * @throws \Exception
      */
-    public function check($value, array $options = []): bool
+    public function check(mixed $value, array $options = []): bool
     {
         $options = Util::mergeOptions($this->options, $options);
 

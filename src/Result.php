@@ -1,6 +1,6 @@
 <?php
 /**
- * Volcanus libraries for PHP
+ * Volcanus libraries for PHP 8.1~
  *
  * @copyright k-holy <k.holy74@gmail.com>
  * @license The MIT License (MIT)
@@ -19,19 +19,19 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
     /**
      * @var array 検証データの配列
      */
-    protected $values = [];
+    protected array $values = [];
 
     /**
      * @var array 検証エラーオブジェクトの配列
      */
-    protected $errors = [];
+    protected array $errors = [];
 
     /**
      * コンストラクタ
      *
-     * @param array|object $values 検証データ
+     * @param object|array|null $values 検証データ
      */
-    public function __construct($values = null)
+    public function __construct(object|array $values = null)
     {
         $this->init($values);
     }
@@ -39,9 +39,10 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
     /**
      * 検証結果をクリアします。
      *
-     * @param array|object $values 検証データ
+     * @param object|array|null $values 検証データ
+     * @return void
      */
-    public function init($values = null)
+    public function init(object|array $values = null): void
     {
         $this->values = [];
         $this->errors = [];
@@ -52,29 +53,44 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
 
     /**
      * 検証エラーをクリアします。
+     *
+     * @return void
      */
-    public function clearErrors()
+    public function clearErrors(): void
     {
         $this->errors = [];
     }
 
-    public function __get($name)
+    /**
+     * __get
+     *
+     * @param string $name
+     * @return mixed
+     */
+    public function __get(string $name): mixed
     {
         return $this->getValue($name);
     }
 
-    public function __set($name, $value)
+    /**
+     * __set
+     *
+     * @param string $name
+     * @param mixed $value
+     * @return void
+     */
+    public function __set(string $name, mixed $value): void
     {
-        return $this->setValue($name, $value);
+        $this->setValue($name, $value);
     }
 
     /**
      * 検証データをセットします。
      *
-     * @param array|object $values 検証データ
+     * @param object|array $values 検証データ
      * @return self
      */
-    public function setValues($values): self
+    public function setValues(object|array $values): self
     {
         if (is_array($values) || ($values instanceof \Traversable)) {
             foreach ($values as $name => $value) {
@@ -98,7 +114,7 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
      * @param mixed $value 検証データ値
      * @return self
      */
-    public function setValue(string $name, $value): self
+    public function setValue(string $name, mixed $value): self
     {
         $this->values[$name] = $value;
         return $this;
@@ -120,7 +136,7 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
      * @param string $name 項目名
      * @return mixed 検証データ値
      */
-    public function getValue(string $name)
+    public function getValue(string $name): mixed
     {
         return $this->values[$name] ?? null;
     }
@@ -133,7 +149,7 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
      * @param array|Error $error
      * @return self
      */
-    public function setError(string $name, string $type, $error = []): self
+    public function setError(string $name, string $type, Error|array $error = []): self
     {
         if (false === ($error instanceof Error)) {
             $error = new Error($type, $error);
@@ -208,58 +224,60 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
      * 指定された項目名の検証エラーを返します
      *
      * @param string $name 項目名
-     * @return mixed 検証エラー
+     * @return Error|null 検証エラー
      */
-    public function getError(string $name)
+    public function getError(string $name): ?Error
     {
         return $this->errors[$name] ?? null;
     }
 
     /**
-     * ArrayAccess::offsetExists()実装
+     * \ArrayAccess::offsetExists()
      *
      * @param mixed $offset
      * @return bool
      */
-    public function offsetExists($offset): bool
+    public function offsetExists(mixed $offset): bool
     {
         return isset($this->values[$offset]);
     }
 
     /**
-     * ArrayAccess::offsetGet()実装
+     * \ArrayAccess::offsetGet()
      *
      * @param mixed $offset
      * @return mixed
      */
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
         return $this->values[$offset];
     }
 
     /**
-     * ArrayAccess::offsetSet()実装
+     * \ArrayAccess::offsetSet()
      *
      * @param mixed $offset
      * @param mixed $value
+     * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->setValue($offset, $value);
     }
 
     /**
-     * ArrayAccess::offsetUnset()実装
+     * \ArrayAccess::offsetUnset()
      *
      * @param mixed $offset
+     * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->values[$offset]);
     }
 
     /**
-     * Countable::count()実装
+     * \Countable::count()
      *
      * @return int
      */
@@ -269,7 +287,7 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
     }
 
     /**
-     * IteratorAggregate::getIterator()実装
+     * \IteratorAggregate::getIterator()
      *
      * @return \ArrayIterator
      */

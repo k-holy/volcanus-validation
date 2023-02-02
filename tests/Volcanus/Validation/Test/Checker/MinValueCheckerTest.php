@@ -1,6 +1,6 @@
 <?php
 /**
- * Volcanus libraries for PHP
+ * Volcanus libraries for PHP 8.1~
  *
  * @copyright k-holy <k.holy74@gmail.com>
  * @license The MIT License (MIT)
@@ -22,7 +22,7 @@ class MinValueCheckerTest extends TestCase
 {
 
     /** @var  MinValueChecker */
-    protected $checker;
+    protected MinValueChecker $checker;
 
     public function setUp(): void
     {

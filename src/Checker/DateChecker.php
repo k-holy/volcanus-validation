@@ -1,6 +1,6 @@
 <?php
 /**
- * Volcanus libraries for PHP
+ * Volcanus libraries for PHP 8.1~
  *
  * @copyright k-holy <k.holy74@gmail.com>
  * @license The MIT License (MIT)
@@ -21,7 +21,7 @@ use Volcanus\Validation\Exception\CheckerException\DateException;
 class DateChecker extends AbstractChecker
 {
 
-    public static $forVector = false;
+    public static bool $forVector = false;
 
     /* 日付解析用パターン */
     const PATTERN_YMD = 'ymd';
@@ -64,7 +64,7 @@ class DateChecker extends AbstractChecker
      * @param array $options 検証オプション
      * @return bool 検証結果
      */
-    public function check($value, array $options = []): bool
+    public function check(mixed $value, array $options = []): bool
     {
         $options = Util::mergeOptions($this->options, $options);
 
@@ -121,7 +121,7 @@ class DateChecker extends AbstractChecker
      * @param string|null $order 日付解析用順序
      * @return array|false  日付部分の配列または FALSE
      */
-    private function parseDate(string $value, string $pattern, string $order = null)
+    private function parseDate(string $value, string $pattern, string $order = null): bool|array
     {
 
         $parsed = [];

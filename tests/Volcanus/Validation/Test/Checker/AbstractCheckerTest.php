@@ -1,6 +1,6 @@
 <?php
 /**
- * Volcanus libraries for PHP
+ * Volcanus libraries for PHP 8.1~
  *
  * @copyright k-holy <k.holy74@gmail.com>
  * @license The MIT License (MIT)
@@ -101,7 +101,7 @@ class NumericChecker extends AbstractChecker
         $this->options = array_replace_recursive($this->options, $options);
     }
 
-    public function check($value, array $options = []): bool
+    public function check(mixed $value, array $options = []): bool
     {
         $options = array_replace_recursive($this->options, $options);
         if (!preg_match('/\A\d+\z/', $value)) {

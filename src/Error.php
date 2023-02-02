@@ -1,6 +1,6 @@
 <?php
 /**
- * Volcanus libraries for PHP
+ * Volcanus libraries for PHP 8.1~
  *
  * @copyright k-holy <k.holy74@gmail.com>
  * @license The MIT License (MIT)
@@ -21,19 +21,19 @@ class Error
 {
 
     /**
-     * @var string このエラーの検証種別
+     * @var string|null このエラーの検証種別
      */
-    protected $type = null;
+    protected ?string $type = null;
 
     /**
      * @var array このエラーの検証パラメータ
      */
-    protected $parameters = [];
+    protected array $parameters = [];
 
     /**
-     * @var string このエラーの表示用メッセージ
+     * @var string|null このエラーの表示用メッセージ
      */
-    protected $message = null;
+    protected ?string $message = null;
 
     /**
      * コンストラクタ
@@ -50,7 +50,7 @@ class Error
     /**
      * このエラーの検証種別を返します。
      *
-     * @return string
+     * @return string|null
      */
     public function getType(): ?string
     {
@@ -73,7 +73,7 @@ class Error
      * @param mixed $options 検証パラメータ (可変引数)
      * @return bool  検証パラメータがこのエラーの検証パラメータに含まれているかどうか
      */
-    public function has($options = []): bool
+    public function has(mixed $options = []): bool
     {
         return ($options === array_intersect_assoc($this->parameters, $options));
     }
@@ -93,7 +93,7 @@ class Error
     /**
      * このエラーの表示用メッセージを返します。
      *
-     * @return string
+     * @return string|null
      */
     public function getMessage(): ?string
     {
@@ -107,7 +107,7 @@ class Error
      * @param string $name
      * @return mixed
      */
-    public function __get(string $name)
+    public function __get(string $name): mixed
     {
         $method = 'get' . ucfirst($name);
         if (method_exists($this, $method)) {
@@ -123,13 +123,13 @@ class Error
      *
      * @param string $name
      * @param mixed $value
-     * @return mixed
+     * @return void
      */
-    public function __set(string $name, $value)
+    public function __set(string $name, mixed $value): void
     {
         $method = 'set' . ucfirst($name);
         if (method_exists($this, $method)) {
-            return $this->{$method}($value);
+            $this->{$method}($value);
         }
         throw new \RuntimeException(
             sprintf('The property "%s" is not defined.', $name));
@@ -140,7 +140,7 @@ class Error
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         $message = $this->getMessage();
         return (strlen($message) >= 1) ? $message : '';

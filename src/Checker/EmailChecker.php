@@ -1,6 +1,6 @@
 <?php
 /**
- * Volcanus libraries for PHP
+ * Volcanus libraries for PHP 8.1~
  *
  * @copyright k-holy <k.holy74@gmail.com>
  * @license The MIT License (MIT)
@@ -22,7 +22,7 @@ use Volcanus\Validation\Exception\CheckerException\MaxLengthException;
 class EmailChecker extends AbstractChecker
 {
 
-    public static $forVector = false;
+    public static bool $forVector = false;
 
     /**
      * __construct
@@ -44,7 +44,7 @@ class EmailChecker extends AbstractChecker
      * @return bool 検証結果
      * @throws \Exception
      */
-    public function check($value, array $options = []): bool
+    public function check(mixed $value, array $options = []): bool
     {
         $options = Util::mergeOptions($this->options, $options);
 
@@ -70,7 +70,7 @@ class EmailChecker extends AbstractChecker
      * @return bool 検証結果
      * @throws \Exception
      */
-    public static function validateAddrSpec($value, bool $allowDotEndOfLocalPart = false): bool
+    public static function validateAddrSpec(mixed $value, bool $allowDotEndOfLocalPart = false): bool
     {
         $stringValue = (string)$value;
         $separatorPosition = strrpos($stringValue, '@');
@@ -102,13 +102,13 @@ class EmailChecker extends AbstractChecker
      * @return bool 検証結果
      * @throws \Exception
      */
-    public static function validateLocalPart($value, bool $allowDotEndOfLocalPart = false): bool
+    public static function validateLocalPart(mixed $value, bool $allowDotEndOfLocalPart = false): bool
     {
         $stringValue = (string)$value;
         $pattern = (!$allowDotEndOfLocalPart)
             ? '(?:[-!#-\'*+\/-9=?A-Z^-~]+(?:\.[-!#-\'*+\/-9=?A-Z^-~]+)*|"(?:[!#-\[\]-~]|\\\\[\x09 -~])*")'
             : '(?:[-!#-\'*+\/-9=?A-Z^-~]+(?:\.[-!#-\'*+\/-9=?A-Z^-~]+|\.)*|"(?:[!#-\[\]-~]|\\\\[\x09 -~]|\.)*")';
-        if ((false !== strpos($stringValue, '..')) ||
+        if ((str_contains($stringValue, '..')) ||
             !preg_match(sprintf('/\A%s\z/i', $pattern), $stringValue)) {
             throw new EmailException(
                 'The value is invalid local-part.',
@@ -133,7 +133,7 @@ class EmailChecker extends AbstractChecker
      * @return bool 検証結果
      * @throws \Exception
      */
-    public static function validateDomain($value): bool
+    public static function validateDomain(mixed $value): bool
     {
         $stringValue = (string)$value;
         $pattern = '[-!#-\'*+\/-9=?A-Z^-~]+(?:\.[-!#-\'*+\/-9=?A-Z^-~]+)*';
