@@ -1,6 +1,6 @@
 <?php
 /**
- * Volcanus libraries for PHP
+ * Volcanus libraries for PHP 8.1~
  *
  * @copyright k-holy <k.holy74@gmail.com>
  * @license The MIT License (MIT)
@@ -21,7 +21,7 @@ use Volcanus\Validation\Exception\CheckerException\AlnumException;
 class AlnumChecker extends AbstractChecker
 {
 
-    public static $forVector = false;
+    public static bool $forVector = false;
 
     public function __construct(array $options = [])
     {
@@ -36,7 +36,7 @@ class AlnumChecker extends AbstractChecker
      * @param array $options 検証オプション
      * @return bool 検証結果
      */
-    public function check($value, array $options = []): bool
+    public function check(mixed $value, array $options = []): bool
     {
         $stringValue = (string)$value;
         if (!ctype_alnum($stringValue)) {
