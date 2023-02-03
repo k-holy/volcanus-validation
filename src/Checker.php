@@ -1,6 +1,6 @@
 <?php
 /**
- * Volcanus libraries for PHP
+ * Volcanus libraries for PHP 8.1~
  *
  * @copyright k-holy <k.holy74@gmail.com>
  * @license The MIT License (MIT)
@@ -28,7 +28,7 @@ interface Checker
      * @param array $options 検証オプション
      * @return bool 検証結果
      */
-    public function check($value, array $options = []): bool;
+    public function check(mixed $value, array $options = []): bool;
 
     /**
      * 検証前のガードメソッドを実行します。このメソッドがFALSEを返した場合は検証メソッドを実行しません。
@@ -36,7 +36,7 @@ interface Checker
      * @param mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
      * @return bool ガード結果
      */
-    public function guard($value): bool;
+    public function guard(mixed $value): bool;
 
     /**
      * 検証メソッド
@@ -45,6 +45,6 @@ interface Checker
      * @param array $options 検証オプション
      * @return bool 検証結果
      */
-    public function __invoke($value, array $options = []): bool;
+    public function __invoke(mixed $value, array $options = []): bool;
 
 }

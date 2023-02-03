@@ -1,6 +1,6 @@
 <?php
 /**
- * Volcanus libraries for PHP
+ * Volcanus libraries for PHP 8.1~
  *
  * @copyright k-holy <k.holy74@gmail.com>
  * @license The MIT License (MIT)
@@ -21,9 +21,9 @@ use Volcanus\Validation\Exception\CheckerException\UriException;
 class UriChecker extends AbstractChecker
 {
 
-    public static $forVector = false;
+    public static bool $forVector = false;
 
-    public static $uriPattern = '~\A(([a-z][a-z0-9+-.]+):)(//([^/?#]*))?([^?#]+)(\?([^#]*))?(#(.*))?\z~i'; // required scheme,path
+    public static string $uriPattern = '~\A(([a-z][a-z0-9+-.]+):)(//([^/?#]*))?([^?#]+)(\?([^#]*))?(#(.*))?\z~i'; // required scheme,path
 
     /**
      * __construct
@@ -62,7 +62,7 @@ class UriChecker extends AbstractChecker
      * @param array $options 検証オプション
      * @return bool 検証結果
      */
-    public function check($value, array $options = []): bool
+    public function check(mixed $value, array $options = []): bool
     {
         $options = Util::mergeOptions($this->options, $options);
 

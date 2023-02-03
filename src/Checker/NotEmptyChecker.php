@@ -1,6 +1,6 @@
 <?php
 /**
- * Volcanus libraries for PHP
+ * Volcanus libraries for PHP 8.1~
  *
  * @copyright k-holy <k.holy74@gmail.com>
  * @license The MIT License (MIT)
@@ -21,7 +21,7 @@ use Volcanus\Validation\Util;
 class NotEmptyChecker extends AbstractChecker
 {
 
-    public static $forVector = true;
+    public static bool $forVector = true;
 
     /**
      * __construct
@@ -39,7 +39,7 @@ class NotEmptyChecker extends AbstractChecker
      * @param mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
      * @return bool
      */
-    public function guard($value): bool
+    public function guard(mixed $value): bool
     {
         return true;
     }
@@ -51,7 +51,7 @@ class NotEmptyChecker extends AbstractChecker
      * @param array $options 検証オプション
      * @return bool 検証結果
      */
-    public function check($value, array $options = []): bool
+    public function check(mixed $value, array $options = []): bool
     {
         if (is_null($value)) {
             throw new EmptyException(

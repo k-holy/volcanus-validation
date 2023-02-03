@@ -1,6 +1,6 @@
 <?php
 /**
- * Volcanus libraries for PHP
+ * Volcanus libraries for PHP 8.1~
  *
  * @copyright k-holy <k.holy74@gmail.com>
  * @license The MIT License (MIT)
@@ -23,7 +23,7 @@ class IntCheckerTest extends TestCase
 {
 
     /** @var  IntChecker */
-    protected $checker;
+    protected IntChecker $checker;
 
     public function setUp(): void
     {

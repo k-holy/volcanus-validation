@@ -1,6 +1,6 @@
 <?php
 /**
- * Volcanus libraries for PHP
+ * Volcanus libraries for PHP 8.1~
  *
  * @copyright k-holy <k.holy74@gmail.com>
  * @license The MIT License (MIT)
@@ -19,12 +19,12 @@ use Volcanus\Validation\Checker;
 abstract class AbstractChecker implements Checker
 {
 
-    public static $forVector = false;
+    public static bool $forVector = false;
 
     /**
      * @var array 検証オプション
      */
-    protected $options = [];
+    protected array $options = [];
 
     /**
      * インスタンスを生成して返します。
@@ -44,7 +44,7 @@ abstract class AbstractChecker implements Checker
      * @param array $options 検証オプション
      * @return bool 検証結果
      */
-    public function __invoke($value, array $options = []): bool
+    public function __invoke(mixed $value, array $options = []): bool
     {
         return $this->check($value, $options);
     }
@@ -56,7 +56,7 @@ abstract class AbstractChecker implements Checker
      * @param array $options 検証オプション
      * @return bool 検証結果
      */
-    public function check($value, array $options = []): bool
+    public function check(mixed $value, array $options = []): bool
     {
         $this->options = Util::mergeOptions($this->options, $options);
         return true;
@@ -69,7 +69,7 @@ abstract class AbstractChecker implements Checker
      * @param mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
      * @return bool
      */
-    public function guard($value): bool
+    public function guard(mixed $value): bool
     {
         if (!isset($value)) {
             return false;
@@ -93,7 +93,7 @@ abstract class AbstractChecker implements Checker
      * @param mixed $value オプション値
      * @return self
      */
-    public function setOption(string $name, $value): Checker
+    public function setOption(string $name, mixed $value): Checker
     {
         if (!$this->isEnableOption($name)) {
             throw new \InvalidArgumentException(

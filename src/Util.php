@@ -1,6 +1,6 @@
 <?php
 /**
- * Volcanus libraries for PHP
+ * Volcanus libraries for PHP 8.1~
  *
  * @copyright k-holy <k.holy74@gmail.com>
  * @license The MIT License (MIT)
@@ -36,7 +36,13 @@ class Util
         return self::_walk($checker, $value, $options);
     }
 
-    private static function _walk($checker, $value, $options)
+    /**
+     * @param callable $checker
+     * @param mixed $value
+     * @param array $options
+     * @return bool
+     */
+    private static function _walk(callable $checker, mixed $value, array $options): bool
     {
         if (isset($value)) {
             if (is_array($value) || $value instanceof \Traversable) {
@@ -46,7 +52,7 @@ class Util
                     }
                 }
             } else {
-                return call_user_func($checker, $value, $options);
+                return (bool)call_user_func($checker, $value, $options);
             }
         }
         return true;
@@ -81,13 +87,13 @@ class Util
      * @param mixed $value 検証値 (文字列または__toStringメソッド実装オブジェクト)
      * @param int $length 文字長
      * @param string $mbLength 文字長測定モード
-     *                 Volcanus\Validation\Checker::LENGTH_BYTES //バイト長
-     *                 Volcanus\Validation\Checker::LENGTH_CHARS //文字長
-     *                 Volcanus\Validation\Checker::LENGTH_WIDTH //文字幅
+     *                 Checker::LENGTH_BYTES //バイト長
+     *                 Checker::LENGTH_CHARS //文字長
+     *                 Checker::LENGTH_WIDTH //文字幅
      * @param string|null $encoding 文字エンコーディング
      * @return bool 検証結果
      */
-    public static function checkMinLength($value, int $length, string $mbLength, string $encoding = null): bool
+    public static function checkMinLength(mixed $value, int $length, string $mbLength, string $encoding = null): bool
     {
         $stringValue = (string)$value;
         switch ($mbLength) {
@@ -133,7 +139,7 @@ class Util
      * @param string|null $encoding 文字エンコーディング
      * @return bool 検証結果
      */
-    public static function checkMaxLength($value, int $length, string $mbLength, string $encoding = null): bool
+    public static function checkMaxLength(mixed $value, int $length, string $mbLength, string $encoding = null): bool
     {
         $stringValue = (string)$value;
         switch ($mbLength) {
@@ -174,7 +180,7 @@ class Util
      * @param bool $unsigned +-を無効とするかどうか
      * @return bool 検証結果
      */
-    public static function checkInt($value, bool $unsigned = false): bool
+    public static function checkInt(mixed $value, bool $unsigned = false): bool
     {
         if (is_string($value)) {
             $stringValue = $value;
@@ -206,7 +212,7 @@ class Util
      * @param bool $unsigned +-を無効とするかどうか
      * @return bool 検証結果
      */
-    public static function checkFloat($value, bool $unsigned = false): bool
+    public static function checkFloat(mixed $value, bool $unsigned = false): bool
     {
         $stringValue = (string)$value;
         if ($unsigned) {
@@ -230,7 +236,7 @@ class Util
      * @param string $encoding 文字エンコーディング
      * @return bool 検証結果
      */
-    public static function checkEncoding($value, string $encoding): bool
+    public static function checkEncoding(mixed $value, string $encoding): bool
     {
         if (false === self::_checkEncoding($value, $encoding)) {
             throw new InvalidEncodingException(
@@ -239,7 +245,12 @@ class Util
         return true;
     }
 
-    private static function _checkEncoding($value, $encoding): bool
+    /**
+     * @param mixed $value
+     * @param string $encoding
+     * @return bool
+     */
+    private static function _checkEncoding(mixed $value, string $encoding): bool
     {
         if (isset($value)) {
             if (is_array($value) || $value instanceof \Traversable) {
@@ -267,7 +278,12 @@ class Util
         return self::_map($func, $value);
     }
 
-    private static function _map($func, $value): array
+    /**
+     * @param callable $func
+     * @param mixed $value
+     * @return array
+     */
+    private static function _map(callable $func, mixed $value): array
     {
         $return = [];
         foreach ($value as $key => $val) {

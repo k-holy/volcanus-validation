@@ -1,6 +1,6 @@
 <?php
 /**
- * Volcanus libraries for PHP
+ * Volcanus libraries for PHP 8.1~
  *
  * @copyright k-holy <k.holy74@gmail.com>
  * @license The MIT License (MIT)
@@ -22,7 +22,7 @@ use Volcanus\Validation\Util;
 class DatetimeChecker extends AbstractChecker
 {
 
-    public static $forVector = false;
+    public static bool $forVector = false;
 
     /**
      * __construct
@@ -44,7 +44,7 @@ class DatetimeChecker extends AbstractChecker
      * @param array $options 検証オプション
      * @return bool 検証結果
      */
-    public function check($value, array $options = []): bool
+    public function check(mixed $value, array $options = []): bool
     {
         try {
             DateChecker::getInstance([

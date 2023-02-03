@@ -1,6 +1,6 @@
 <?php
 /**
- * Volcanus libraries for PHP
+ * Volcanus libraries for PHP 8.1~
  *
  * @copyright k-holy <k.holy74@gmail.com>
  * @license The MIT License (MIT)
@@ -21,7 +21,7 @@ class AlnumCheckerTest extends TestCase
 {
 
     /** @var  AlnumChecker */
-    protected $checker;
+    protected AlnumChecker $checker;
 
     public function setUp(): void
     {

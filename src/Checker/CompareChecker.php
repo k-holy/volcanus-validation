@@ -1,6 +1,6 @@
 <?php
 /**
- * Volcanus libraries for PHP
+ * Volcanus libraries for PHP 8.1~
  *
  * @copyright k-holy <k.holy74@gmail.com>
  * @license The MIT License (MIT)
@@ -21,7 +21,7 @@ use Volcanus\Validation\Exception\CheckerException\CompareException;
 class CompareChecker extends AbstractChecker
 {
 
-    public static $forVector = false;
+    public static bool $forVector = false;
 
     const IS_EQUAL_TO = 'eq';
     const IS_NOT_EQUAL = 'ne';
@@ -49,7 +49,7 @@ class CompareChecker extends AbstractChecker
      * @param array $options 検証オプション
      * @return bool 検証結果
      */
-    public function check($value, array $options = []): bool
+    public function check(mixed $value, array $options = []): bool
     {
         $options = Util::mergeOptions($this->options, $options);
 
