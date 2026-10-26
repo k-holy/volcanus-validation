@@ -1,6 +1,6 @@
 <?php
 /**
- * Volcanus libraries for PHP 8.1~
+ * Volcanus libraries for PHP 8.3~
  *
  * @copyright k-holy <k.holy74@gmail.com>
  * @license The MIT License (MIT)
@@ -85,7 +85,7 @@ class EmailChecker extends AbstractChecker
 
         try {
             Util::checkMaxLength($value, 256, parent::LENGTH_BYTES);
-        } catch (MaxLengthException $e) {
+        } catch (MaxLengthException) {
             throw new MaxLengthException(
                 'A addr-spec of the e-mail address is limited within 256 bytes.');
         } catch (\Exception $e) {
@@ -117,7 +117,7 @@ class EmailChecker extends AbstractChecker
 
         try {
             Util::checkMaxLength($value, 64, parent::LENGTH_BYTES);
-        } catch (MaxLengthException $e) {
+        } catch (MaxLengthException) {
             throw new MaxLengthException(
                 'A local-part of the e-mail address is limited within 64 bytes.');
         } catch (\Exception $e) {
@@ -145,7 +145,7 @@ class EmailChecker extends AbstractChecker
 
         try {
             Util::checkMaxLength($value, 255, parent::LENGTH_BYTES);
-        } catch (MaxLengthException $e) {
+        } catch (MaxLengthException) {
             throw new MaxLengthException(
                 'A domain of the e-mail address is limited within 255 bytes.');
         } catch (\Exception $e) {

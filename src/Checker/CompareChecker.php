@@ -1,6 +1,6 @@
 <?php
 /**
- * Volcanus libraries for PHP 8.1~
+ * Volcanus libraries for PHP 8.3~
  *
  * @copyright k-holy <k.holy74@gmail.com>
  * @license The MIT License (MIT)
@@ -23,12 +23,12 @@ class CompareChecker extends AbstractChecker
 
     public static bool $forVector = false;
 
-    const IS_EQUAL_TO = 'eq';
-    const IS_NOT_EQUAL = 'ne';
-    const IS_GREATER_THAN = 'gt';
-    const IS_LESS_THAN = 'lt';
-    const IS_GREATER_THAN_OR_EQUAL_TO = 'ge';
-    const IS_LESS_THAN_OR_EQUAL_TO = 'le';
+    const string IS_EQUAL_TO = 'eq';
+    const string IS_NOT_EQUAL = 'ne';
+    const string IS_GREATER_THAN = 'gt';
+    const string IS_LESS_THAN = 'lt';
+    const string IS_GREATER_THAN_OR_EQUAL_TO = 'ge';
+    const string IS_LESS_THAN_OR_EQUAL_TO = 'le';
 
     /**
      * __construct

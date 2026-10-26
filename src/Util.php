@@ -1,6 +1,6 @@
 <?php
 /**
- * Volcanus libraries for PHP 8.1~
+ * Volcanus libraries for PHP 8.3~
  *
  * @copyright k-holy <k.holy74@gmail.com>
  * @license The MIT License (MIT)
@@ -93,7 +93,7 @@ class Util
      * @param string|null $encoding 文字エンコーディング
      * @return bool 検証結果
      */
-    public static function checkMinLength(mixed $value, int $length, string $mbLength, string $encoding = null): bool
+    public static function checkMinLength(mixed $value, int $length, string $mbLength, ?string $encoding = null): bool
     {
         $stringValue = (string)$value;
         switch ($mbLength) {
@@ -139,7 +139,7 @@ class Util
      * @param string|null $encoding 文字エンコーディング
      * @return bool 検証結果
      */
-    public static function checkMaxLength(mixed $value, int $length, string $mbLength, string $encoding = null): bool
+    public static function checkMaxLength(mixed $value, int $length, string $mbLength, ?string $encoding = null): bool
     {
         $stringValue = (string)$value;
         switch ($mbLength) {
