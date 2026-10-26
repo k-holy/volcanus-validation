@@ -46,8 +46,10 @@ class Util
     {
         if (isset($value)) {
             if (is_array($value) || $value instanceof \Traversable) {
-                if (array_any($value, fn($_value) => false === self::_walk($checker, $_value, $options))) {
-                    return false;
+                foreach ($value as $_value) {
+                    if (false === self::_walk($checker, $_value, $options)) {
+                        return false;
+                    }
                 }
             } else {
                 return (bool)call_user_func($checker, $value, $options);
@@ -252,8 +254,10 @@ class Util
     {
         if (isset($value)) {
             if (is_array($value) || $value instanceof \Traversable) {
-                if (array_any($value, fn($_value) => false === self::_checkEncoding($_value, $encoding))) {
-                    return false;
+                foreach ($value as $_value) {
+                    if (false === self::_checkEncoding($_value, $encoding)) {
+                        return false;
+                    }
                 }
             } else {
                 return mb_check_encoding($value, $encoding);
