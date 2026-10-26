@@ -1,6 +1,6 @@
 <?php
 /**
- * Volcanus libraries for PHP 8.1~
+ * Volcanus libraries for PHP 8.3~
  *
  * @copyright k-holy <k.holy74@gmail.com>
  * @license The MIT License (MIT)
@@ -31,7 +31,7 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
      *
      * @param object|array|null $values 検証データ
      */
-    public function __construct(object|array $values = null)
+    public function __construct(object|array|null $values = null)
     {
         $this->init($values);
     }
@@ -42,7 +42,7 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
      * @param object|array|null $values 検証データ
      * @return void
      */
-    public function init(object|array $values = null): void
+    public function init(object|array|null $values = null): void
     {
         $this->values = [];
         $this->errors = [];
@@ -197,7 +197,7 @@ class Result implements \ArrayAccess, \IteratorAggregate, \Countable
      * @param array $options 検証内容
      * @return bool  比較値がこの検証種別のエラーに含まれているかどうか
      */
-    public function hasError(string $name = null, string $type = null, array $options = []): bool
+    public function hasError(?string $name = null, ?string $type = null, array $options = []): bool
     {
         if (!isset($name)) {
             return (count($this->errors) >= 1);
