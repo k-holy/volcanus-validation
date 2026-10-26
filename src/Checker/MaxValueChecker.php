@@ -1,6 +1,6 @@
 <?php
 /**
- * Volcanus libraries for PHP 8.1~
+ * Volcanus libraries for PHP 8.3~
  *
  * @copyright k-holy <k.holy74@gmail.com>
  * @license The MIT License (MIT)
@@ -54,10 +54,10 @@ class MaxValueChecker extends AbstractChecker
 
         try {
             Util::checkInt($options['max'], false);
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             try {
                 Util::checkFloat($options['max'], false);
-            } catch (\Exception $e) {
+            } catch (\Exception) {
                 throw new \InvalidArgumentException(
                     'The max parameter contains characters other than the sign and digits and comma.');
             }
@@ -65,10 +65,10 @@ class MaxValueChecker extends AbstractChecker
 
         try {
             Util::checkInt($value, false);
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             try {
                 Util::checkFloat($value, false);
-            } catch (\Exception $e) {
+            } catch (\Exception) {
                 throw new InvalidValueException(
                     'The value contains characters other than the sign and digits and comma.');
             }

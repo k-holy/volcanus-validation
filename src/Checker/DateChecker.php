@@ -1,6 +1,6 @@
 <?php
 /**
- * Volcanus libraries for PHP 8.1~
+ * Volcanus libraries for PHP 8.3~
  *
  * @copyright k-holy <k.holy74@gmail.com>
  * @license The MIT License (MIT)
@@ -24,22 +24,22 @@ class DateChecker extends AbstractChecker
     public static bool $forVector = false;
 
     /* 日付解析用パターン */
-    const PATTERN_YMD = 'ymd';
-    const PATTERN_YMDH = 'ymdh';
-    const PATTERN_YMDHI = 'ymdhi';
-    const PATTERN_YMDHIS = 'ymdhis';
+    const string PATTERN_YMD = 'ymd';
+    const string PATTERN_YMDH = 'ymdh';
+    const string PATTERN_YMDHI = 'ymdhi';
+    const string PATTERN_YMDHIS = 'ymdhis';
 
     /* 日付解析用順序 */
-    const ORDER_YMD = 'ymd';
-    const ORDER_YMDH = 'ymdh';
-    const ORDER_YMDHI = 'ymdhi';
-    const ORDER_YMDHIS = 'ymdhis';
+    const string ORDER_YMD = 'ymd';
+    const string ORDER_YMDH = 'ymdh';
+    const string ORDER_YMDHI = 'ymdhi';
+    const string ORDER_YMDHIS = 'ymdhis';
 
     /* 日付解析用正規表現 */
-    const PREG_PATTERN_YMD = '#\A(\d+)[-/](\d{1,2})[-/](\d{1,2})\z#';
-    const PREG_PATTERN_YMDH = '#\A(\d+)[-/](\d{1,2})[-/](\d{1,2}) *(\d{1,2})\z#';
-    const PREG_PATTERN_YMDHI = '#\A(\d+)[-/](\d{1,2})[-/](\d{1,2}) *(\d{1,2}):(\d{1,2})\z#';
-    const PREG_PATTERN_YMDHIS = '#\A(\d+)[-/](\d{1,2})[-/](\d{1,2}) *(\d{1,2}):(\d{1,2}):(\d{1,2})\z#';
+    const string PREG_PATTERN_YMD = '#\A(\d+)[-/](\d{1,2})[-/](\d{1,2})\z#';
+    const string PREG_PATTERN_YMDH = '#\A(\d+)[-/](\d{1,2})[-/](\d{1,2}) *(\d{1,2})\z#';
+    const string PREG_PATTERN_YMDHI = '#\A(\d+)[-/](\d{1,2})[-/](\d{1,2}) *(\d{1,2}):(\d{1,2})\z#';
+    const string PREG_PATTERN_YMDHIS = '#\A(\d+)[-/](\d{1,2})[-/](\d{1,2}) *(\d{1,2}):(\d{1,2}):(\d{1,2})\z#';
 
     /**
      * __construct
@@ -121,7 +121,7 @@ class DateChecker extends AbstractChecker
      * @param string|null $order 日付解析用順序
      * @return array|false  日付部分の配列または FALSE
      */
-    private function parseDate(string $value, string $pattern, string $order = null): bool|array
+    private function parseDate(string $value, string $pattern, ?string $order = null): bool|array
     {
 
         $parsed = [];

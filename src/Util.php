@@ -1,6 +1,6 @@
 <?php
 /**
- * Volcanus libraries for PHP 8.1~
+ * Volcanus libraries for PHP 8.3~
  *
  * @copyright k-holy <k.holy74@gmail.com>
  * @license The MIT License (MIT)
@@ -46,10 +46,8 @@ class Util
     {
         if (isset($value)) {
             if (is_array($value) || $value instanceof \Traversable) {
-                foreach ($value as $_value) {
-                    if (false === self::_walk($checker, $_value, $options)) {
-                        return false;
-                    }
+                if (array_any($value, fn($_value) => false === self::_walk($checker, $_value, $options))) {
+                    return false;
                 }
             } else {
                 return (bool)call_user_func($checker, $value, $options);
@@ -93,7 +91,7 @@ class Util
      * @param string|null $encoding 文字エンコーディング
      * @return bool 検証結果
      */
-    public static function checkMinLength(mixed $value, int $length, string $mbLength, string $encoding = null): bool
+    public static function checkMinLength(mixed $value, int $length, string $mbLength, ?string $encoding = null): bool
     {
         $stringValue = (string)$value;
         switch ($mbLength) {
@@ -139,7 +137,7 @@ class Util
      * @param string|null $encoding 文字エンコーディング
      * @return bool 検証結果
      */
-    public static function checkMaxLength(mixed $value, int $length, string $mbLength, string $encoding = null): bool
+    public static function checkMaxLength(mixed $value, int $length, string $mbLength, ?string $encoding = null): bool
     {
         $stringValue = (string)$value;
         switch ($mbLength) {
@@ -254,10 +252,8 @@ class Util
     {
         if (isset($value)) {
             if (is_array($value) || $value instanceof \Traversable) {
-                foreach ($value as $_value) {
-                    if (false === self::_checkEncoding($_value, $encoding)) {
-                        return false;
-                    }
+                if (array_any($value, fn($_value) => false === self::_checkEncoding($_value, $encoding))) {
+                    return false;
                 }
             } else {
                 return mb_check_encoding($value, $encoding);

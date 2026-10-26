@@ -1,6 +1,6 @@
 <?php
 /**
- * Volcanus libraries for PHP 8.1~
+ * Volcanus libraries for PHP 8.3~
  *
  * @copyright k-holy <k.holy74@gmail.com>
  * @license The MIT License (MIT)
@@ -17,9 +17,9 @@ interface Checker
 {
 
     /* 文字長測定モード */
-    const LENGTH_BYTES = 'B'; // バイト長
-    const LENGTH_CHARS = 'C'; // 文字長
-    const LENGTH_WIDTH = 'W'; // 文字幅
+    const string LENGTH_BYTES = 'B'; // バイト長
+    const string LENGTH_CHARS = 'C'; // 文字長
+    const string LENGTH_WIDTH = 'W'; // 文字幅
 
     /**
      * 検証メソッドを実行します。

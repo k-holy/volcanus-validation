@@ -1,6 +1,6 @@
 <?php
 /**
- * Volcanus libraries for PHP 8.1~
+ * Volcanus libraries for PHP 8.3~
  *
  * @copyright k-holy <k.holy74@gmail.com>
  * @license The MIT License (MIT)
@@ -234,7 +234,7 @@ class Context
             } elseif ($checker instanceof AbstractChecker && true === $checker::$forVector) {
                 try {
                     $valid = call_user_func($checker, $value, $options);
-                } catch (CheckerException $e) {
+                } catch (CheckerException) {
                     $valid = false;
                 }
             } else {
@@ -249,7 +249,7 @@ class Context
         } else {
             try {
                 $valid = call_user_func($checker, $value, $options);
-            } catch (CheckerException $e) {
+            } catch (CheckerException) {
                 $valid = false;
             }
         }
@@ -307,7 +307,7 @@ class Context
      * @param array $options エラーのパラメータ
      * @return bool エラーが含まれているかどうか
      */
-    public function isError(string $name, string $type = null, array $options = []): bool
+    public function isError(string $name, ?string $type = null, array $options = []): bool
     {
         return $this->result->hasError($name, $type, $options);
     }
